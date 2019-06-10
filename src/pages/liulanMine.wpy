@@ -1,0 +1,40 @@
+<style type='less'>
+  @import "../assets/css/index.less";
+
+
+</style>
+
+<template>
+    <view class="containLiuLan">
+
+      <repeat for="{{list}}" key="key" item="item" index="index">
+      <liulanCom></liulanCom>
+      </repeat>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import liulanCom from "../components/mine/liulanCom"
+
+  export default class Index extends wepy.page {
+    components={
+      liulanCom,
+    }
+    config = {
+      "navigationBarTitleText": "浏览记录"
+    };
+    data = {
+      list:["2","2","2"]
+    };
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

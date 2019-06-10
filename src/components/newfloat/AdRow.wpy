@@ -1,0 +1,141 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+  @baseHeight:300rpx;
+
+  .ad-row{
+    width:100%;
+    height:@baseHeight;
+    border-bottom: 1px solid #eee;
+    padding-top: 15rpx;
+    box-sizing: border-box;
+
+    .ad-title-box{
+      width:100%;
+      height:60rpx;
+      line-height:60rpx;
+      .flex-just(@dirt: row,@x:space-between);
+      font-size:32rpx;
+      font-weight: 700;
+
+      .ad-title{
+        width:50%;
+        position: relative;
+      }
+
+      .ad-label{
+        margin-left: 20rpx;
+        font-size: 20rpx;
+        color: #fff;
+        background: @themeColorDeep;
+        padding:5rpx 12rpx;
+
+
+      }
+
+
+      .price-box span:nth-child(1){
+        font-size:34rpx;
+        color: @price;
+        font-weight: 700;
+        margin-right: 10rpx;
+
+      }
+      .price-box span:nth-child(2) {
+        font-size: 24rpx;
+        color: @fontColor9;
+
+      }
+
+    }
+
+    .ad-desc-box{
+      width:100%;
+      font-size: 24rpx;
+      color: @fontColor9;
+      .flex-just(@dirt: row,@x:flex-start);
+
+      .ad-item{
+        margin-right: 20rpx;
+      }
+
+    }
+
+    .ad-image-box{
+      width:100%;
+      margin-top: 20rpx;
+      .flex-just(@dirt:row,@x:space-between);
+      flex-wrap: nowrap;
+      position: relative;
+
+      .ad-foot{
+        position: absolute;
+        right:10rpx;
+        bottom:10rpx;
+        font-size: 20rpx;
+        background: rgba(0,0,0,0.2);
+        color: #eee;
+        border:1rpx solid #eee;
+        padding:2rpx 5rpx;
+      }
+
+      image{
+        width:32%;
+        height:138rpx;
+      }
+    }
+
+  }
+
+</style>
+<template>
+    <view class="ad-row">
+      <view class="ad-title-box">
+        <view class="ad-title">
+          <span class="ad-text">中海上学府</span>
+          <span class="ad-label">住宅</span>
+        </view>
+        <view class="price-box">
+          <span>10500</span>
+          <span>元/m²</span>
+        </view>
+      </view>
+      <view class="ad-desc-box">
+        <view class="ad-item">高新北区</view>
+        <view class="ad-item">建面89-128m²</view>
+        <view class="ad-item">2居|3居|4居</view>
+      </view>
+      <view class="ad-image-box">
+        <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+        <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+        <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+        <view class="ad-foot">广告</view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class AdRow extends wepy.component {
+
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

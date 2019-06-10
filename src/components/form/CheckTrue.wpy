@@ -1,0 +1,150 @@
+<style type="less">
+
+  @import "../../assets/css/index.less";
+
+  .check-true{
+    width:100%;
+    background: #fff;
+
+    .check-box{
+      padding:30rpx 4% 50rpx;
+      box-sizing: border-box;
+      .splitBorderBottom();
+
+      .check-true-title{
+        width:100%;
+        font-size: 32rpx;
+        color: @fontColorBack;
+        font-weight: 700;
+
+      }
+      .check-true-tip{
+        font-size: 24rpx;
+        color: @fontColor9;
+        margin:20rpx 0;
+
+      }
+      .check-true-box{
+        width:100%;
+        .flex-just(@dirt: row,@x:space-between);
+
+        .check-true-common{
+          width:48%;
+          height:88rpx;
+          font-size: 32rpx;
+          font-weight: 700;
+          background: #c6c6c6;
+          .flex-just();
+        }
+        .check-true-common:nth-child(1){
+          background: @themeColor;
+        }
+
+      }
+
+    }
+
+    .heyan-true{
+      .container();
+    }
+    .heyan-not{
+      .container();
+    }
+  }
+
+</style>
+<template>
+    <view class="check-true">
+      <view class="check-box">
+        <view class="check-true-title">请填写房产局验真信息</view>
+        <view class="check-true-tip">系统会将数据加密处理，验真房源优先展示，未核验会被视为无产权</view>
+        <view class="check-true-box">
+          <view class="check-true-common" @tap="changeCheckStatus(1)">验真</view>
+          <view class="check-true-common" @tap="changeCheckStatus(0)">放弃</view>
+        </view>
+      </view>
+
+
+      <!--验证部分-->
+      <view class="heyan-true" wx:if="{{yanzhen}}">
+        <FormList :form_list="heyan_list" :data_array="heyan_data_list"/>
+      </view>
+
+      <!--不验证-->
+      <view class="heyan-not" wx:else>
+        <InputItem1
+          curType="input"
+          :form_list.sync="noheyan_list"
+          which_one="jianzhu"
+          place_holder="请输入建筑面积"
+        >
+          <view slot="left">*建筑面积</view>
+          <view slot="danwei">平米</view>
+        </InputItem1>
+        <InputItem2
+          curType="picker"
+          :form_list.sync="noheyan_list"
+          :data_array="diya_data"
+          which_one="diya"
+          place_holder="请选择抵押类型"
+        >
+          <view slot="left">*有无抵押</view>
+        </InputItem2>
+      </view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import FormList from "../heyanChanquan/FormList"
+  import InputItem from "../common/InputItem"
+
+  export default class CheckTrue extends wepy.component {
+    props={
+      yanzhen:{
+        type:Boolean,
+        twoWay:true
+      },
+      heyan_list:{
+        type:Object,
+      },
+      heyan_data_list:{
+        typr:Object
+      },
+      noheyan_list:{
+        type:Object
+      }
+    }
+    components = {
+      FormList,
+      "InputItem1":InputItem,
+      "InputItem2":InputItem,
+    };
+    data = {
+      diya_data:[
+        {id:1,name:"是"},
+        {id:2,name:"否"}
+      ]
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changeCheckStatus(e) {
+        this.yanzhen =  e == 1?true:false
+
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

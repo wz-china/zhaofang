@@ -1,0 +1,48 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .ad{
+    height:250rpx;
+    box-sizing: border-box;
+    .container();
+    padding-top: 50rpx;
+    padding-bottom: 50rpx;
+
+    image{
+      .base-wh();
+    }
+
+  }
+
+</style>
+<template>
+    <view class="ad">
+      <image @tap="gotoPage" src="{{imgSrc}}"></image>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Advertisement extends wepy.component {
+
+    components = {}
+    data = {}
+    props=["imgSrc"]
+
+    methods = {
+      gotoPage() {
+        console.log(this.imgSrc);
+      }
+    };
+
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,53 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .old-float{
+    .base-wh();
+
+  }
+</style>
+<template>
+  <view class="old-float">
+    <CommonFLoatList >
+      <FloatItem :itemType="types" />
+    </CommonFLoatList>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonFLoatList from "../components/common/CommonFLoatList"
+  import FloatItem from "../components/common/FloatItem"
+  import AdRow from "../components/newfloat/AdRow"
+
+  export default class Canlendar extends wepy.page {
+    config = {
+      "navigationBarTitleText": "二手房"
+    };
+    components = {
+      CommonFLoatList,
+      FloatItem,
+      AdRow
+    };
+    data = {
+      types:"old"
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

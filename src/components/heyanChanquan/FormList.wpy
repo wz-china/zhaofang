@@ -1,0 +1,106 @@
+<style type="less">
+
+  .form-list{
+    width:100%;
+
+    .input-item:nth-last-child(1){
+      border: none;
+    }
+
+  }
+</style>
+<template>
+    <view class="form-list">
+
+      <InputItem1
+        curType="picker"
+        :data_array.sync="leixing_data"
+        :form_list="form_list"
+        which_one="leixing"
+        place_holder="请选择产权证类型" >
+        <view slot="left">*产权证类型</view>
+      </InputItem1>
+
+      <InputItem2
+        curType="input"
+        other_type="teshu"
+        :form_list="form_list"
+        which_one="bianhao"
+        place_holder="请输入产权证编号">
+        <view slot="left">*产权证编号</view>
+      </InputItem2>
+
+      <InputItem3
+        curType="input"
+        :form_list="form_list"
+        which_one="xingming"
+        place_holder="请输入产权人姓名">
+        <view slot="left">*产权人姓名</view>
+      </InputItem3>
+
+      <InputItem4
+        curType="picker"
+        :data_array="zhengjian_data"
+        :form_list="form_list" which_one="zhengjian" place_holder="请选择产权人证件类型">
+      <view slot="left">*产权人证件类型</view>
+      </InputItem4>
+
+      <InputItem5
+        curType="input"
+        :form_list="form_list"
+        which_one="zhengjian_num"
+        place_holder="请输入产权人证件编号">
+        <view slot="left">*产权人证件编号</view>
+      </InputItem5>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import InputItem from "../common/InputItem"
+
+  export default class FormList extends wepy.component {
+    props={
+      form_list:{
+        type:Object,
+        twoWay: true
+      },
+      data_array:{
+        type:Object,
+        defualt:[]
+      }
+    }
+    components = {
+      "InputItem1":InputItem,
+      "InputItem2":InputItem,
+      "InputItem3":InputItem,
+      "InputItem4":InputItem,
+      "InputItem5":InputItem,
+    };
+    data = {}
+    computed={
+      zhengjian_data(){
+        return this.data_array["zhengjian"]
+      },
+      leixing_data(){
+        return this.data_array['leixing']
+      }
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+    };
+
+  }
+
+
+</script>
+
+

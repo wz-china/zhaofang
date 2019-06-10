@@ -1,0 +1,324 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .send-common{
+    .base-wh();
+
+    .common-title{
+      .container();
+      border-bottom: 1px solid #eee;
+      height:100rpx;
+      font-size: 28rpx;
+      .flex-just(@dirt: row,@x:flex-start);
+
+      view:nth-child(1){
+        font-weight: 700;
+        color: @fontColorBack;
+      }
+      view:nth-child(2){
+        color: @fontColor9;
+      }
+
+    }
+
+    .see-float-box{
+      .container();
+      height:100rpx;
+      font-size: 28rpx;
+      margin-top: 20rpx;
+
+      .see-float-left{
+        height:100%;
+        width:50%;
+        float: left;
+        font-weight: 700;
+        color: @fontColorBack;
+        .flex-just(@dirt: row,@x:flex-start);
+      }
+      .see-float-right{
+        height:100%;
+        width:50%;
+        float: left;
+        .flex-just(@dirt: row,@x:space-between);
+
+        view{
+          width:150rpx;
+          height:60rpx;
+          .flex-just();
+          border:1px solid@fontColor9;
+          box-sizing: border-box;
+
+        }
+
+        .see-selected{
+          background:  rgba(255,170,0,0.10);
+          color: @themeColorDeep;
+          border:1px solid @themeColorDeep;
+        }
+      }
+    }
+
+    .comment-box{
+      .container();
+      height: 380rpx;
+      .flex-just();
+      position: relative;
+
+      .textareas{
+        font-size: 28rpx;
+        box-sizing: border-box;
+        width:100%;
+        height:300rpx;
+        border:1px solid #eee;
+        padding:20rpx;
+
+      }
+
+      .textarea-text-number{
+        width:92%;
+        height:50rpx;
+        position: absolute;
+        bottom:55rpx;
+        left:50%;
+        transform: translateX(-50%);
+        z-index:1;
+        font-size: 24rpx;
+        color: @fontColor9;
+        line-height:50rpx;
+        text-align: right;
+        box-sizing: border-box;
+        padding-right: 20rpx;
+
+      }
+
+
+    }
+
+    .comment-bottom{
+      .container();
+      .flex-just(@dirt: row,@x:space-between);
+
+      .comment-bottom-left{
+        font-size: 24rpx;
+        color: @fontColor9;
+        .flex-just(@dirt: row,@x:flex-start);
+
+        image{
+          width:32rpx;
+          height:32rpx;
+          margin-right: 10rpx;
+        }
+
+
+      }
+
+      .comment-bottom-right{
+        font-size: 24rpx;
+        color: @themeColorDeep;
+
+      }
+
+
+    }
+
+    .comment-btn-box{
+      width:100%;
+      height:150rpx;
+      position: fixed;
+      bottom:0;
+      left:0;
+      .container();
+      .flex-just();
+
+      .comment-btn{
+        width:100%;
+        height:88rpx;
+        background: @themeColor;
+        color: @fontColorBack;
+        font-weight: 700;
+        font-size: 32rpx;
+        .flex-just();
+
+      }
+    }
+
+    .comment-tip-box{
+      width:100%;
+      height:100%;
+      position: fixed;
+      z-index:11;
+      background: rgba(0,0,0,0.8);
+      left:0;
+      top:0;
+      .flex-just();
+
+      .comment-tip{
+        width:630rpx;
+        height:888rpx;
+        background: #fff;
+        border-radius: 10rpx;
+        position: relative;
+        box-sizing: border-box;
+        padding:0 5%;
+
+        image{
+          width:44rpx;
+          height:44rpx;
+          position: absolute;
+          right:4%;
+          top:3%;
+        }
+
+        .comment-tip-title{
+          width:100%;
+          height:50rpx;
+          font-size: 42rpx;
+          color: @fontColorBack;
+          font-weight: 700;
+          margin-top: 100rpx;
+          margin-bottom: 20rpx;
+        }
+
+        .comment-text{
+          line-height:40rpx;
+          font-size: 28rpx;
+          color: @fontColorBack;
+          font-weight: 700;
+        }
+
+        .comment-tip-list{
+          margin-top: 20rpx;
+          width:100%;
+          height:500rpx;
+
+        }
+        .comment-tip-box-btn{
+          width:100%;
+          height:88rpx;
+          background: @themeColor;
+          font-size: 32rpx;
+          .flex-just();
+          color: @fontColorBack;
+          font-weight: 700;
+          margin-top: 40rpx;
+        }
+
+      }
+    }
+  }
+
+</style>
+<template>
+    <view class="send-common">
+      <view class="common-title">
+        <view>楼盘：</view>
+        <view>龙太古城首府三期</view>
+      </view>
+
+      <view class="see-float-box">
+        <view class="see-float-left">*是否去售楼处看过房：</view>
+        <view class="see-float-right">
+          <view class="{{cur_type == 'zhunbei'?'see-selected':''}}" @tap="changeSeeType('zhunbei')">准备看房</view>
+          <view class="{{cur_type == 'xianchang'?'see-selected':''}}" @tap="changeSeeType('xianchang')">实地看房</view>
+        </view>
+
+
+
+        </view>
+      <view class="comment-box">
+        <textarea class="textareas"
+                  maxlength="100"
+                  value="{{comment_text}}"
+                  @input="textareaInput"
+                  placeholder="对本楼的环境、位置、配套设施满意吗？说说你的看法" />
+        <cover-view class="textarea-text-number">{{getTextNumber}}/100字</cover-view>
+      </view>
+
+      <view class="comment-bottom">
+        <view class="comment-bottom-left"  @tap="changeNiming">
+          <image wx:if="{{niming_type}}" src="/assets/icon/float-desc/comment_btn_anonymous_de.png"></image>
+          <image wx:else src="/assets/icon/float-desc/comment_btn_anonymous_se.png"></image>
+          <span>匿名评论</span>
+        </view>
+        <view class="comment-bottom-right" @tap="changeShow">评论规则及免责申明</view>
+      </view>
+
+      <view class="comment-btn-box">
+        <view class="comment-btn"  @tap="gotoCommonPage('sendCommon','id=111')">发布</view>
+
+      </view>
+
+      <view class="comment-tip-box" wx:if="{{isShow}}">
+        <view class="comment-tip">
+          <image src="/assets/icon/float-desc/popup_btn_close.png" @tap="changeShow"></image>
+          <view class="comment-tip-title">评论规则及免责声明</view>
+          <view class="comment-text">评论规则：</view>
+          <scroll-view scroll-y class="comment-tip-list">
+            <view class="comment-text">1.严禁发表重复内容；</view>
+            <view class="comment-text">2.严禁发表人身攻击的内容信息；</view>
+            <view class="comment-text">3.严禁发布舌尖反动、煽动民族仇恨、破坏民族团结、带有歧视的内容信息；</view>
+            <view class="comment-text">4.严禁发布恶意攻击政府机构及官员的内容信息；</view>
+            <view class="comment-text">5.严禁发布宣扬邪教及封建迷信的信息；</view>
+            <view class="comment-text">6.严禁发布涉嫌黄、赌、毒、暴力、教唆犯罪的信息；</view>
+            <view class="comment-text">7.严禁发布涉嫌诱导、诈骗、欺骗性的信息；</view>
+            <view class="comment-text">8.严禁发布违反国家现行法律法规、破坏社会公共秩序的信息。</view>
+          </scroll-view>
+          <view class="comment-tip-box-btn" @tap="changeShow">知道了</view>
+        </view>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonMethods from "../mixins/CommonMethods"
+
+  export default class sendCommon extends wepy.page {
+    config = {
+      "navigationBarTitleText": "发布评论"
+    };
+    mixins=[CommonMethods]
+    components = {};
+    data = {
+      cur_type:"zhunbei",
+      comment_text:"",
+      niming_type:false,
+      isShow:false
+    }
+
+    computed={
+      getTextNumber:function () {
+        return this.comment_text.length
+      },
+
+    }
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changeSeeType(e) {
+        console.log(e)
+        this.cur_type=e
+
+      },
+      textareaInput({detail}) {
+        this.comment_text = detail.value
+      },
+      changeNiming(e){
+        this.niming_type = !this.niming_type
+      },
+      changeShow(){
+        this.isShow = !this.isShow
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

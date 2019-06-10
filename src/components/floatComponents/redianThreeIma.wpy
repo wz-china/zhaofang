@@ -1,0 +1,91 @@
+<style type='less'>
+
+  .redianThreeIma{
+    position: relative;
+    display: flex;
+    margin-top: 40rpx;
+  }
+  .title1{
+    width: 690rpx;
+    height: 48rpx;
+    /*margin-left: 20rpx;*/
+    margin-top: 20rpx;
+    font-size: 35rpx;
+    position: absolute;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .time1{
+    width: 430rpx;
+    height: 45rpx;
+    font-size: 30rpx;
+    /*margin-left: 20rpx;*/
+    margin-top: 70rpx;
+    color: #666666;
+    position: absolute;
+
+  }
+  .ima1{
+    width: 216rpx;
+    height: 148rpx;
+    background-color: #666666;
+    margin-top: 130rpx;
+    /*margin-left: 20rpx;*/
+    margin-right: 20rpx;
+    /*position: absolute;*/
+  }
+  .imaN{
+    width: 216rpx;
+    height: 148rpx;
+    background-color: #666666;
+    margin-top: 130rpx;
+    /*margin-left: 20rpx;*/
+    margin-right: 0rpx;
+  }
+  .line1{
+    height: 2rpx;
+    width: 690rpx;
+    background-color: #dcdcdc;
+
+    margin-left: 0rpx;
+    margin-right: 20rpx;
+    margin-top: 310rpx;
+    position: absolute;
+
+
+  }
+
+</style>
+
+<template>
+    <view class="redianThreeIma">
+
+      <view class="title1">2019房地产税最新消息:2019房地产税最新消息房地产税最新消息</view>
+      <view class="time1">2019-04-05</view>
+      <repeat for="{{arrayIma}}" index="index" key="index" item="item">
+      <view class="ima1 {{index==2 ? 'imaN':''}}"></view>
+      </repeat>
+      <view class="line1"></view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class redianThreeIma extends wepy.component {
+    data = {
+      arrayIma:[1,2,3],
+    };
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

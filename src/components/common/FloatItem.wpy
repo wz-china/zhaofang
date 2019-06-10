@@ -1,0 +1,222 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .float-item{
+    width:100%;
+    height:260rpx;
+    box-sizing: border-box;
+    padding:40rpx 0;
+    .flex-just(@dirt: row,@x:space-between);
+
+    .float-item-left{
+      width:34%;
+      height:100%;
+      position: relative;
+
+      image{
+        width:100%;
+        height:180rpx;
+      }
+
+      .liulan-box{
+        width:100%;
+        height:50rpx;
+        position: absolute;
+        left:0;
+        bottom:0;
+        .flex-just(@dirt: row,@x:flex-start);
+        box-sizing: border-box;
+        padding-left: 10rpx;
+        font-size: 16rpx;
+        color: #fff;
+
+        image{
+          width:25rpx;
+          height:25rpx;
+        }
+      }
+    }
+
+    .float-item-right{
+      width:62%;
+      height:180rpx;
+
+      .float-title{
+        width:100%;
+        .text-ellipsis();
+        font-size: 16px;
+        font-weight: 700;
+
+      }
+      .float-desc{
+        width:100%;
+        .text-ellipsis();
+        font-size: 14px;
+        color: @fontColor;
+        margin:10rpx 0 0;
+      }
+      .float-label-list{
+        width:90%;
+        margin-bottom: 5rpx;
+        .text-ellipsis();
+        box-sizing: border-box;
+        padding-left: 5rpx;
+
+        .label-item{
+          font-size: 16rpx;
+          color: @themeColorDeep;
+          padding:4rpx 6rpx;
+          border:1px solid @themeColorDeep;
+          margin-right: 15rpx;
+          box-shadow: -1px 5px 2px @themeColorDeep;
+        }
+
+      }
+      .price-box{
+        width:100%;
+        height:50rpx;
+
+        .price-box-left{
+          width:50%;
+          float: left;
+          text-align: left;
+          .text-ellipsis();
+
+          span:nth-child(1){
+            font-size: 16px;
+            font-weight: 700;
+            color: @price;
+            margin-right: 10rpx;
+          }
+          span:nth-child(2){
+            font-size: 12px;
+            color: @fontColor;
+          }
+
+
+        }
+
+        .price-box-right{
+          width:50%;
+          float: left;
+          .flex-just(@dirt: row,@x:flex-end);
+          height:100%;
+
+          image{
+            width:24rpx;
+            height:24rpx;
+            margin-right: 5rpx;
+            margin-bottom: -2rpx;
+          }
+          span{
+            font-size: 14px;
+            color: @fontColor;
+            margin-bottom: -2rpx;
+
+          }
+        }
+
+        .all-money{
+          font-size: 16px;
+          font-weight: 700;
+          color: @price;
+        }
+        .ev-money{
+          font-size: 12px;
+          color: @fontColor;
+          margin-left: 10rpx;
+
+        }
+      }
+    }
+  }
+
+  .float-item-split{
+    border-bottom: 1px solid #eee;
+  }
+</style>
+<template>
+    <view class="float-item {{!isPk ? 'float-item-split':''}}" @tap="gotoCommonPage({{pageType}},'id=111')">
+      <view class="float-item-left">
+        <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+        <view class="liulan-box" wx:if="{{itemType == 'new' && !isPk}}">
+          <image src="/assets/icon/see.png"></image>
+          <span>11W</span>
+        </view>
+      </view>
+      <view class="float-item-right">
+        <view class="float-title">碧桂园君汇华府世家四期</view>
+        <view class="float-desc">二道区莲花山生态旅游</view>
+        <view class="float-label-list">
+          <span class="label-item">品牌楼盘</span>
+          <span class="label-item">品牌楼盘</span>
+          <span class="label-item">品牌楼盘</span>
+          <span class="label-item">品牌楼盘</span>
+        </view>
+        <view class="price-box" wx:if="{{itemType == 'new'}}" >
+          <view class="price-box-left">
+            <span>12000</span><span>元/m²</span>
+          </view>
+          <view class="price-box-right" wx:if="{{!isPk}}">
+            <view class="comment">
+              <image src="/assets/icon/comment-icon.png"></image>
+              <span>111</span>
+            </view>
+          </view>
+        </view>
+        <view class="price-box" wx:if="{{itemType == 'old'}}" >
+          <span class="all-money">46万</span>
+          <span class="ev-money">10300元/m²</span>
+        </view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonMethods from "../../mixins/CommonMethods"
+
+  export default class FloatItem extends wepy.component {
+
+    mixins=[CommonMethods]
+    props={
+      itemType:{
+        type:String,
+      },
+      isPk:{
+        type:Boolean,
+        default:false
+      }
+    }
+    components = {};
+    data = {}
+    computed={
+      pageType:function () {
+        let types = ""
+        if(this.itemType == "new"){
+          types = 'newFloatDesc'
+        }else{
+          types = 'oldFloatDesc'
+        }
+        return types
+      }
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log(this.itemType);
+    };
+
+  }
+
+
+</script>
+
+

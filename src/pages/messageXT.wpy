@@ -1,0 +1,89 @@
+<style type='less'>
+  .containXT{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #F5F5F5;
+
+  }
+  .bac{
+
+    width: 100%;
+    height: 303rpx;
+    position: relative;
+    background-color: #F5F5F5;
+
+  }
+  .time{
+
+    width: 190rpx;
+    height: 42rpx;
+    margin-top: 40rpx;
+    margin-left: 280rpx;
+    background-color: #D3D0D4;
+    color: white;
+    font-size: 26rpx;
+    line-height: 42rpx;
+    text-align: center;
+    position: absolute;
+
+  }
+  .white{
+    width: 690rpx;
+    height: 176rpx;
+    margin-top: 112rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    background-color: white;
+
+  }
+  .text{
+    font-size: 32rpx;
+    width: 630rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    background-color: white;
+  }
+  /*.bac:nth-child(1){*/
+  /*  margin-top: 20rpx;*/
+  /*}*/
+</style>
+
+<template>
+    <view class="containXT">
+      <repeat for="list" index="index" key="key" item="item">
+      <view class="bac">
+        <view class="time">06-03 10:40</view>
+        <view class="white">
+          <view class="text">您的楼盘入驻申请已成功提交</view>
+        </view>
+      </view>
+      </repeat>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "系统消息"
+    };
+    data = {
+      list:["1","2","3"],
+
+    };
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

@@ -1,0 +1,68 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .item-list{
+    .container();
+    .flex-just(@dirt: row,@x:space-between);
+    margin-top: 30rpx;
+
+    .item-list-common{
+      .flex-just();
+    }
+    .item-list-left{
+      width:40%;
+    }
+
+    .item-list-center {
+      width:16%;
+      text-align: center;
+    }
+    .item-list-right {
+      width:40%;
+
+
+    }
+  }
+
+
+</style>
+<template>
+    <view class="item-list">
+      <view class="item-list-common item-list-left">
+        <slot name="left"></slot>
+      </view>
+      <view class="item-list-common item-list-center">
+        <slot name="center"></slot>
+      </view>
+      <view class="item-list-common item-list-right">
+        <slot name="right"></slot>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class ItemList extends wepy.component {
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

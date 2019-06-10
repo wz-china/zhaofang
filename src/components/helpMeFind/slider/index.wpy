@@ -1,0 +1,167 @@
+<style lang="less" src="./index.less"></style>
+
+<template>
+  <view class="slider-{{componentId}}">
+    <view wx:if="{{type==='single'}}" class="slider-container">
+      <view class="slider-stick__wrap" @tap="tap" >
+        <view class="slider-stick slider-stick__unselected"></view>
+        <view class="slider-stick slider-stick__selected" style="width:{{left}}px"></view>
+        <view class="slider-block" catchtouchmove="move(0)" style="left:{{left}}px;"></view>
+      </view>
+      <view class="slider-value font-14">{{value}}</view>
+    </view>
+
+    <!--双向滚动-->
+    <view wx:else class="slider-container">
+      <view class="slider-value">{{valueMin}}万</view>
+      <view class="slider-stick__wrap" @tap="tap" >
+        <view class="slider-stick slider-stick__unselected"></view>
+        <view class="slider-stick slider-stick__selected" style="left:{{stickLeft}}px;width:{{stickWidth}}px"></view>
+        <view class="slider-block" catchtouchmove="move(0)" style="left:{{left1}}px;"></view>
+        <view class="slider-block" catchtouchmove="move(1)" style="left:{{left2}}px;"></view>
+      </view>
+      <view class="slider-value">{{valueMax}}万</view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class Slider extends wepy.component {
+    props = {
+      type: {
+        type: String,
+        default: 'single'
+      },
+      componentId: {
+        type: String,
+        default: ''
+      },
+      value: {
+        type: [Number, String, Array],
+        twoWay: true,
+        coerce (v) {
+          if (typeof v !== 'object') {
+            return Number(v)
+          } else {
+            return v.map(item => Number(item))
+          }
+        }
+      },
+      max: {
+        type: [Number, String],
+        default: 100,
+        coerce (v) {
+          return Number(v)
+        }
+      },
+      min: {
+        type: [Number, String],
+        default: 5,
+        coerce (v) {
+          return Number(v)
+        }
+      }
+    }
+    data = {
+      ratio: '',
+      left: '',
+      startX: '',
+      endX: '',
+      width: '',
+      circle: '',
+      left1: '',
+      left2: ''
+    }
+    computed = {
+      stickLeft () {
+        if (this.type !== 'single') {
+          return Math.min(this.left1, this.left2)
+        }
+      },
+      stickWidth () {
+        if (this.type !== 'single') {
+          return Math.abs(this.left1 - this.left2)
+        }
+      },
+      valueMin () {
+        if (this.type !== 'single') {
+          return Math.min(this.value[0], this.value[1])
+        }
+      },
+      valueMax () {
+        if (this.type !== 'single') {
+          return Math.max(this.value[0], this.value[1])
+        }
+      }
+    }
+    methods = {
+      tap (e) {
+        this.count(e.detail.x, 'tap')
+      },
+      move (index, e) {
+        const endX = e.touches[0].clientX
+        this.count(endX, 'move', Number(index))
+        this.$emit("sliderChange",this.valueMin,this.valueMax)
+      }
+    }
+
+    count (endX, eventName, index) {
+      let distance = endX - this.startX
+      if (distance > this.width) {
+        distance = this.width
+      }
+      if (distance < 0) {
+        distance = 0
+      }
+      if (this.type === 'single') {
+        this.left = this.countLeft(distance)
+        this.value = this.countValue(distance)
+      } else {
+        if (eventName === 'tap') {
+          if ((this.left1 < this.left2 && this.left2 < distance) || (distance < this.left2 && this.left2 < this.left1) || (this.left2 < this.left1 && distance < this.left1)) {
+              this.left2 = this.countLeft(distance)
+              this.value[1] = this.countValue(distance)
+          } else {
+            this.left1 = this.countLeft(distance)
+            this.value[0] = this.countValue(distance)
+          }
+        } else {
+          if (index === 0) {
+            this.left1 = this.countLeft(distance)
+          } else {
+            this.left2 = this.countLeft(distance)
+          }
+          this.value[index] = this.countValue(distance)
+        }
+      }
+    }
+
+    countLeft (distance) {
+      return distance - this.circle / 2
+    }
+
+    countValue (distance) {
+      return Math.round(distance / this.ratio) + this.min
+    }
+
+    onLoad () {
+      wx.createSelectorQuery().select('.slider-' + this.componentId + ' .slider-stick__wrap').boundingClientRect((res) => {
+        this.width = res.width
+        this.startX = res.left
+        this.$apply()
+        wx.createSelectorQuery().select('.slider-' + this.componentId + ' .slider-block').boundingClientRect((res) => {
+          this.circle = res.width
+          this.ratio = this.width / (this.max - this.min)
+          if (this.type === 'single') {
+            this.left = this.ratio * (this.value - this.min) - this.circle / 2
+          } else {
+            this.left1 = this.ratio * (this.value[0] - this.min) - this.circle / 2
+            this.left2 = this.ratio * (this.value[1] - this.min) - this.circle / 2
+          }
+          this.$apply()
+        }).exec()
+      }).exec()
+    }
+  }
+</script>

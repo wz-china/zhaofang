@@ -1,0 +1,277 @@
+<style type="less">
+
+  @import "../assets/css/index.less";
+  .containf1 {
+//    .container();
+    padding-bottom: 100rpx;
+
+    background-color: #FFF;
+  }
+  .containf2 {
+//    .container();
+    background-color: #F5F5F5;
+    padding-bottom: 100rpx;
+  }
+  .head {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    /*<!--.flex-just(@dirt: row,@x:space-around);-->*/
+    margin-top: 0rpx;
+    background-color: #FFF;
+    /*margin-left: -2%;*/
+    /*margin-right: -2%;*/
+    height: 93rpx;
+    width: 100%;
+    z-index: 10;
+    /*position: fixed;*/
+
+
+
+  }
+  .all{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @fontColor;
+    line-height: 90rpx;
+    margin-top: 0rpx;
+    background-color: #FFF;
+
+    /*background-color: orange;*/
+
+  }
+  .all:last-child{
+
+    border-right: 0;
+
+  }
+
+  .scroll-container{
+    .container();
+
+
+  }
+
+  .check{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @themeColorDeep;
+    position: relative;
+    z-index:2;
+    border-bottom:8rpx solid @themeColorDeep;
+
+    line-height: 90rpx;
+    margin-top: 0rpx;
+    background-color: #FFF;
+    /*position: fixed;*/
+
+  }
+  .check:last-child {
+
+    border-right: 0;
+  }
+  .beforeT{
+    font-size: 38rpx;
+    margin-top: 30rpx;
+    margin-left: 20rpx;
+  }
+  .lineHead{
+
+    width: 100%;
+    height: 2rpx;
+    background-color: #dcdcdc;
+    margin-top: 94rpx;
+    /*margin-left: -2%;*/
+    position: fixed;
+
+  }
+  .zbbhLine{
+    height: 2rpx;
+    width: 690rpx;
+    background-color: #dcdcdc;
+
+    margin-left: 0rpx;
+    margin-right: 20rpx;
+    margin-top: 30rpx;
+  }
+
+
+</style>
+<template>
+  <view class="containf1" wx:if="{{selectItem==1||selectItem==3||selectItem==5}}">
+    <view class="head">
+
+      <repeat for="{{itemNum}}" key="index" index="index" item="item">
+        <!--          <radio value="{{item.value}}" checked="{{item.checked}}">{{item.title}}</radio>-->
+        <!--          <text>-->
+        <view class="all" data-value="{{item.value}}" data-title="{{item.title}}" data-checked="{{item.checked}}"
+              wx:if="{{!item.checked}}" @tap="tapChangeAct">
+          {{item.title}}
+
+        </view>
+
+        <view class="check" data-value="{{item.value}}" data-title="{{item.title}}" data-checked="{{item.checked}}"
+              wx:if="{{item.checked}}">
+          {{item.title}}
+
+          <!--            <view class="fline"-->
+          <!--                  style="position: absolute;background-color: #ffaa00;margin-top: 10rpx;width: 60rpx;height: 1rpx"></view>-->
+          <!--            下划线-->
+        </view>
+
+        <!--          </text>-->
+      </repeat>
+
+
+    </view>
+
+    <view class="lineHead"></view>
+    <scroll-view class="scroll-container" style="margin-top: 100rpx;height: 92%;position: absolute;background-color: #FFF;" scroll-y>
+      <loushiredianOneIma wx:if="{{selectItem==1}}"></loushiredianOneIma>
+      <redianThreeIma wx:if="{{selectItem==1}}"></redianThreeIma>
+      <redianBigIma wx:if="{{selectItem==1}}"></redianBigIma>
+      <repeat for="[1,2,3]" index="index" item="item" key="index">
+        <shipin wx:if="{{selectItem==3}}"></shipin>
+      </repeat>
+      <zhibo wx:if="{{selectItem==5}}"></zhibo>
+      <view class="zbbhLine" wx:if="{{selectItem==5}}"></view>
+      <view wx:if="{{selectItem==5}}" class="beforeT">往期录像</view>
+      <zhiboBefore wx:if="{{selectItem==5}}"></zhiboBefore>
+
+    </scroll-view>
+
+  </view>
+
+  <view class="containf2" wx:if="{{selectItem==2||selectItem==4}}">
+    <view class="head">
+
+      <repeat for="{{itemNum}}" key="index" index="index" item="item">
+        <!--          <radio value="{{item.value}}" checked="{{item.checked}}">{{item.title}}</radio>-->
+        <!--          <text>-->
+        <view class="all" data-value="{{item.value}}" data-title="{{item.title}}" data-checked="{{item.checked}}"
+              wx:if="{{!item.checked}}" @tap="tapChangeAct">
+          {{item.title}}
+
+        </view>
+
+        <view class="check" data-value="{{item.value}}" data-title="{{item.title}}" data-checked="{{item.checked}}"
+              wx:if="{{item.checked}}">
+          {{item.title}}
+
+          <!--            <view class="fline"-->
+          <!--                  style="position: absolute;background-color: #ffaa00;margin-top: 10rpx;width: 60rpx;height: 1rpx"></view>-->
+          <!--            下划线-->
+        </view>
+
+        <!--          </text>-->
+      </repeat>
+
+
+    </view>
+
+    <view class="lineHead"></view>
+
+    <scroll-view style="margin-top: 100rpx;height: 92%;position: absolute;background-color: #F5F5F5;padding-left: -2%"
+                 scroll-y>
+      <repeat for="[1,2,3]" index="index" item="item" key="index">
+        <pingce wx:if="{{selectItem==2}}"></pingce>
+      </repeat>
+      <repeat for="[1,2,3]" index="index" item="item" key="index">
+        <dongtai wx:if="{{selectItem==4}}"></dongtai>
+      </repeat>
+
+    </scroll-view>
+
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import loushiredianOneIma from "../components/floatComponents/loushiredianOneIma"
+  import redianThreeIma from "../components/floatComponents/redianThreeIma"
+  import redianBigIma from "../components/floatComponents/redianBigIma"
+  import pingce from "../components/floatComponents/pingce"
+  import shipin from "../components/floatComponents/shipin"
+  import dongtai from "../components/floatComponents/dongtai"
+  import zhibo from "../components/floatComponents/zhibo"
+  import zhiboBefore from "../components/floatComponents/zhiboBefore"
+
+  export default class Float extends wepy.page {
+    config = {
+      "navigationBarTitleText": "楼市"
+    };
+    components = {
+      loushiredianOneIma,
+      redianThreeIma,
+      redianBigIma,
+      pingce,
+      shipin,
+      dongtai,
+      zhibo,
+      zhiboBefore
+
+    };
+    data = {
+      itemNum: [
+        {value: 1, title: '楼市热点',checked: false},
+        {value: 2, title: '楼盘评测', checked: false},
+        {value: 3, title: '视频',checked: false},
+        {value: 4, title: '楼盘动态',checked: true},
+        {value: 5, title: '直播',checked: false},
+      ],
+      selectItem:4
+
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      },
+      tapChangeAct(e){
+        console.log("跳转")
+        // wepy.navigateTo({
+        //   url: 'homeCompute'
+        // })
+        console.log(e)
+        var value = e.currentTarget.dataset.value
+        console.log(e.currentTarget.dataset.value);
+
+        this.selectItem = e.currentTarget.dataset.value
+
+        this.itemNum.forEach(item=>{
+          item.checked = false
+        })
+
+        var index = this.itemNum.findIndex(item =>item.value == value)
+        this.itemNum[index].checked = true
+        this.$apply();
+
+      }
+
+    };
+
+    //页面的生命周期函数
+    onLoad(option) {
+      console.log(option);
+      // this.selectItem=option.currentTarget.dataset.value
+      // this.$apply()
+
+
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,87 @@
+<style type='less'>
+  .ruzhuContain{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+  }
+  .guwen{
+    width: 690rpx;
+    height: 360rpx;
+    margin-top: 0rpx;
+    margin-left: 0rpx;
+    position: absolute;
+
+  }
+  .text{
+    width: 270rpx;
+    height: 42rpx;
+    position: absolute;
+    color: white;
+    margin-top: 157rpx;
+    margin-left: 290rpx;
+    font-size: 45rpx;
+    font-weight: 800;
+  }
+  .ima{
+    width: 180rpx;
+    height: 180rpx;
+    /*background-color: red;*/
+    border-radius: 90rpx;
+    margin-left: 60rpx;
+    margin-top: 90rpx;
+    position: absolute;
+  }
+
+</style>
+
+<template>
+    <view class="ruzhuContain">
+      <view style="position: relative; width: 690rpx;height: 360rpx;margin-top: 30rpx;margin-left: 30rpx">
+        <image class="guwen" src="/assets/icon/guwen.png" @tap="guwenRuzhu">
+        </image>
+        <image class="ima" @tap="guwenRuzhu" src="/assets/icon/guwenPer.png"></image>
+        <view class="text" @tap="guwenRuzhu">置业顾问入驻</view>
+      </view>
+
+      <view style="position: relative; width: 690rpx;height: 360rpx;margin-top: 30rpx;margin-left: 30rpx">
+        <image class="guwen" src="/assets/icon/jingjiren.png" @tap="agentRuzhu">
+        </image>
+        <image class="ima" @tap="agentRuzhu"  src="/assets/icon/agentPer.png"></image>
+        <view class="text" @tap="agentRuzhu">经纪人入驻</view>
+
+      </view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "入驻楼盘"
+    };
+    data = {};
+    methods = {
+      agentRuzhu(){
+        wx.navigateTo({
+          url: 'agentRuzhu'
+        })
+      },
+      guwenRuzhu(){
+        wx.navigateTo({
+          url: 'guwenRuzhu'
+        })
+      },
+    };
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

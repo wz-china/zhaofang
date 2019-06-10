@@ -1,0 +1,70 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .new-float{
+    .base-wh();
+
+    .ad-top{
+      width:100%;
+      height:152rpx;
+
+      image{
+        width:100%;
+        height:100%;
+      }
+    }
+
+  }
+</style>
+<template>
+    <view class="new-float">
+      <view class="ad-top">
+        <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+      </view>
+      <CommonFLoatList >
+        <FloatItem :itemType="types" />
+        <AdRow />
+      </CommonFLoatList>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonFLoatList from "../components/common/CommonFLoatList"
+  import FloatItem from "../components/common/FloatItem"
+  import AdRow from "../components/newfloat/AdRow"
+
+  export default class newFloat extends wepy.page {
+    config = {
+      "navigationBarTitleText": "新房",
+      "enablePullDownRefresh":true,
+      "onReachBottomDistance":20,
+    };
+    components = {
+      CommonFLoatList,
+      FloatItem,
+      AdRow
+    };
+    data = {
+      types:'new',
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      getFormValue(e) {
+        console.log(e);
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

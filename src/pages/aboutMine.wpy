@@ -1,0 +1,78 @@
+<style type='less'>
+  .containAboutMine{
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .image{
+    width: 250rpx;
+    height: 250rpx;
+    margin-top: 80rpx;
+    margin-left: 250rpx;
+    border-radius: 10rpx;
+    position: relative;
+
+  }
+  .title{
+    width: 100%;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    margin-top: 10rpx;
+    position: relative;
+    font-size: 39rpx;
+    font-weight: 500;
+  }
+  .version{
+    width: 100%;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    margin-top: 10rpx;
+    position: relative;
+    font-size: 33rpx;
+    color: #666666;
+
+  }
+  .de{
+    position: relative;
+    margin-left: 30rpx;
+    width: 690rpx;
+    font-size: 32rpx;
+    color: #666666;
+    margin-top: 60rpx;
+
+  }
+</style>
+
+<template>
+    <view class="containAboutMine">
+      <image class="image" src="/assets/icon/aboutus.png"></image>
+      <view class="title">找房豹</view>
+      <view class="version">V1.0.0</view>
+      <view class="de">买房就找《房地产报》！《找房豹》是《房地产报》的官方网络服务平台，由房报传媒唯一运营商——长春初唐网络科技有限公司研发运维。
+        秉承房报传媒『一切为了购房者』的服务宗旨，『找房豹』竭诚为购房者提供及时而专业的楼市资讯、楼盘分析及房源信息，可查询权威的新房预售证信息，可在线核验二手房产权，同时提供各种在线咨询及线下服务；装修用户还可找到长春最优惠的特价爆款主材及软装商品。
+      </view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "关于我们"
+    }
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

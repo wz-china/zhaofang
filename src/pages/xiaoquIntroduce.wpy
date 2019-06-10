@@ -1,0 +1,225 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .xiaoqu {
+    .base-wh();
+
+    .xiaoqu-title-box {
+      height: 160rpx;
+      .container();
+      .splitBorderBottom();
+
+      .xiaoqu-title {
+        width: 100%;
+        .flex-just(@dirt: row,@x:space-between);
+        margin: 20rpx 0;
+
+        view:nth-child(1) {
+          font-size: 42rpx;
+          color: @fontColorBack;
+          font-weight: 700;
+        }
+
+        view:nth-child(2) {
+
+          text:nth-child(1) {
+            color: @fontColor9;
+            font-size: 24rpx;
+            margin-right: 15rpx;
+
+          }
+
+          text:nth-child(2) {
+            color: @price;
+            font-size: 36rpx;
+            font-weight: 700;
+          }
+        }
+      }
+
+      .xiaoqu-add {
+        width: 100%;
+        color: @fontColor9;
+        font-size: 28rpx;
+      }
+
+    }
+
+    .xiaoqu-desc{
+      .container();
+      .splitBorderBottom();
+      padding-top:30rpx;
+      padding-bottom:30rpx;
+
+      .xiaoqu-desc-title{
+        width:100%;
+        font-size: 36rpx;
+        font-weight: 700;
+
+      }
+
+      .xiaoqu-desc-item{
+        width:100%;
+        margin-top: 20rpx;
+        font-size: 28rpx;
+
+
+        .xiaoqu-desc-item-title{
+          color:@fontColor9;
+          width:20%;
+          text-align: justify;
+          float: left;
+          height:50rpx;
+
+          text{
+            display:inline-block;
+            width:100%;
+          }
+
+        }
+
+        .xiaoqu-desc-item-inner{
+          color: @fontColorBack;
+          width:80%;
+          padding-left:5%;
+          box-sizing: border-box;
+          height:100%;
+          float: left;
+          line-height:42rpx;
+        }
+
+        .clearfix{
+          clear: both;
+        }
+
+      }
+
+      .xiaoqu-btn{
+        width:100%;
+        height:88rpx;
+        background: #eff0f3;
+        color: @fontColorBack;
+        font-weight: 700;
+        font-size: 28rpx;
+        .flex-just();
+        margin-top: 30rpx;
+
+      }
+
+
+    }
+
+    .xiaoqu-float{
+      .container();
+
+      .xiaoqu-float-title{
+        width:100%;
+        margin:30rpx 0 0;
+        font-size: 36rpx;
+        color: @fontColorBack;
+        font-weight: 700;
+
+      }
+
+      .float-item:nth-last-child(1){
+        border:none;
+      }
+
+    }
+
+  }
+
+</style>
+<template>
+  <ScrollView class="xiaoqu">
+    <view>
+      <BannerBox :imgUrls="imgUrls"/>
+      <view class="xiaoqu-title-box">
+        <view class="xiaoqu-title">
+          <view>中顺和苑</view>
+          <view>
+            <text>均价</text>
+            <text>4600元/m²</text>
+          </view>
+        </view>
+        <view class="xiaoqu-add">乐群街北与东新路交汇</view>
+      </view>
+      <view class="xiaoqu-desc">
+        <view class="xiaoqu-desc-title">中顺和苑</view>
+        <view class="xiaoqu-desc-item">
+          <view class="xiaoqu-desc-item-title">建筑年代<text></text></view>
+          <view class="xiaoqu-desc-item-inner">2018年</view>
+          <view class="clearfix"></view>
+        </view>
+        <view class="xiaoqu-desc-item">
+          <view class="xiaoqu-desc-item-title">物业费用<text></text></view>
+          <view class="xiaoqu-desc-item-inner">2018年</view>
+          <view class="clearfix"></view>
+        </view>
+        <view class="xiaoqu-desc-item">
+          <view class="xiaoqu-desc-item-title">建筑类型<text></text></view>
+          <view class="xiaoqu-desc-item-inner">2018年</view>
+          <view class="clearfix"></view>
+        </view>
+        <view class="xiaoqu-desc-item">
+          <view class="xiaoqu-desc-item-title">开发商<text></text></view>
+          <view class="xiaoqu-desc-item-inner">万科企业股份有限公司成立于1984年1988年进入房地产行业，1991年成为证券交易所第二家上市公司。经过二十多年的发展，成为国内最大的住宅开发企业，业务覆盖珠三角、长三角、环渤海三大城市经济圈以及中西部地区，共计53个大中城市。</view>
+          <view class="clearfix"></view>
+        </view>
+        <view class="xiaoqu-btn" @tap="gotoCommonPage('MoreFloatInfo','id=111')">查看完整简介</view>
+      </view>
+      <view class="xiaoqu-float">
+        <view class="xiaoqu-float-title">小区房源</view>
+        <FloatItem itemType="old" class="float-item"/>
+      </view>
+      <BottomTip />
+    </view>
+  </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import BannerBox from "../components/common/BannerBox"
+  import FloatItem from "../components/common/FloatItem"
+  import BottomTip from "../components/common/BottomTip"
+  import ScrollView from "../components/common/ScrollView"
+  import CommonMethods from "../mixins/CommonMethods"
+
+  export default class Canlendar extends wepy.page {
+    config = {
+      "navigationBarTitleText": "小区介绍"
+    };
+    mixins=[CommonMethods]
+    components = {
+      BannerBox,
+      FloatItem,
+      BottomTip,
+      ScrollView,
+
+    };
+    data = {
+      imgUrls: ['https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640', 'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640']
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+    }
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

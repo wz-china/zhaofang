@@ -1,0 +1,146 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vant-weapp",
+        "scope": null,
+        "escapedName": "vant-weapp",
+        "name": "vant-weapp",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "F:\\WebProject\\zhaofangbao\\zhaofangbao"
+    ]
+  ],
+  "_from": "vant-weapp@latest",
+  "_hasShrinkwrap": false,
+  "_id": "vant-weapp@0.5.13",
+  "_inCache": true,
+  "_location": "/vant-weapp",
+  "_nodeVersion": "8.11.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/vant-weapp_0.5.13_1557901145852_0.5315421400531266"
+  },
+  "_npmUser": {
+    "name": "rex-zsd",
+    "email": "rexkaneki@gmail.com"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vant-weapp",
+    "scope": null,
+    "escapedName": "vant-weapp",
+    "name": "vant-weapp",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vant-weapp/-/vant-weapp-0.5.13.tgz",
+  "_shasum": "c7d873b9b09fcd084d7f96a5a63cda1f15c5b218",
+  "_shrinkwrap": null,
+  "_spec": "vant-weapp",
+  "_where": "F:\\WebProject\\zhaofangbao\\zhaofangbao",
+  "author": {
+    "name": "youzan"
+  },
+  "bugs": {
+    "url": "https://github.com/youzan/vant-weapp/issues"
+  },
+  "dependencies": {},
+  "description": "轻量、可靠的小程序 UI 组件库",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@vant/doc": "^1.0.24",
+    "@vant/icons": "1.1.7",
+    "autoprefixer": "^9.4.4",
+    "babel-loader": "8.0.5",
+    "cross-env": "^5.1.4",
+    "css-loader": "^2.1.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^5.11.1",
+    "eslint-plugin-vue-libs": "^3.0.0",
+    "fast-vue-md-loader": "^1.0.3",
+    "gh-pages": "^2.0.1",
+    "gulp": "^4.0.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-less": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-typescript": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "miniprogram-api-typings": "^2.4.2-2",
+    "postcss-loader": "^3.0.0",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "style-loader": "^0.23.1",
+    "typescript": "^3.2.2",
+    "vue": "2.6.10",
+    "vue-loader": "^15.4.2",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "2.6.10",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.3.0",
+    "webpack-serve": "^2.0.3"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-rtgThfgkdoUpjOl/uL41KN/4zr+iSVfx442oUqt1bkWvYQmJiqfh5nWjwEKg6ExnaBkN1ESaC38W9eHkwA+3hg==",
+    "shasum": "c7d873b9b09fcd084d7f96a5a63cda1f15c5b218",
+    "tarball": "https://registry.npmjs.org/vant-weapp/-/vant-weapp-0.5.13.tgz",
+    "fileCount": 540,
+    "unpackedSize": 458329,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJc269aCRA9TVsSAnZWagAAqY8P/i3UgegFARVbPJX309/h\nLt8gLZrOxZBq3IDJ0z8AkiCzWr8zZ9ubaR8vq1fsLhP4Iw7B3Amf6eHO6vIU\nuydNLfoWn6cbaBh19DDxzh3w1j7p0vxNp7Mu0DhqnIyJXZfxpey4o2y1ZEbG\nkiJmMKBo3keDCltaFfV5QINQlds+Bg3kxb58bwXr8DH5aQPzjIt2kdDDGbkO\n4r1MRGNQA4DY0sx1IEje1Yk7IIFR9M9CDMcH6JrUfJLOtggKdy4BzVZPTE9m\n3G/IXL/8cW1hGUgaq9s2g3sZc+O8jYI7gCFZO4paNjlScS6mVc0j089q0RHr\nvXgyc/09eWYnvbPA/9zPfiNeOhINW/YpTxT91x9W8ktuJ29QGOVUnqzJUqWh\nHvkGttWgW/2mo2uFiHAL8FyfObF4gOCLImHuJ3bwaKi2W+sNeOH7U5dCoCsJ\nxWKGsYI1Fhov5D+95oyt2gu2tU2SvxBKpk7iRFj+uip4anCnDt7oBVDlj7/i\nLu1dNyl5QfV+5o0lk1wga6q6F3HGf6nmb75xUjhBpmZCvblE5uVhWHSrHDWi\nZ9X6mx7G2dzZB96K5HRQBatjvxYI1dRBUb1zifEQvkZWKnxkNkMsjsS+MpMx\nMyxnK7BsOsZ1EiY2mpwvCTwSXPX3iTJ0Vuw2n9N4ZLaTbxSxBPm1R/H99tjz\n1qWq\r\n=MUUo\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "gitHead": "bdf41f4c645cf02b0939e22eda116e4f4dcebc02",
+  "homepage": "https://github.com/youzan/vant-weapp#readme",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "chenjiahan",
+      "email": "416417567@163.com"
+    },
+    {
+      "name": "cookfront",
+      "email": "cookfront@gmail.com"
+    },
+    {
+      "name": "pangxie1991",
+      "email": "chenyao1102@gmail.com"
+    },
+    {
+      "name": "rex-zsd",
+      "email": "rexkaneki@gmail.com"
+    },
+    {
+      "name": "w91",
+      "email": "colonD@qq.com"
+    }
+  ],
+  "miniprogram": "dist",
+  "name": "vant-weapp",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/youzan/vant-weapp.git"
+  },
+  "scripts": {
+    "build:changelog": "vant-doc changelog --tag v0.5.0 changelog.generated.md",
+    "build:lib": "yarn && rm -rf dist && rm -rf lib && NODE_ENV=production node build/compiler.js",
+    "build:site": "rm -rf docs/dist && cross-env NODE_ENV=production webpack --config build/webpack.doc.prd.js && gh-pages -d docs/dist",
+    "dev": "node build/dev.js",
+    "lint": "eslint ./packages --ext .js",
+    "release": "sh build/release.sh"
+  },
+  "version": "0.5.13"
+}

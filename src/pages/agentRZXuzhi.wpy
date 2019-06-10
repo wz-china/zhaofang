@@ -1,0 +1,76 @@
+<style type='less'>
+  @import "../assets/css/index.less";
+
+  .containRZ{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /*bottom: 100rpx;*/
+  }
+  .title{
+    position: relative;
+    margin-top: 30rpx;
+    margin-left: 30rpx;
+    font-size: 38rpx;
+
+  }
+  .detail{
+    position: relative;
+    margin-left: 30rpx;
+    margin-top: 20rpx;
+    font-size: 32rpx;
+    color: #666666;
+    width: 690rpx;
+  }
+  .yellow{
+    width: 690rpx;
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+    color: @themeColorDeep;
+    font-size: 32rpx;
+
+  }
+</style>
+
+<template>
+    <view class="containRZ">
+
+      <view class="title">经纪人入驻须知
+      </view>
+      <view class="detail">经纪人账号由所属公司开通，本平台只允许一个经纪人入驻三个楼盘，并须提供相关身份证明。已入驻后，要想入驻到其他楼盘，须先撤离已入驻楼盘，重新选择需要入驻的楼盘。 若经纪人离职，则该账号由该经纪人所属公司注销。
+      </view>
+      <view class="title">为什么要入驻《找房豹》？
+      </view>
+      <view class="detail">1、《找房豹》房产交易服务平台，是《房地产报》的官方网络服务平台，包括APP、小程序、m站（手机浏览器网站）和网站等全部互联网入口端，加上《长春惠买房》公众号、抖音号、头条号和《长春房地产报》微博及《壹HOUSE》等视频全网发布平台，房报传媒系列新媒体矩阵及平台用户已超过50万，成为长春房产领域的绝对头部新媒体传播平台。
+        2、房报传媒已服务长春购房者20年，转型互联网新媒体之后，在保持强大的专业房产内容生产能力的同时，全新打造的《找房豹》房产交易服务平台还接入了房产局预售证信息查询、二手房产权核验、网签合同（等待与政府官网同步上线）等政府官方平台功能，已成为长春最权威的房产交易服务平台。
+        3、《找房豹》房产服务平台永久对置业顾问和经纪人免费开放入驻，将开发商、经纪人和购房者连结为一体，让购房者花更少的时间找到符合自己的优质房源，也让置业顾问和经纪人更有效地找到精准的潜在客户。
+        4、《找房豹》平台会持续扶持置业顾问或经纪人，免费为其设置推荐位，给予足够的曝光量。置业顾问或经纪人入驻楼盘后，将告别过去四处寻找客户的盲目，只要动动手指，花点时间，就有精准客户来找你，极大的提高了拓客效率。
+        5、购房者进入楼盘后，通过置业顾问或经纪人名片，可直接拨打其电话或者与置业顾问或经纪人聊天，让置业顾问或经纪人可深层次接近与潜在客户的关系，从而提高转化率。
+      </view>
+      <view class="yellow">怎样获得更高排名？
+      </view>
+      <view class="yellow">点击查看积分规则（敬请等待，即将上线）
+      </view>
+      <view style="height: 100rpx"></view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "入驻优势与须知"
+    }
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

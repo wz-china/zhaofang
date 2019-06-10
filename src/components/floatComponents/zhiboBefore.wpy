@@ -1,0 +1,69 @@
+<style type='less'>
+  .zbbContain{
+    display: flex;
+    justify-content: space-between;
+    /*margin-right: 4%;*/
+    padding-left: 0rpx;
+    padding-right: 0rpx;
+
+    /*margin-right: 20rpx;*/
+
+  }
+  .beforeIma{
+    background-color: #666666;
+    width: 335rpx;
+    height: 176rpx;
+    left: 0rpx;
+    right: 0rpx;
+    /*margin-left: 0rpx;*/
+    /*margin-right: 0rpx;*/
+    margin-top: 25rpx;
+    /*position: absolute;*/
+
+
+  }
+  .zbbText{
+    /*margin-left: 22rpx;*/
+    margin-top: 18rpx;
+    width: 330rpx;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+  }
+
+</style>
+
+<template>
+    <view class="zbbContain">
+
+      <repeat for="{{zbbList}}" key="index" index="index" item="item">
+        <view>
+      <view class="beforeIma">
+        <image style="width: 56rpx;height: 56rpx;margin-top: 60rpx;margin-left: 140rpx" src="/components/floatComponents/playtwo.png"></image>
+      </view>
+      <view class="zbbText">跟老张学评测</view>
+        </view>
+      </repeat>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    data = {
+      zbbList:[1,2],
+    };
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

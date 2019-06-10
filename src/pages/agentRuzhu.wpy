@@ -1,0 +1,78 @@
+<style type='less'>
+  @import "../assets/css/index.less";
+  .containAgent{
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .tishi{
+    width: 160rpx;
+    height: 50rpx;
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+    font-size: 38rpx;
+    font-weight: 400;
+    position: absolute;
+  }
+  .dianji{
+    width: 250rpx;
+    height: 40rpx;
+    position: absolute;
+    color: @themeColorDeep;
+    font-size: 31rpx;
+    right: 30rpx;
+    text-align: right;
+    margin-top: 40rpx;
+  }
+  .deText{
+    width: 690rpx;
+    height: 120rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    color: #666666;
+    font-size: 34rpx;
+    margin-top: 120rpx;
+  }
+  .kfPhone{
+    width: 690rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    font-size: 34rpx;
+    margin-top: 260rpx;
+  }
+</style>
+
+<template>
+    <view class="containAgent">
+      <view class="tishi">温馨提示</view>
+      <view class="dianji" @tap="tapXuzhi">入驻优势与须知</view>
+      <view class="deText">经纪人有专用的业务管理工具客立方App，请联系客服开通账号并下载客户端登录使用。</view>
+
+      <view class="kfPhone">客服电话：0431-12345678</view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "经纪人入驻"
+    }
+    data = {};
+    methods = {
+      tapXuzhi(){
+        wepy.navigateTo({
+          url: 'agentRZXuzhi'
+        })
+      }
+    };
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

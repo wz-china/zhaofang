@@ -1,0 +1,117 @@
+<style type='less'>
+
+  .containDT{
+    position: relative;
+    margin-top: 10rpx;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    background-color: #FFF;
+    height: 310rpx;
+
+
+  }
+
+  .dtimaPerson{
+
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 30rpx;
+    background-color: #666666;
+    margin-top: 0rpx;
+    margin-left: 30rpx;
+    position: absolute;
+
+  }
+
+  .dtname{
+    width: 100rpx;
+    height: 48rpx;
+    font-size: 34rpx;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    margin-top: 7rpx;
+    margin-left: 110rpx;
+    position: absolute;
+
+  }
+  .dtspTime{
+
+    color: #666666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    margin-left: 460rpx;
+    margin-top: 10rpx;
+    font-size: 32rpx;
+    height: 48rpx;
+    width: 200rpx;
+    position: absolute;
+    text-align: right;
+
+  }
+  .dtTitle{
+
+    width: 640rpx ;
+    height: 108rpx;
+    line-height: 108rpx;
+    margin-left: 30rpx;
+
+    font-size: 38rpx;
+    margin-top: 30rpx;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+  }
+  .dtDetail{
+
+    width: 630rpx;
+    height: 106rpx;
+
+    overflow:hidden;//一定要写
+    text-overflow: ellipsis;//超出省略号
+    display:-webkit-box;//一定要写
+    -webkit-line-clamp: 2;//控制行数
+    -webkit-box-orient: vertical;//一定要写
+    font-size: 36rpx;
+    margin-top: 85rpx;
+    margin-left: 30rpx;
+
+  }
+
+</style>
+
+<template>
+    <view class="containDT">
+
+      <view class="dtTitle">长春恒大城</view>
+      <view class="dtimaPerson"></view>
+      <view class="dtname">小灰</view>
+      <view class="dtspTime">2019-04-05</view>
+      <view class="dtDetail">恒大城加推二期小高层恒大城加推二期小高层恒大城加推二期小高</view>
+
+
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class dongtai extends wepy.component {
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

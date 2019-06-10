@@ -1,0 +1,183 @@
+<style type="less">
+
+  @import "../../assets/css/index.less";
+
+  .form-top{
+    width:100%;
+    /*padding-bottom:30rpx;*/
+    .splitBorderBottom();
+    background: #fff;
+
+    .upload-box{
+      width:100%;
+      height:240rpx;
+      .splitBorderBottom();
+      .flex-just(@dirt: row,@x:space-between);
+      font-size: 28rpx;
+      .container();
+
+      .upload-box-right{
+        height:100%;
+        .flex-just(@dirt: row,@x:flex-end);
+
+        .image-left-box{
+          width:220rpx;
+          height:160rpx;
+          background: #d8d8d8;
+          .flex-just();
+          margin-right: 20rpx;
+
+          .image-left{
+            width:68rpx;
+            height:68rpx;
+          }
+
+        }
+        .image-arrow{
+          width:24rpx;
+          height:24rpx;
+        }
+
+      }
+
+    }
+
+    .form-list{
+      .container();
+
+      .picker-loudong{
+        width:50vw;
+      }
+
+    }
+
+    .form-list .input-item:nth-last-child(1){
+      border-bottom: none;
+    }
+
+  }
+
+</style>
+<template>
+    <view class="form-top">
+      <view class="upload-box">
+        <view class="upload-box-left">*上传照片</view>
+        <view class="upload-box-right">
+          <view class="image-left-box" @tap="gotoCommonPage('uploadFloatImage','type=old')">
+            <image class="image-left" src="/assets/icon/float-desc/list_btn_photo.png"></image>
+          </view>
+          <image class="image-arrow" src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+        </view>
+      </view>
+      <view class="form-list">
+
+        <InputItem1
+          curType="input"
+          :form_list.sync="form_list"
+          which_one="xiaoqu_name"
+          place_holder="请输入小区名称"
+        >
+          <view slot="left">*小区名称</view>
+        </InputItem1>
+
+        <InputItem2
+          curType="picker"
+          :form_list.sync="form_list"
+          :data_array.sync="region_data"
+          which_one="region"
+          place_holder="省市区县乡镇等"
+        >
+          <view slot="left">*所在地区</view>
+        </InputItem2>
+
+        <InputItem3
+          curType="custom"
+        >
+          <view slot="right">
+            <SelectFloatPicker
+              class="picker-loudong"
+              :form_list="form_list"
+              which_one="loudong"
+            />
+          </view>
+          <view slot="left">*楼栋门牌</view>
+        </InputItem3>
+
+        <InputItem4
+          curType="picker"
+          :form_list.sync="form_list"
+          :data_array="huxing_data"
+          which_one="huxing"
+          place_holder="请选择户型"
+        >
+          <view slot="left">*户型</view>
+        </InputItem4>
+
+        <InputItem5
+          curType="input"
+          :form_list.sync="form_list"
+          which_one="shoujia"
+          place_holder="请输入售价"
+        >
+          <view slot="left">*售价</view>
+          <view slot="danwei">万元</view>
+        </InputItem5>
+
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import InputItem from "../common/InputItem"
+  import SelectFloatPicker from "../common/SelectFloatPicker"
+  import CommonMethods from "../../mixins/CommonMethods"
+
+  export default class BaseFormTop extends wepy.component {
+    components = {
+      SelectFloatPicker,
+      "InputItem1":InputItem,
+      "InputItem2":InputItem,
+      "InputItem3":InputItem,
+      "InputItem4":InputItem,
+      "InputItem5":InputItem,
+    };
+    mixins=[CommonMethods]
+    props={
+      form_list:{
+        type:Object,
+        twoWay: true
+      },
+      data_array:{
+        type:Object,
+      }
+    }
+    data = {}
+
+    computed={
+      region_data(){
+        return this.data_array["region"]
+      },
+      huxing_data(){
+        return this.data_array["huxing"]
+      }
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log(this.huxing_data);
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,160 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+  .new-float-desc{
+    width:100%;
+
+    .bottom-btn{
+      width:100%;
+      height:120rpx;
+      position: fixed;
+      bottom:0;
+      left:0;
+      z-index:12;
+      background: #fff;
+      box-sizing: border-box;
+      padding:0 30rpx;
+
+      .icon-view{
+        height:100%;
+        .flex-just();
+        font-size: 24rpx;
+        color: @fontColor;
+        float: left;
+
+        image{
+          width:44rpx;
+          height:44rpx;
+          margin-bottom: 5rpx;
+        }
+      }
+      .icon-view:nth-child(1) {
+        margin-right: 80rpx;
+      }
+
+      .float-btn{
+        float: right;
+        width:200rpx;
+        height:88rpx;
+        font-size: 32rpx;
+        color: @fontColorBack;
+        background: @themeColor;
+        font-weight: 700;
+        margin-top: 16rpx;
+        .flex-just();
+
+      }
+      .zaixian{
+        background: #46EDFF;
+        margin-right: 20rpx;
+      }
+
+
+    }
+
+  }
+</style>
+<template>
+    <ScrollView class="new-float-desc">
+
+      <!--轮播图-->
+      <BannerBox  :imgUrls="imgUrls"/>
+
+      <!--详情区域-->
+      <DescTitle />
+
+      <!--户型介绍-->
+      <HuXing />
+
+      <!--楼盘动态-->
+      <FloatDongTai />
+
+      <!--周边配套-->
+      <FloatZhouBian />
+
+      <!--优秀置业顾问-->
+      <FloatGuWen />
+
+      <!--用户评论-->
+      <FloatPingLun />
+
+      <!--猜你喜欢-->
+      <YourLike />
+
+      <!--底部按钮-->
+      <view class="bottom-btn">
+        <view class="icon-view" >
+          <image src="/assets/icon/float-desc/personal_btn_follow.png"></image>
+          <view>关注</view>
+        </view>
+        <view class="icon-view" >
+          <image src="/assets/icon/float-desc/detail_btn_evaluat.png"></image>
+          <view>评测</view>
+        </view>
+        <view class="float-btn">电话咨询</view>
+        <view class="float-btn zaixian">在线咨询</view>
+      </view>
+
+    </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+  import BannerBox from "../components/common/BannerBox"
+  import DescTitle from "../components/newFloatDesc/DescTitle"
+  import HuXing from "../components/newFloatDesc/HuXing"
+  import FloatDongTai from "../components/newFloatDesc/FloatDongTai"
+  import FloatZhouBian from "../components/newFloatDesc/FloatZhouBian"
+  import FloatGuWen from "../components/newFloatDesc/FloatGuWen"
+  import FloatPingLun from "../components/newFloatDesc/FloatPingLun"
+  import YourLike from "../components/common/YourLike"
+
+  export default class newFloatDesc extends wepy.page {
+    config = {
+      "navigationBarTitleText": "详情"
+    };
+    components = {
+      ScrollView,
+      BannerBox,
+      DescTitle,
+      HuXing,
+      FloatDongTai,
+      FloatZhouBian,
+      FloatGuWen,
+      FloatPingLun,
+      YourLike
+    };
+    data = {
+      imgUrls: [
+        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+        'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+      ],
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+
+    };
+
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+    }
+
+
+    //页面的生命周期函数
+    onLoad() {
+      setTimeout(()=>{
+        wx.setNavigationBarTitle({
+          title: '牛逼'
+        })
+      },1000)
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

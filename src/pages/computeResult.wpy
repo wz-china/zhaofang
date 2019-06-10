@@ -1,0 +1,52 @@
+<style type='less'>
+  .comtainResult{
+
+    position: relative;
+
+  }
+</style>
+
+<template>
+    <view class="comtainResult">
+
+      <view style="margin-left: 10rpx;margin-top: -160rpx">
+      <huankuan></huankuan>
+      </view>
+
+      <view style="background-color: #F9F9FB;height: 20rpx;width: 750rpx;margin-top: 590rpx;position: absolute"></view>
+
+      <view style="font-size: 34rpx;width: 200rpx;height: 45rpx;margin-top: 640rpx;margin-left: 40rpx;position: absolute">还款详情</view>
+
+      <view style="margin-top: 700rpx;position: absolute">
+        <repeat for="[6,7]" index="index" key="key" item="item">
+           <huankuanDetail></huankuanDetail>
+        </repeat>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import huankuan from '../components/homeCompute/huankuan'
+  import huankuanDetail from '../components/homeCompute/huankuanDetail'
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "房贷计算器"
+    }
+    components = {
+      huankuan,
+      huankuanDetail
+    }
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

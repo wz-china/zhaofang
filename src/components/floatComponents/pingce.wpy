@@ -1,0 +1,105 @@
+<style type='less'>
+  .containPC{
+    position: relative;
+    background-color: #F5F5F5;
+    height: 510rpx;
+    /*margin-top: 60rpx;*/
+  }
+
+  .image{
+    width: 690rpx;
+    height: 280rpx;
+    background-color: #666666;
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+
+  }
+
+  .titlepc{
+
+    position: absolute;
+    font-size: 38rpx;
+    margin-top: 15rpx;
+    width: 642rpx;
+    height: 46rpx;
+    overflow:hidden;//一定要写
+    text-overflow: ellipsis;//超出省略号
+    display:-webkit-box;//一定要写
+    -webkit-line-clamp: 1;//控制行数
+    -webkit-box-orient: vertical;//一定要写
+    margin-left: 35rpx;
+
+
+  }
+
+  .detail{
+    position: absolute;
+    font-size: 32rpx;
+    margin-top: 70rpx;
+    width: 642rpx;
+    height: 46rpx;
+    color: #666666;
+    overflow:hidden;//一定要写
+    text-overflow: ellipsis;//超出省略号
+    display:-webkit-box;//一定要写
+    -webkit-line-clamp: 1;//控制行数
+    -webkit-box-orient: vertical;//一定要写
+    margin-left: 35rpx;
+
+
+  }
+
+  .descrip{
+
+    position: absolute;
+    font-size: 28rpx;
+    margin-top: 130rpx;
+    width: 100rpx;
+    height: 46rpx;
+    color: #ffaa00;
+    border-width: 1rpx;
+    border-style: solid;
+    border-color: #ffaa00;
+    text-align: center;
+    line-height: 46rpx;
+    margin-left: 35rpx;
+
+  }
+
+</style>
+
+<template>
+    <view class="containPC">
+
+<!--      <view class="title2">2019房地产税最新消息:2019房地产税最新消息房地产税最新消息</view>-->
+<!--      <view class="time2">2019-04-05</view>-->
+      <view class="image"></view>
+      <view style="background-color: white;height: 200rpx;width: 690rpx;margin-left: 30rpx;margin-right: 15rpx;position: relative">
+
+        <view class="titlepc">二道区大盘|万科物业</view>
+        <view class="detail">二道区莲花山生态旅游</view>
+        <view class="descrip">精品房</view>
+
+      </view>
+
+
+<!--      <view class="line2"></view>-->
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class pingce extends wepy.component {
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

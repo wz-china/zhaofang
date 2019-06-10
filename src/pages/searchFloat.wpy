@@ -1,0 +1,368 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .search-box{
+    width:100%;
+    height:100%;
+
+    .search-top{
+      width:100%;
+      height:120rpx;
+      background: #F9F9FB;
+      box-sizing: border-box;
+      padding:20rpx 5%;
+      border-bottom: 1px solid #eee;
+
+      .search-inner{
+        width:100%;
+        height:100%;
+        box-sizing: border-box;
+        padding:20rpx;
+        background: #fff;
+
+        .search-inner-left{
+          width:25%;
+          height:100%;
+          float: left;
+          position: relative;
+          .flex-just(@dirt: row);
+          border-right: 1px solid #eee;
+          box-sizing: border-box;
+
+
+          .select-text{
+            font-size: 16px;
+            margin-right: 10rpx;
+            color: @fontColorBack;
+          }
+
+          .triangle_border_up{
+            width:0;
+            height:0;
+            border-width:0 10rpx 10rpx;
+            border-style:solid;
+            border-color:transparent transparent @themeColorDeep;
+            position:relative;
+          }
+
+          .triangle_border_down{
+            width:0;
+            height:0;
+            border-width:10rpx 10rpx 0;
+            border-style:solid;
+            border-color:#C2C2C2 transparent transparent;
+            position:relative;
+          }
+
+          .search-select-list{
+            width:100%;
+            height:150rpx;
+            position: absolute;
+            left:0;
+            bottom:-165rpx;
+            background:#fff;
+            padding:0 5%;
+            box-sizing: border-box;
+            z-index:13;
+
+            view{
+              width:100%;
+              height:75rpx;
+              line-height:75rpx;
+              color: @fontColorBack;
+              font-size: 16px;
+              text-align: center;
+              box-sizing: border-box;
+              border-bottom: 1px solid #eee;
+            }
+            view:nth-last-child(1) {
+              border:none;
+            }
+
+
+          }
+
+        }
+        .search-inner-right{
+          width:75%;
+          height:100%;
+          float: left;
+          .flex-just(@dirt: row);
+
+          image{
+            width:30rpx;
+            height:30rpx;
+          }
+
+          .search-input{
+            width:70%;
+            height:60rpx;
+            font-size: 14px;
+            color: @fontColor;
+            margin-left: 20rpx;
+
+
+          }
+
+        }
+
+      }
+
+
+    }
+
+    .history{
+      width:100%;
+      padding:0 5%;
+      box-sizing: border-box;
+
+      .history-title{
+        width:100%;
+        height:90rpx;
+        line-height:90rpx;
+        font-weight: 700;
+        font-size: 18px;
+        .flex-just(@dirt: row,@x:space-between);
+
+        image{
+          width:30rpx;
+          height:30rpx;
+        }
+      }
+
+      .history-list{
+        width:100%;
+
+        .history-item{
+          width:100%;
+          height:96rpx;
+          line-height:96rpx;
+          font-size: 16px;
+          color: @fontColor;
+          border-bottom: 1px solid #eee;
+        }
+
+      }
+    }
+
+    .result-null{
+      width:100%;
+      height:600rpx;
+      .flex-just();
+
+      image{
+        width:240rpx;
+        height:240rpx;
+
+      }
+      .result-tip{
+        font-size: 14px;
+        color: @fontColor9;
+        margin-top: 20rpx;
+      }
+
+      .result-button{
+        width:228rpx;
+        height:72rpx;
+        font-size: 14px;
+        color: @fontColorBack;
+        .flex-just();
+        background: @themeColor;
+        margin-top: 35rpx;
+        font-weight: 700;
+
+      }
+
+    }
+
+    .occup{
+      position: relative;
+      width:100%;
+      height:88rpx;
+    }
+
+    .search-content{
+      width:100%;
+      .container();
+    }
+
+
+}
+</style>
+<template>
+    <ScrollView class="search-box" >
+      <view class="search-top">
+        <view class="search-inner">
+          <view class="search-inner-left" >
+            <span class="select-text" @tap="changeFloatType">{{cur_type}}</span>
+            <view class="{{selectFloatType ? 'triangle_border_up' : 'triangle_border_down'}}">
+              <span></span>
+            </view>
+            <van-action-sheet
+              show="{{ selectFloatType }}"
+              actions="{{ actions }}"
+              cancel-text="取消"
+              close-on-click-overlay
+              bind:cancel="CloseAction"
+              bind:close="CloseAction"
+              bind:select="SelectAction"
+            />
+          </view>
+          <view class="search-inner-right">
+            <image src="../assets/icon/search.png"></image>
+            <input class="search-input" @focus="seeFocus" @blur="outFocus" value="{{search_inner}}" type="text" placeholder="楼盘名 / 商圈名/ 开发商等" />
+          </view>
+        </view>
+      </view>
+
+      <!--搜索历史-->
+      <view class="history" wx:if="{{showWhichBox == 'history'}}">
+        <view class="history-title">
+          <span>搜索历史</span>
+          <image src="../assets/icon/del.png" @tap="delHistory"></image>
+        </view>
+        <view class="history-list">
+          <view class="history-item" @tap="selectHistoryItem('长春万科')">长春万科</view>
+        </view>
+      </view>
+
+      <!--含有搜索结果的-->
+      <view class="occup"  wx:if="{{showWhichBox == 'result'}}">
+        <SelectOption @getFormValue.user="getFormValue"  :isShow.sync="showMask" />
+      </view>
+      <view class="search-content"  wx:if="{{showWhichBox == 'result'}}">
+        <!--搜索为空-->
+        <view class="result-null" wx:if="{{listData.length == 0 && listData.length == 0}}">
+          <image src="../assets/icon/search_defaultimage.png"></image>
+          <view class="result-tip">对不起，没有找到相关楼盘信息</view>
+          <view class="result-button">去列表页看看</view>
+        </view>
+
+        <!--有内容-->
+        <ColumnFloatList  wx:if="{{showWhichBox == 'result' && listData.length != 0}}"/>
+      </view>
+    </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+  import SelectOption from "../components/common/SelectOption"
+  import ColumnFloatList from "../components/common/ColumnFloatList"
+
+
+  export default class SearchFloat extends wepy.page {
+    config = {
+      "navigationBarTitleText": "搜索",
+      "enablePullDownRefresh":true,
+      "onReachBottomDistance":20,
+      "usingComponents": {
+        "van-action-sheet": "../libs/vant-weapp/lib/action-sheet/index"
+      }
+    };
+    components = {
+      ScrollView,
+      SelectOption,
+      ColumnFloatList
+    };
+    data = {
+      showWhichBox:"result",
+      cur_type:"新房",
+      selectFloatType:false,
+      search_inner:"",
+      showMask:false,
+      listData:[],
+      actions: [
+        {name: '新房'},
+        {name: '二手房'},
+      ]
+    }
+
+    changeType() {
+      this.selectFloatType = !this.selectFloatType
+      this.$apply()
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      seeFocus(){
+        this.showWhichBox = "history"
+      },
+      outFocus(){
+        this.showWhichBox = "result"
+      },
+
+      selectHistoryItem(e){
+        this.search_inner = e
+        this.showWhichBox = "result"
+        this.$apply()
+
+      },
+
+      //清空搜索历史
+      delHistory(e){
+
+      },
+
+      CloseAction(){
+        this.selectFloatType = false
+        this.$apply()
+      },
+
+      SelectAction(e){
+        this.cur_type = e.detail.name
+        this.selectFloatType = false
+        this.$apply()
+      },
+
+      changeFloatType(){
+        this.selectFloatType = true
+      },
+
+      selectFloatTypeEvent(e){
+        console.log(e)
+        this.cur_type = e=='new'?"新房":"二手房"
+        this.changeType()
+
+      },
+
+      hideMask(){
+        this.showMask = false
+        this.$broadcast("toOriginal")
+      },
+
+      //获取筛选值
+      getFormValue(e){
+        console.log(e)
+
+      },
+    };
+
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+    }
+
+    //下拉
+    onPullDownRefresh(e){
+      setTimeout(()=>{
+        wepy.stopPullDownRefresh()
+      },2000)
+    }
+
+    //上拉
+    onReachBottom(){
+      console.log(222)
+    }
+
+    //页面的生命周期函数
+    onLoad() {
+
+
+    };
+
+  }
+
+
+</script>
+
+

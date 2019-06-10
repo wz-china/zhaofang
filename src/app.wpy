@@ -1,0 +1,178 @@
+<style lang="less">
+page{
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index',
+      'pages/floatXiaoquList',
+      'pages/oldFloatDesc',
+      'pages/newFloatDesc',
+      'pages/guwenPageList',
+      'pages/pkList',
+      "pages/floatList",
+      'pages/editorSecondFloat',
+      'pages/weituoSell',
+      'pages/heyanChanquan',
+      'pages/guwenPage',
+      'pages/xiaoquIntroduce',
+      'pages/checkYushou',
+      'pages/heyanChanquanResult',
+      'pages/uploadFloatImage',
+      'pages/helpMeFind',
+      'pages/pkDesc',
+      'pages/newFloat',
+      'pages/sendCommon',
+      'pages/floatPingLun',
+      'pages/floatDongTai',
+      'pages/huxingList',
+      'pages/MoreFloatInfo',
+      'pages/MapScreenInfo',
+      'pages/oldFloat',
+      'pages/searchFloat',
+      'pages/message',
+      'pages/selectCity',
+      'pages/mine',
+      'pages/float',
+
+      'pages/messageXT',
+      'pages/mianze',
+      'pages/guwenRZXuzhi',
+      'pages/agentRuzhu',
+      'pages/agentRZXuzhi',
+      'pages/aboutMine',
+      'pages/fabuDongtai',
+      'pages/guwenRuzhu',
+      'pages/mineShezhi',
+      'pages/ruzhuFloat',
+      'pages/mineInfo',
+      'pages/ruzhuMine',
+      'pages/guanzhuMine',
+      'pages/fabuMine',
+      'pages/liulanMine',
+      'pages/paihangbang',
+      'pages/homeCompute',
+      'pages/computeResult',
+    ],
+    subPackages: [
+      {
+        "root": "pagea",
+        "pages": ["selectCity"]
+      }
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#ffdd00',
+      navigationBarTitleText: '找房豹',
+      navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      "borderStyle": "white",
+      "position": "bottom",
+      "backgroundColor": "#fff",
+      "color": "#979797",
+      "selectedColor": "#ffaa00",
+      "list": [
+        {
+          "pagePath": "pages/index",
+          "text": "首页",
+          "iconPath": "assets/icon/nav/home.png",
+          "selectedIconPath": "assets/icon/nav/home_select.png"
+        },
+        {
+          "pagePath": "pages/float",
+          "text": "楼市",
+          "iconPath": "assets/icon/nav/float.png",
+          "selectedIconPath": "assets/icon/nav/float_select.png"
+        },
+        {
+          "pagePath": "pages/message",
+          "text": "消息",
+          "iconPath": "assets/icon/nav/message.png",
+          "selectedIconPath": "assets/icon/nav/message_select.png"
+        },
+        {
+          "pagePath": "pages/mine",
+          "text": "我的",
+          "iconPath": "assets/icon/nav/mine.png",
+          "selectedIconPath": "assets/icon/nav/mine_select.png"
+        }
+      ]
+    },
+  }
+
+  globalData = {
+    userInfo: null,
+    isShowGuide:false
+  }
+
+  constructor () {
+    super()
+    this.use('promisify')
+    // 拦截request请求
+    this.intercept('request', {
+      // 发出请求时的回调函数
+      config (p) {
+        // 对所有request请求中的OBJECT参数对象统一附加时间戳属性
+//        console.log('config request: ', p);
+        // 必须返回OBJECT参数对象，否则无法发送请求到服务端
+        return p;
+      },
+
+      // 请求成功后的回调函数
+      success (p) {
+        // 可以在这里对收到的响应数据对象进行加工处理
+        if(p.data.code == 0){
+          return p.data.data
+        }else{
+          setTimeout(()=>{
+            wx.showToast({
+              title: p.data.msg || "请求失败",
+              icon: 'none',
+              duration: 2000,
+            })
+            return null
+          },1000)
+        }
+      },
+
+      //请求失败后的回调函数
+      fail (p) {
+        return p;
+      },
+    });
+  }
+
+  async onLaunch() {
+    let code = await wepy.getLaunchOptionsSync()
+
+    console.log(code)
+
+  }
+
+  getUserInfo(cb) {
+    const that = this
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo
+    }
+    wepy.getUserInfo({
+      success (res) {
+        that.globalData.userInfo = res.userInfo
+        cb && cb(res.userInfo)
+      }
+    })
+  }
+}
+</script>

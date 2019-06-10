@@ -1,0 +1,48 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .item-header{
+    width:100%;
+    font-size: 32rpx;
+    height:20rpx;
+    line-height:15rpx;
+    margin-top: 20rpx;
+    font-weight: 700;
+    box-sizing: border-box;
+    padding-left: 20rpx;
+    border-left: 3px solid @fontColorBack;
+
+  }
+
+</style>
+<template>
+    <view class="item-header">
+      <slot name="header"></slot>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class ItemHeader extends wepy.component {
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

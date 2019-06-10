@@ -1,0 +1,438 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .desc-box{
+    .container();
+    padding-top:30rpx;
+    .splitBorderBottom();
+
+    .desc-box-title-box{
+      .flex-just(@dirt: row);
+      height:60rpx;
+      line-height:60rpx;
+
+      .desc-box-title{
+        font-size: 42rpx;
+        color: @fontColorBack;
+        width:60%;
+        .text-ellipsis();
+        font-weight: 700;
+      }
+
+      .desc-box-right{
+        .flex-just(@dirt:row,@x:flex-end);
+        width:40%;
+
+        .desc-pk-box{
+          width:50rpx;
+          height:44rpx;
+          position: relative;
+
+          image{
+            width:44rpx;
+            height: 44rpx;
+
+          }
+          .pk-num{
+            width:30rpx;
+            height:30rpx;
+            border-radius: 30rpx;
+            background: @themeColor;
+            font-size: 20rpx;
+            position: absolute;
+            right:-5rpx;
+            top:-10rpx;
+            .flex-just();
+          }
+
+        }
+
+        .share{
+          width:44rpx;
+          height:44rpx;
+          margin-left: 30rpx;
+          margin-top: 5rpx;
+        }
+
+        .share-btn{
+          border:none;
+          .flex-just();
+          margin:0;
+
+        }
+
+      }
+
+    }
+
+    .desc-label-box{
+      width:100%;
+      .flex-just(@dirt: row,@x:flex-start);
+      flex-wrap: nowrap;
+      margin-top: 10rpx;
+
+      .desc-label-item{
+        padding:5rpx 10rpx;
+        color: #fff;
+        font-size: 20rpx;
+        margin-right: 10rpx;
+      }
+      .desc-label-item-orange{
+        background: #FE6E00;
+      }
+      .desc-label-item-blue{
+        background: #69C8F8;
+      }
+
+      .desc-label-item-common{
+        border:1px solid @themeColorDeep;
+        color: @themeColorDeep;
+      }
+    }
+
+    .desc-price{
+      width:100%;
+
+      .desc-price-common{
+        width:50%;
+        height:150rpx;
+        float: left;
+        .flex-just(@y:flex-start);
+        border-bottom: 1px solid #eee;
+
+        .desc-price{
+          font-size: 36rpx;
+          font-weight: 700;
+          color: @price;
+
+        }
+        .desc-price-label{
+          font-size: 28rpx;
+          color: @fontColor9;
+          margin-top: 10rpx;
+
+        }
+
+      }
+    }
+
+    .desc-info-box{
+      width:100%;
+
+      .desc-info-item{
+        width:50%;
+        height:60rpx;
+        line-height:60rpx;
+        font-size: 28rpx;
+        float: left;
+        .flex-just(@dirt: row,@x:flex-start);
+        flex-wrap: nowrap;
+
+        .desc-info-item-title{
+          width:80rpx;
+          color: @fontColor9;
+        }
+        .desc-info-item-text{
+          width:75%;
+          color: @fontColorBack;
+          .text-ellipsis();
+        }
+      }
+
+      .desc-info-item-lang{
+        width:100%;
+        position: relative;
+
+        image{
+          position: absolute;
+          right:0rpx;
+          top:50%;
+          transform: translateY(-50%);
+          width:24rpx;
+          height:24rpx;
+
+        }
+      }
+
+
+    }
+
+    .desc-more-btn{
+      background: #EFF0F3;
+      height:88rpx;
+      font-size: 28rpx;
+      .flex-just();
+      color: @fontColorBack;
+      margin: 20rpx 0;
+
+    }
+
+    .remind-box{
+      width:100%;
+      height:120rpx;
+      border-bottom: 1px solid #eee;
+
+      .remind-common{
+        width:50%;
+        float: left;
+        height:120rpx;
+        color: @themeColorDeep;
+        .flex-just(@dirt: row);
+        font-size: 28rpx;
+
+        image{
+          width:32rpx;
+          height:32rpx;
+          margin-right: 10rpx;
+        }
+
+      }
+
+    }
+
+    .paiming-box{
+      width:100%;
+      height:100rpx;
+      line-height:100rpx;
+      .flex-just(@dirt: row,@x:space-between);
+
+      .paiming-box-left{
+        height:100%;
+        .flex-just(@dirt: row);
+        font-size: 28rpx;
+        color: @fontColorBack;
+
+        image{
+          width:32rpx;
+          height:32rpx;
+          margin-right: 20rpx;
+        }
+
+      }
+
+      image{
+        width:24rpx;
+        height:24rpx;
+      }
+
+    }
+
+    .clearfloat{
+      clear: both;
+    }
+
+    .tixing-box{
+      width:100vw;
+      height:100vh;
+      background: rgba(0,0,0,0.8);
+      position: fixed;
+      z-index:20;
+      left:0;
+      top:0;
+      .flex-just();
+
+
+      .tixing-inner{
+        width:630rpx;
+        height:600rpx;
+        background: #fff;
+        border-radius: 10rpx;
+        position: relative;
+        box-sizing: border-box;
+        padding:0 5%;
+
+        image{
+          width:44rpx;
+          height:44rpx;
+          position: absolute;
+          right:4%;
+          top:4%;
+        }
+
+        .tixing-title{
+          width:100%;
+          height:50rpx;
+          font-size: 42rpx;
+          color: @fontColorBack;
+          font-weight: 700;
+          margin-top: 100rpx;
+          margin-bottom: 20rpx;
+        }
+        .tixing-tip{
+          font-size: 24rpx;
+          color: @fontColor9;
+          margin-top: 20rpx;
+
+        }
+        .tixing-dingyue{
+          width:100%;
+          font-size: 28rpx;
+          color: @fontColorBack;
+          font-weight: 700;
+          margin-top: 30rpx;
+        }
+        input{
+          width:100%;
+          height:50rpx;
+          font-size: 32rpx;
+          color: @fontColor9;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 10rpx;
+          margin-top: 50rpx;
+
+        }
+
+        .tixing-btn{
+          width:100%;
+          height:88rpx;
+          background: @themeColor;
+          font-size: 32rpx;
+          .flex-just();
+          color: @fontColorBack;
+          font-weight: 700;
+          margin-top: 50rpx;
+        }
+
+
+
+      }
+
+
+    }
+  }
+</style>
+<template>
+  <view class="desc-box">
+    <view class="desc-box-title-box">
+      <view class="desc-box-title">嘉龙太古城首付三期</view>
+      <view class="desc-box-right">
+        <view class="desc-pk-box" @tap="gotoCommonPage('pkList')">
+          <image src="/assets/icon/float-desc/detail_btn_pk.png"></image>
+          <span class="pk-num">11</span>
+        </view>
+        <button class="share-btn" plain open-type="share">
+          <image class="share"  src="/assets/icon/share.png" ></image>
+        </button>
+      </view>
+    </view>
+
+    <view class="desc-label-box">
+      <view class="desc-label-item desc-label-item-orange">住宅</view>
+      <view class="desc-label-item desc-label-item-blue">住宅</view>
+      <view class="desc-label-item  desc-label-item-common">品牌楼盘</view>
+    </view>
+
+    <view class="desc-price">
+      <view class="desc-price-left desc-price-common">
+        <view class="desc-price">10500元/m²</view>
+        <view class="desc-price-label">售价</view>
+      </view>
+      <view class="desc-price-right desc-price-common">
+        <view class="desc-price">66-260万</view>
+        <view class="desc-price-label">总价</view>
+      </view>
+    </view>
+
+    <view class="desc-info-box">
+      <view class="desc-info-item">
+        <view class="desc-info-item-title">结构:</view>
+        <view class="desc-info-item-text">高层</view>
+      </view>
+      <view class="desc-info-item">
+        <view class="desc-info-item-title">户型:</view>
+        <view class="desc-info-item-text">一居室|二居室</view>
+      </view>
+      <view class="desc-info-item">
+        <view class="desc-info-item-title">建面:</view>
+        <view class="desc-info-item-text">89-149/m²</view>
+      </view>
+      <view class="desc-info-item">
+        <view class="desc-info-item-title">开盘:</view>
+        <view class="desc-info-item-text">2019-04-01</view>
+      </view>
+      <view class="desc-info-item desc-info-item-lang">
+        <view class="desc-info-item-title">地址:</view>
+        <view class="desc-info-item-text">二道区莲花山生态旅游度假区</view>
+        <image src="/assets/icon/arrow-right.png"></image>
+      </view>
+
+    </view>
+
+    <view class="clearfloat"></view>
+
+    <view class="desc-more-btn" @tap="gotoCommonPage('MoreFloatInfo')">更多楼盘信息</view>
+
+    <view class="remind-box">
+      <view class="remind-common" @tap="changeTixing('jiangjia')">
+        <image src="/assets/icon/float-desc/detail_icon_pricereduction.png"></image>
+        <span>降价提醒我</span>
+      </view>
+      <view class="remind-common" @tap="changeTixing('kaipan')" >
+        <image src="/assets/icon/float-desc/detail_icon_remind.png"></image>
+        <span>开盘提醒我</span>
+      </view>
+
+    </view>
+
+    <view class="paiming-box" @tap="gotoCommonPage('paihangbang')">
+      <view class="paiming-box-left">
+        <image src="/assets/icon/float-desc/detail_icon_rank.png"></image>
+        <span>入选长春市人气帮第1名</span>
+
+      </view>
+      <image src="/assets/icon/arrow-right.png"></image>
+
+    </view>
+
+    <!--提醒-->
+    <view class="tixing-box" wx:if="{{isShowTixing}}" catchtouchmove="ture">
+      <view class="tixing-inner">
+        <image src="/assets/icon/float-desc/popup_btn_close.png" @tap="changeTixingStatus"></image>
+        <view class="tixing-content">
+          <view class="tixing-title">{{cur_tixing_type=='jiangjia'?'降价提醒':"开盘提醒"}}</view>
+          <view class="tixing-tip">{{cur_tixing_type=='jiangjia'?'降价':"开盘"}}消息会通过短信及手机推送消息通知您</view>
+          <view class="tixing-dingyue">订阅后，不在错过{{cur_tixing_type=='jiangjia'?'降价':"好房源"}}！</view>
+          <input type="number" maxlength="11" minlength="11" value="{{phone_number}}" placeholder="请输入手机号码" />
+        </view>
+        <view class="tixing-btn" >确定</view>
+      </view>
+    </view>
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonMethods from "../../mixins/CommonMethods"
+
+  export default class DescTitle extends wepy.component {
+    mixins=[CommonMethods]
+    components = {};
+    data = {
+      phone_number:"15584123875",
+      cur_tixing_type:"jiangjia",
+      isShowTixing:false
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changeTixing(e) {
+        this.cur_tixing_type = e
+        this.isShowTixing = !this.isShowTixing
+      },
+      changeTixingStatus(){
+        this.isShowTixing = !this.isShowTixing
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,95 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .float-item-row{
+    width:31%;
+    height:100%;
+    .flex-just();
+
+    image{
+      width:100%;
+      height:138rpx;
+    }
+    .item-row-title-box{
+      width:100%;
+
+      .item-row-title{
+        width:100%;
+        text-align: left;
+        .text-ellipsis();
+        font-size: 14px;
+        color: #000;
+        font-weight: 700;
+      }
+      .item-row-address{
+        width:100%;
+        margin-top: 10rpx;
+        .flex-just(@dirt: row,@x:flex-end);
+        font-size: 12px;
+        color: @fontColor;
+
+        .address{
+          width:50%;
+          .text-ellipsis();
+        }
+        .comment{
+          .flex-just(@dirt: row,@x:flex-end);
+          width:50%;
+
+          image{
+            width:24rpx;
+            height:22rpx;
+            margin-right: 5rpx;
+          }
+
+
+        }
+
+      }
+
+    }
+
+  }
+
+</style>
+<template>
+    <view class="float-item-row">
+      <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+      <view class="item-row-title-box">
+        <view class="item-row-title">德辉首府</view>
+        <view class="item-row-address">
+          <view class="address">二道区</view>
+          <view class="comment">
+            <image src="/assets/icon/comment-icon.png"></image>
+            <span>111</span>
+          </view>
+        </view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class FloatItemRow extends wepy.component {
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

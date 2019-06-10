@@ -1,0 +1,87 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .guwen{
+    .container();
+    .splitBorderBottom();
+    padding-bottom: 30rpx;
+
+    .guwen-list{
+      width:100%;
+      .flex-just(@dirt: row,@x:space-between);
+
+      .guwwn-item{
+        width:210rpx;
+        height:210rpx;
+        background: #f4f4f4;
+        .flex-just();
+        font-size: 28rpx;
+        color: @fontColor;
+        font-weight: 700;
+
+        image{
+          width:90rpx;
+          height:90rpx;
+          margin-bottom: 10rpx;
+          border-radius: 90rpx;
+        }
+      }
+    }
+
+
+  }
+</style>
+<template>
+    <view class="guwen">
+      <ItemHeader :headerTitle.sync="header1"  gotoPage="guwenPageList" params="id=1111"/>
+      <view class="guwen-list">
+        <view class="guwwn-item" @tap="gotoCommonPage('guwenPage','id=111')">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view>陈天骄</view>
+        </view>
+        <view class="guwwn-item" @tap="gotoCommonPage('guwenPage','id=111')">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view>陈天骄</view>
+        </view>
+        <view class="guwwn-item" @tap="gotoCommonPage('guwenPage','id=111')">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view>陈天骄</view>
+        </view>
+
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ItemHeader from "../common/ItemHeader"
+  import CommonMethods from "../../mixins/CommonMethods"
+
+  export default class FloatGuWen extends wepy.component {
+    mixins=[CommonMethods]
+    components = {
+      ItemHeader
+    };
+    data = {
+      header1:"优秀置业顾问"
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

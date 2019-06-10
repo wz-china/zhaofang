@@ -1,0 +1,63 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .help-me-header{
+    .container();
+    padding-top:30rpx;
+    padding-bottom: 30rpx;
+
+    .header{
+      width:100%;
+      font-size: 36rpx;
+      color: @fontColorBack;
+      font-weight: 700;
+    };
+
+  }
+
+  .help-me-header-bottom{
+    .splitBorderBottom();
+  }
+</style>
+<template>
+    <view class="help-me-header {{ifSplit?'help-me-header-bottom':''}}">
+      <view class="header">
+        <slot name="title"></slot>
+      </view>
+      <view class="content">
+        <slot name="content"></slot>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class ItemHeader extends wepy.component {
+    props={
+      ifSplit:{
+        type:Boolean,
+        default:true
+      }
+    }
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,81 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .animation-row-list{
+    width:200%;
+    height:300rpx;
+    background: orange;
+    position: absolute;
+    top:100rpx;
+    left:0;
+    box-sizing: border-box;
+    padding:0 2%;
+    .flex-just(@dirt: row,@x:space-between);
+  }
+
+  .swiper-content{
+    box-sizing: border-box;
+    padding:0 2%;
+    .swiper-row-item{
+      .base-wh();
+      .flex-just(@dirt: row,@x:space-between);
+    }
+
+  }
+
+</style>
+<template>
+
+  <swiper indicator-dots="{{indicatorDots}}"
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item class="swiper-content">
+        <view class="swiper-row-item">
+          <FloatItemRow />
+          <FloatItemRow />
+          <FloatItemRow />
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import FloatItemRow from "../common/FloatItemRow"
+
+  export default class RowAnimationList extends wepy.component {
+
+    components = {
+      FloatItemRow,
+    };
+    data = {
+      imgUrls: [
+        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+      ],
+      indicatorDots: false,
+      autoplay: true,
+      interval: 5000,
+      duration: 1000
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    async onLoad() {
+
+    };
+
+  }
+
+
+</script>
+
+

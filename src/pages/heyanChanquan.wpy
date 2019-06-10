@@ -1,0 +1,79 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .heyan-chanquan{
+    .container();
+
+    .heyan-btn-box{
+      .container();
+      height:88rpx;
+      .flex-just();
+      font-size: 32rpx;
+      color: @fontColorBack;
+      font-weight: 700;
+      background: @themeColor;
+      margin-top: 50rpx;
+    }
+
+    .tip{
+      width:100%;
+      .flex-just();
+      margin-top: 20rpx;
+      color: @fontColor9;
+      font-size: 24rpx;
+    }
+
+  }
+
+</style>
+<template>
+    <view class="heyan-chanquan">
+      <FormList :form_list="form_list" :data_array="data_list"/>
+      <view class="heyan-btn-box" @tap="heyanEvent">立即核验</view>
+      <view class="tip">*为必填项，请填写房产局的验真信息，保证核验的准确性</view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import FormList from "../components/heyanChanquan/FormList"
+
+  export default class heyanChanquan extends wepy.page {
+    config = {
+      "navigationBarTitleText": "核验产权"
+    };
+    components = {
+      FormList,
+    };
+    data = {
+      data_list:{
+        leixing:[{id:1,name:"niubi1"},{id:2,name:"niubi2"}],
+        zhengjian:[{id:1,name:"身份证"},{id:2,name:"护照"}]
+      },
+      form_list:{
+        leixing:null,
+        bianhao:null,
+        xingming:null,
+        zhengjian:null,
+        zhengjian_num:null,
+      }
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      heyanEvent() {
+        console.log(this.form_list);
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,120 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .base-form-box{
+    width:100%;
+    background: #F9F9FB;
+
+    .send-btn{
+      width:100%;
+      margin-top: 50rpx;
+      background: #fff;
+      height:120rpx;
+      margin-top: 50rpx;
+      .flex-just();
+      .container();
+
+      view{
+        width:100%;
+        height:88rpx;
+        background: @themeColor;
+        font-size: 32rpx;
+        font-weight: 700;
+        .flex-just();
+      }
+
+
+    }
+  }
+</style>
+<template>
+    <view class="base-form-box">
+      <BaseFormTop
+        :form_list.sync="base_form_list"
+        :data_array.sync="data_array"
+      />
+
+      <EditorSecondFloatForm :form_list.sync="form_inner"></EditorSecondFloatForm>
+
+      <CheckTrue
+        :yanzhen.sync="yanzhen"
+        :heyan_list="heyan_list"
+        :heyan_data_list="heyan_data_list"
+        :noheyan_list="noheyan_list"
+      />
+
+      <view class="send-btn">
+        <view>确认发布</view>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import BaseFormTop from "../components/form/BaseFormTop"
+  import CheckTrue from "../components/form/CheckTrue"
+  import EditorSecondFloatForm from "../components/form/EditorSecondFloatForm"
+  import InputItem from "../components/common/InputItem"
+
+  export default class editorSecondFloat extends wepy.page {
+    config = {
+      "navigationBarTitleText": "发布二手房"
+    };
+    components = {
+      BaseFormTop,
+      CheckTrue,
+      EditorSecondFloatForm
+    };
+    data = {
+      base_form_list:{
+        xiaoqu_name:null,
+        huxing:null,
+        loudong:[],
+        region:null,
+        shoujia:null
+      },
+      form_inner:{
+        fangbiaoti:""
+      },
+      data_array:{
+        region:[],
+        huxing:[]
+      },
+      heyan_data_list:{
+        leixing:[{id:1,name:"niubi1"},{id:2,name:"niubi2"}],
+        zhengjian:[{id:1,name:"身份证"},{id:2,name:"护照"}]
+      },
+      yanzhen:true,
+      heyan_list:{
+        leixing:null,
+        bianhao:null,
+        xingming:null,
+        zhengjian:null,
+        zhengjian_num:null,
+      },
+      noheyan_list:{
+        jianzhu:"",
+        diya:""
+      },
+
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changePage() {
+
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

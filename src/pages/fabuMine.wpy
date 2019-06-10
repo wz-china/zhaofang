@@ -1,0 +1,154 @@
+<style type='less'>
+
+  @import "../assets/css/index.less";
+
+  .containFabu{
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+    padding-bottom: 50rpx;
+  }
+  .bacView{
+    width: 100%;
+    height: 390rpx;
+    background-color: #F5F5F5;
+    position: relative;
+  }
+  .fabu{
+    width: 100%;
+    height: 370rpx;
+    background-color: white;
+    position: absolute;
+    margin-bottom: 20rpx;
+  }
+  .imaFabu{
+    width: 240rpx;
+    height: 186rpx;
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    background-color: red;
+  }
+  .titleFabu{
+    width: 430rpx;
+    height: 44rpx;
+    margin-top: 40rpx;
+    margin-left: 290rpx;
+    position: absolute;
+    font-size: 34rpx;
+    .text-ellipsis
+  }
+  .deFabu{
+    width: 430rpx;
+    height: 38rpx;
+    margin-top: 88rpx;
+    margin-left: 290rpx;
+    position: absolute;
+    font-size: 28rpx;
+    .text-ellipsis;
+    color: @fontColor;
+  }
+  .biaoqian{
+    width: 100rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    margin-top: 136rpx;
+    margin-left: 290rpx;
+    position: absolute;
+    font-size: 25rpx;
+    .text-ellipsis;
+    color: @themeColorDeep;
+    border-color: @themeColorDeep;
+    border-width: 1rpx;
+    border-style: solid;
+  }
+  .price{
+    width: 120rpx;
+    height: 42rpx;
+    margin-top: 186rpx;
+    margin-left: 290rpx;
+    position: absolute;
+    font-size: 37rpx;
+    .text-ellipsis;
+    color: red;
+    font-weight: 900;
+  }
+  .danwei{
+    width: 120rpx;
+    height: 42rpx;
+    margin-top: 192rpx;
+    margin-left: 400rpx;
+    position: absolute;
+    font-size: 30rpx;
+    .text-ellipsis;
+    color: @fontColor;
+  }
+  .viewL{
+    width: 690rpx;
+    height: 1rpx;
+    margin-top: 270rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    background-color: #E6E6E6;
+
+  }
+  .delete{
+    width: 140rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    margin-top: 290rpx;
+    margin-left: 580rpx;
+    position: absolute;
+    font-size: 26rpx;
+    border-color: #999999;
+    border-width: 1rpx;
+    border-style: solid;
+  }
+
+
+</style>
+
+<template>
+    <view class="containFabu">
+
+      <repeat for="{{list}}" key="key" index="index" item="item">
+        <view class="bacView">
+          <view class="fabu">
+
+        <image class="imaFabu"></image>
+        <view class="titleFabu">大众中央公园二期</view>
+        <view class="deFabu">二道区莲花山生态旅游</view>
+        <view class="biaoqian">品牌楼盘</view>
+        <view class="price">12000</view>
+        <view class="danwei">元/㎡</view>
+        <view class="viewL"></view>
+        <view class="delete">删除</view>
+
+      </view>
+        </view>
+      </repeat>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "我的发布"
+    };
+    data = {
+      list:["q","q","q","q","q","q","q"]
+    };
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

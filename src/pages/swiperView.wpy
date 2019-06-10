@@ -1,0 +1,85 @@
+<style type='less'>
+</style>
+
+<template>
+    <view>
+      <headV :titleText="array" ></headV>
+      <swiper  indicator-dots="{{indicatorDots}}"
+              autoplay="{{autoplay}}" interval="{{interval}}" current="{{currentSwiper}}" duration="{{duration}}" bindchange="swiperChange">
+        <block wx:for="{{imgUrls}}" wx:key="key">
+          <swiper-item>
+            <view>第{{currentSwiper*1+1}}页</view>
+<!--            <image src="{{item}}" class="slide-image" width="355" height="150"/>-->
+          </swiper-item>
+        </block>
+      </swiper>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import headV from '../components/homeCompute/headV'
+
+  export default class Index extends wepy.page {
+    components = {
+      headV,
+
+    }
+    data = {
+      imgUrls: [
+        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+        'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+      ],
+      indicatorDots: false,
+      autoplay: false,
+      // interval: 5000,
+      // duration: 1000,
+      array:['人气榜','热销榜','关注榜'],
+      currentSwiper:'0',
+      ceshi:''
+    };
+    methods = {
+
+
+
+    };
+
+
+    events = {
+      'selectID': (event) => {
+
+        console.log(888,event)
+        this.currentSwiper=event-1
+
+        this.$apply()
+        // wepy.pageScrollTo({
+        //   scrollTop: 0,
+        //   duration: 300
+        // })
+
+        // console.log(${this.name} receive ${$event.name} from ${$event.source.name});
+      }
+    }
+
+    swiperChange (e) {
+
+      this.currentSwiper= e.detail.current
+      console.log('eeeee',this.currentSwiper)
+      this.$broadcast("currentSwiper",this.currentSwiper)
+
+      this.$apply()
+
+
+    }
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

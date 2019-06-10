@@ -1,0 +1,136 @@
+<style type='less'>
+  @import "../assets/css/index.less";
+
+
+  .containPHB{
+    padding-bottom: 50rpx;
+    width: 100%;
+    position: relative;
+    height: 100%;
+
+
+    .headPHB{
+      width: 100%;
+      position: relative;
+
+      .qifei{
+        width: 100%;
+        height:90rpx;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: white;
+
+      }
+      .to-top{
+        position: fixed;
+        z-index: 10;
+
+      }
+
+
+    }
+    .imaPHB{
+      width: 100rpx;
+      height: 100rpx;
+      position: absolute;
+    }
+
+
+  }
+
+
+</style>
+
+<template>
+    <view class="containPHB">
+      <view style="position: relative;width: 100%;">
+        <view style="height: 180rpx;width: 100%;background-color: #E6E6E6"></view>
+        <view class="headPHB" style="height: 90rpx;">
+          <view class="qifei {{iftoTop?'to-top':''}}">
+          <headV :titleText="array"></headV>
+          </view>
+<!--          <view class="qifei {{iftoTop?'to-top':''}}">hello world</view>-->
+
+        </view>
+      </view>
+      <view style="padding-bottom: 40rpx">
+
+      <ScrollView>
+        <repeat for="['2','2']" item="item" index="index" key="key">
+        <view style="margin-top: 40rpx;margin-left: 30rpx;height: 370rpx;width: 690rpx;background-color: #E6E6E6">
+          <view>
+            <image class="imaPHB" src="/assets/icon/paihangbang.png"></image>
+          </view>
+          <view style="font-size: 33rpx;margin-top: 10rpx;margin-left: 0rpx;position: absolute;width: 100rpx;text-align: center">Top</view>
+          <view style="font-size: 33rpx;margin-top: 50rpx;margin-left: 0rpx;position: absolute;width: 100rpx;text-align: center;font-weight: 800rpx">{{index+1}}</view>
+        </view>
+        </repeat>
+      </ScrollView>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import headV from '../components/homeCompute/headV'
+  import ScrollView from '../components/common/ScrollView'
+
+  export default class Index extends wepy.page {
+    components = {
+      headV,
+      ScrollView
+    }
+
+    events = {
+      'selectID': (event) => {
+
+        console.log(888,event)
+        this.selectid=event
+
+        wepy.pageScrollTo({
+          scrollTop: 0,
+          duration: 300
+        })
+
+    // console.log(${this.name} receive ${$event.name} from ${$event.source.name});
+    }
+    }
+
+    data = {
+      array:['人气榜','热销榜','关注榜'],
+      selectid:'',
+      iftoTop:false
+    };
+    methods = {};
+
+    onPageScroll(e){
+      let cur_top = e.scrollTop
+
+      console.log(e.scrollTop)
+      if(!this.iftoTop){
+        if(cur_top > 90){
+          this.iftoTop = true
+          this.$apply()
+        }
+      }
+      if(this.iftoTop){
+        if(cur_top < 100){
+          this.iftoTop = false
+          this.$apply()
+        }
+      }
+
+
+      this.$broadcast("pageScroll",e)
+    }
+
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

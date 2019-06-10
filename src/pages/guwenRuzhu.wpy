@@ -1,0 +1,343 @@
+<style type='less'>
+  @import "../assets/css/index.less";
+
+  .containGuwen{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #F5F5F5;
+    padding-bottom: 100rpx;
+  }
+  .line2{
+    width: 100%;
+    height: 115rpx;
+    background-color: white;
+    position: relative;
+  }
+  .text2{
+    width: 170rpx;
+    height: 45rpx;
+    margin-top: 33rpx;
+    margin-left: 30rpx;
+    font-size: 34rpx;
+    position: absolute;
+  }
+  .detext2{
+    width: 480rpx;
+    height: 40rpx;
+    margin-top: 37rpx;
+    margin-left: 200rpx;
+    font-size: 31rpx;
+    position: absolute;
+    text-align: right;
+    color: #999999;
+    .text-ellipsis
+  }
+  .jiantou{
+    width: 32rpx;
+    height: 30rpx;
+    margin-top: 60rpx;
+    margin-left: 690rpx;
+    position: absolute;
+  }
+  .lineV1{
+    width: 720rpx;
+    height: 2rpx;
+    margin-left: 30rpx;
+    margin-top: 147rpx;
+    background-color: #E6E6E6;
+    position: absolute;
+  }
+  .tishi{
+    width: 160rpx;
+    height: 50rpx;
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+    font-size: 38rpx;
+    font-weight: 400;
+    position: absolute;
+  }
+  .dianji{
+    width: 250rpx;
+    height: 40rpx;
+    position: absolute;
+    color: @themeColorDeep;
+    font-size: 31rpx;
+    right: 30rpx;
+    text-align: right;
+    margin-top: 40rpx;
+  }
+  .loupan{
+    width: 160rpx;
+    height: 50rpx;
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+    font-size: 38rpx;
+    font-weight: 400;
+    position: absolute;
+  }
+  .deloupan{
+    width: 360rpx;
+    height: 50rpx;
+    margin-top: 26rpx;
+    margin-left: 210rpx;
+    font-size: 32rpx;
+    font-weight: 400;
+    position: absolute;
+    color: @fontColor;
+  }
+  .sf{
+    width: 100%;
+    height: 90rpx;
+    background-color: white;
+    position: relative;
+  }
+  .sftext{
+    width: 260rpx;
+    height: 50rpx;
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+    font-size: 38rpx;
+    font-weight: 400;
+    position: absolute;
+  }
+  .sfView{
+    margin-top: 0rpx;
+    width: 100%;
+    height: 320rpx;
+    /*position: relative;*/
+    display: flex;
+    background-color: white;
+    /*justify-content: space-between;*/
+  }
+  .idcardIma{
+    width: 324rpx;
+    height: 216rpx;
+    margin-top: 10rpx;
+    margin-left: 35rpx;
+    margin-right: 20rpx;
+    position: absolute;
+  }
+  .idcardText{
+    width: 300rpx;
+    height: 40rpx;
+    margin-top: 246rpx;
+    margin-left: 45rpx;
+    position: absolute;
+    font-size: 30rpx;
+    color: #999999;
+  }
+
+  .buttom{
+    position: fixed;
+    width: 100%;
+    height: 148rpx;
+    background-color: white;
+    bottom: 0rpx;
+  }
+  .baocun{
+    width: 690rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    margin-top: 30rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    background-color: @themeColor;
+    font-size: 34rpx;
+  }
+  .viewb{
+    background-color: #F5F5F5;
+    height: 20rpx;
+    width: 100%;
+  }
+
+  .zhaoxiangji{
+    position: absolute;
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 45rpx;
+    margin-top: 76rpx;
+    margin-left: 153rpx;
+  }
+</style>
+
+<template>
+    <view class="containGuwen">
+
+      <view style="position: relative;width: 100%;height: 120rpx;background-color: white">
+      <view class="tishi">基本信息</view>
+      <view class="dianji" @tap="xuzhiTap">入驻优势与须知</view>
+      </view>
+      <repeat for="{{list}}" index="index" key="key" item="item">
+        <view class="line2">
+
+          <view class="text2">{{item}}</view>
+          <!--        <view class="detext2">{{list1[index]}}</view>-->
+          <input class="detext2" type="text" placeholder="{{list1[index]}}" style="min-height: 1.0rem;"/>
+          <image class="jiantou" src="/components/homeCompute/jiantou.png" style="margin-top: 40rpx"></image>
+          <view wx:if="{{index!=3}}" class="lineV1" style="margin-top: 111rpx"></view>
+        </view>
+      </repeat>
+      <view class="viewb"></view>
+      <view style="position: relative;width: 100%;height: 70rpx;margin-top: 0rpx;background-color: white">
+        <view class="loupan">楼盘信息</view>
+        <view class="deloupan">只能入驻一个楼盘</view>
+      </view>
+      <view class="line2">
+
+          <view class="text2">*楼盘名称</view>
+          <!--        <view class="detext2">{{list1[index]}}</view>-->
+<!--          <input class="detext2" type="text" placeholder="请选择已有的楼盘" style="min-height: 1.0rem;"/>-->
+        <picker class="detext2" bindchange="bindPickerChangeJizhun" value="请选择已有的楼盘" range="[1,2,3]" style="margin-top: 30rpx">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute;margin-left: 50rpx">
+            请选择已有的楼盘
+          </view>
+        </picker>
+          <image class="jiantou" src="/components/homeCompute/jiantou.png" style="margin-top: 40rpx"></image>
+      </view>
+      <view class="viewb"></view>
+      <view class="sf">
+      <view class="sftext">身份证信息</view>
+      </view>
+      <view class="sfView" style="margin-bottom: 0rpx">
+
+          <view style="width: 355rpx;height: 300rpx;position: relative;margin-left: 2rpx">
+                <image class="idcardIma" src="{{listIma[0]}}" ></image>
+                <image class="zhaoxiangji" src="/assets/icon/zhaoxiangji.png" @tap="tapSF" data-id="0"></image>
+                <view class="idcardText">{{listcard[0]}}</view>
+          </view>
+          <view style="width: 355rpx;height: 300rpx;position: relative;margin-left: 2rpx">
+            <image class="idcardIma" src="{{listIma[1]}}"></image>
+            <image class="zhaoxiangji" src="/assets/icon/zhaoxiangji.png" @tap="tapSF" data-id="1"></image>
+            <view class="idcardText">{{listcard[1]}}</view>
+          </view>
+
+      </view>
+      <view class="viewb"></view>
+      <view class="sf">
+        <view class="sftext">名牌/工牌信息</view>
+      </view>
+      <view class="sfView" style="margin-top: 0rpx">
+
+          <view style="width: 48%;height: 300rpx;position: relative;margin-left: 0rpx">
+            <image class="idcardIma" src="{{mingpai}}"></image>
+            <image class="zhaoxiangji" src="/assets/icon/zhaoxiangji.png" @tap="mingpaiTap"></image>
+            <view class="idcardText" style="width: 350rpx;margin-left: 35rpx">点击上传名牌/工牌照片</view>
+          </view>
+
+      </view>
+
+      <view class="buttom">
+        <view class="baocun" @tap="tijiaoTap">提交</view>
+      </view>
+
+      <view style="height: 150rpx"></view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "置业顾问入驻"
+    };
+    data = {
+      list:["*姓名","手机号码","*个人简介","推荐人电话"],
+      list1:["请输入姓名","请输入手机号码","请选择楼栋门牌号","请输入推荐人电话"],
+      listIma:["/assets/icon/idcardz.png","/assets/icon/idcardf.png"],
+      listcard:["点击上传身份证正面照","点击上传身份证反面照"],
+      mingpai:"/assets/icon/gongpai.png"
+    };
+    methods = {
+      mingpaiTap(){
+        console.log('上传头像')
+        var that=this
+        wx.chooseImage({
+          count: 1,
+
+          sizeType: ['compressed'],
+          sourceType: ['album', 'camera'],
+          success: function(res) {
+
+            const tempFilePaths = res.tempFilePaths
+            console.log(res, tempFilePaths[0])
+
+            // this.imaUrl=tempFilePaths[0]
+            // this.$apply()
+            that.mingpai = tempFilePaths[0]
+            that.$apply()
+
+          }
+        })
+      },
+      tapSF(e){
+        if (e.currentTarget.dataset.id==0){
+          console.log('上传头像')
+          var that=this
+          wx.chooseImage({
+            count: 1,
+
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            success: function(res) {
+
+              const tempFilePaths = res.tempFilePaths
+              console.log(res, tempFilePaths[0])
+
+              // this.imaUrl=tempFilePaths[0]
+              // this.$apply()
+              that.listIma[0] = tempFilePaths[0]
+              that.$apply()
+
+            }
+          })
+        } else {
+          console.log('上传头像')
+          var that=this
+          wx.chooseImage({
+            count: 1,
+
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+            success: function(res) {
+
+              const tempFilePaths = res.tempFilePaths
+              console.log(res, tempFilePaths[0])
+
+              // this.imaUrl=tempFilePaths[0]
+              // this.$apply()
+              that.listIma[1] = tempFilePaths[0]
+              that.$apply()
+
+            }
+          })
+        }
+      },
+      tijiaoTap(){
+        wx.navigateTo({
+          url: 'ruzhuFloat'
+        })
+      },
+
+      xuzhiTap(){
+
+        wx.navigateTo({
+          url: 'guwenRZXuzhi'
+        })
+
+      }
+    };
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

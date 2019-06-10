@@ -1,0 +1,214 @@
+<style type='less'>
+
+  @import "../assets/css/index.less";
+  .containMineInfo{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #F5F5F5;
+  }
+  .line1{
+    margin-top: 20rpx;
+    width: 100%;
+    height: 150rpx;
+    background-color: white;
+    position: relative;
+  }
+  .line2{
+     width: 100%;
+     height: 115rpx;
+     background-color: white;
+     position: relative;
+   }
+  .text1{
+    width: 170rpx;
+    height: 45rpx;
+    margin-top: 51rpx;
+    margin-left: 30rpx;
+    font-size: 34rpx;
+    position: absolute;
+  }
+  .text2{
+     width: 170rpx;
+     height: 45rpx;
+     margin-top: 33rpx;
+     margin-left: 30rpx;
+     font-size: 34rpx;
+     position: absolute;
+   }
+  .detext2{
+    width: 480rpx;
+    height: 40rpx;
+    margin-top: 37rpx;
+    margin-left: 200rpx;
+    font-size: 31rpx;
+    position: absolute;
+    text-align: right;
+    color: #999999;
+    .text-ellipsis
+  }
+  .ima{
+    width: 108rpx;
+    height: 108rpx;
+    margin-top: 20rpx;
+    margin-left: 568rpx;
+    position: absolute;
+    border-radius: 54rpx;
+    background-color: #F5F5F5;
+  }
+  .jiantou{
+    width: 32rpx;
+    height: 30rpx;
+    margin-top: 60rpx;
+    margin-left: 690rpx;
+    position: absolute;
+  }
+  .lineV1{
+    width: 720rpx;
+    height: 2rpx;
+    margin-left: 30rpx;
+    margin-top: 147rpx;
+    background-color: #E6E6E6;
+    position: absolute;
+  }
+  .buttom{
+    position: fixed;
+    width: 100%;
+    height: 148rpx;
+    background-color: white;
+    bottom: 0rpx;
+  }
+  .baocun{
+    width: 690rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    margin-top: 30rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    background-color: @themeColor;
+    font-size: 34rpx;
+  }
+</style>
+
+<template>
+    <view class="containMineInfo">
+      <view class="line1" @tap="tapIma">
+        <view class="text1">头像</view>
+        <image class="ima" src="{{imaBac}}"></image>
+        <image class="jiantou" src="/components/homeCompute/jiantou.png"></image>
+        <view class="lineV1"></view>
+      </view>
+      <repeat for="{{list}}" index="index" key="key" item="item">
+      <view class="line2">
+
+        <view class="text2">{{item}}</view>
+<!--        <view class="detext2">{{list1[index]}}</view>-->
+        <input class="detext2" type="text" placeholder="{{list1[index]}}" style="min-height: 1.0rem;"/>
+        <image class="jiantou" src="/components/homeCompute/jiantou.png" style="margin-top: 40rpx"></image>
+        <view wx:if="{{index==0}}" class="lineV1" style="margin-top: 111rpx"></view>
+      </view>
+      </repeat>
+
+      <view class="buttom">
+        <view class="baocun">保存</view>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "个人信息"
+    };
+    data = {
+      list:["昵称","手机号码"],
+      list1:["刘小灰","13080028536"],
+      imaBac:String,
+    };
+    methods = {
+      tapIma(){
+        console.log('上传头像')
+        var that=this
+        wx.chooseImage({
+          count: 1,
+
+          sizeType: ['compressed'],
+          sourceType: ['album', 'camera'],
+          success: function (res) {
+
+            const tempFilePaths = res.tempFilePaths
+            console.log(res,tempFilePaths[0])
+
+            // this.imaUrl=tempFilePaths[0]
+            // this.$apply()
+            that.imaBac=tempFilePaths[0]
+            that.$apply()
+
+
+            // wx.uploadFile({
+            //   url: 'https://yueke.kplin.cn/mini/uploadImage', // 仅为示例，非真实的接口地址
+            //   filePath: tempFilePaths[0],
+            //   name: 'file',
+            //   formData: {
+            //     user: 'test'
+            //   },
+            //   success(resU) {
+            //     console.log('resU',resU)
+            //     // const data = resU.data
+            //     var d= JSON.parse(resU.data)
+            //     console.log(resU,resU.data,d)
+            //
+            //
+            //     try{
+            //
+            //       var res = get_common({url:'updateScheduleImg',data:{imgSrc:d.data}})
+            //       if(res){
+            //         console.log(res)
+            //         console.log('tempFilePaths[0]',tempFilePaths[0])
+            //         that.imaBac=tempFilePaths[0]
+            //         that.$apply()
+            //
+            //         wx.showToast({
+            //           title: '上传成功',
+            //           icon: 'success',
+            //           duration: 2000
+            //         })
+            //         // this.imaBac=res
+            //         // this.$apply()
+            //
+            //
+            //
+            //       }
+            //     }catch (e) {
+            //       console.log(e)
+            //     }finally {
+            //       // wx.stopPullDownRefresh();
+            //       // this.queryScheduleImg()
+            //
+            //     }
+            //
+            //
+            //     // do something
+            //   }
+            // })
+
+
+          }
+
+        })
+      },
+
+    };
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

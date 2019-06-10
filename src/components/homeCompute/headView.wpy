@@ -1,0 +1,183 @@
+<style type='less'>
+  @import "../../assets/css/index.less";
+  .containHead {
+    .container();
+    padding-bottom: 30rpx;
+    position: relative;
+    /*display: flex;*/
+    /*background-color: #F5F5F5;*/
+  }
+
+  .head {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    /*<!--.flex-just(@dirt: row,@x:space-around);-->*/
+    margin-top: 5rpx;
+    background-color: #FFF;
+    margin-left: -2%;
+    margin-right: -2%;
+    height: 90rpx;
+    width: 100%;
+    /*position: fixed;*/
+
+
+
+  }
+
+  .lineHead{
+
+    width: 100%;
+    height: 1rpx;
+    background-color: #dcdcdc;
+    margin-top: 0rpx;
+    margin-left: 0%;
+    position: relative;
+
+  }
+
+  .all{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @fontColor;
+    line-height: 90rpx;
+
+    /*background-color: orange;*/
+
+  }
+  .all:last-child{
+
+    border-right: 0;
+
+  }
+  .check{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @themeColorDeep;
+    position: relative;
+
+    border-bottom: #ffaa00;
+    border-bottom: 4rpx;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    /*border-width: 1rpx;*/
+    border-style: solid;
+    line-height: 90rpx;
+    /*position: fixed;*/
+
+  }
+  .check:last-child {
+
+    border-right: 0;
+  }
+</style>
+
+<template>
+  <view class="containHead">
+
+    <view class="head">
+
+      <repeat for="{{itemNum}}" key="index" index="index" item="item">
+
+        <view class="all" data-value="{{item.value}}" data-title="{{item.title}}"  data-checked="{{item.checked}}" wx:if="{{!item.checked}}" @tap="tapChangeAct">
+          {{item.title}}
+
+        </view>
+
+        <view class="check"  data-value="{{item.value}}" data-title="{{item.title}}"  data-checked="{{item.checked}}" wx:if="{{item.checked}}">
+          {{item.title}}
+
+        </view>
+
+
+      </repeat>
+
+    </view>
+    <view class="lineHead"></view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class headView extends wepy.component {
+    props={
+
+      titleText:Array,
+      itemid:String
+
+    };
+
+    data = {
+
+
+      itemNum: [
+        {value: 1, title: '人气榜',checked: true},
+        {value: 2, title: '热销榜', checked: false},
+        {value: 3, title: '关注榜',checked: false},
+
+      ],
+      selectItem:1,
+
+    };
+    methods = {
+
+      tapChangeAct(e){
+
+        console.log(e)
+        var value = e.currentTarget.dataset.value
+        console.log(e.currentTarget.dataset.value);
+
+        this.$emit('selectID', e.currentTarget.dataset.value);
+
+        this.selectItem = e.currentTarget.dataset.value
+
+        this.itemNum.forEach(item=>{
+          item.checked = false
+        })
+
+        var index = this.itemNum.findIndex(item =>item.value == value)
+        this.itemNum[index].checked = true
+        this.$apply;
+
+      }
+
+    };
+
+    onLoad(options) {
+        console.log(options,this.titleText,this.titleText[1])
+      this.itemNum=[
+        {value: 1, title: this.titleText[0],checked: true},
+        {value: 2, title: this.titleText[1], checked: false},
+        {value: 3, title: this.titleText[2],checked: false},
+
+      ]
+      console.log('pppp',this.itemid)
+      if (this.itemid) {
+        this.selectItem=this.itemid+1
+        for (var i=0;i<3;i++){
+          this.itemNum[i].checked=false;
+          if (i==this.itemid) {
+            this.itemNum[i].checked = true;
+          }
+
+        }
+      }
+      console.log(this.itemNum)
+      this.$apply()
+
+    }
+
+  }
+
+</script>

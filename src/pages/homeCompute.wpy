@@ -1,0 +1,307 @@
+<style type='less'>
+
+  @import "../assets/css/index.less";
+
+  .containCompute {
+    .container();
+    padding-bottom: 100rpx;
+    position: relative;
+    /*display: flex;*/
+    /*background-color: #F5F5F5;*/
+  }
+
+  .head {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    /*<!--.flex-just(@dirt: row,@x:space-around);-->*/
+    margin-top: 5rpx;
+    background-color: #FFF;
+    margin-left: -2%;
+    margin-right: -2%;
+    height: 90rpx;
+    width: 100%;
+    /*position: fixed;*/
+
+
+
+  }
+
+  .lineHead{
+
+    width: 100%;
+    height: 1rpx;
+    background-color: #dcdcdc;
+    margin-top: 0rpx;
+    margin-left: 0%;
+    position: relative;
+
+  }
+
+  .all{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @fontColor;
+    line-height: 90rpx;
+
+    /*background-color: orange;*/
+
+  }
+  .all:last-child{
+
+    border-right: 0;
+
+  }
+  .check{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @themeColorDeep;
+    position: relative;
+
+    border-bottom: #ffaa00;
+    border-bottom: 4rpx;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    /*border-width: 1rpx;*/
+    border-style: solid;
+    line-height: 90rpx;
+    /*position: fixed;*/
+
+  }
+  .check:last-child {
+
+    border-right: 0;
+  }
+
+  .denge{
+    margin-top: 70rpx;
+    margin-left: 30rpx;
+    font-size: 28rpx;
+    line-height: 60rpx;
+    text-align: center;
+    width: 310rpx;
+    height: 60rpx;
+    border-style: solid;
+    border-width: 1rpx;
+
+    background-color: rgb(255,244,233);
+    border-color: @themeColorDeep;
+    color: @themeColorDeep;
+
+    /*opacity: 0.1;*/
+    position: absolute;
+  }
+  .dengebenjin{
+    margin-top: 70rpx;
+    margin-left: 50%;
+    font-size: 28rpx;
+    line-height: 60rpx;
+    text-align: center;
+    width: 310rpx;
+    height: 60rpx;
+    border-style: solid;
+    border-width: 1rpx;
+
+    border-color: #999999;
+    color: black;
+    background-color: white;
+
+    position: absolute;
+  }
+  .text{
+    font-size: 28rpx;
+    width: 690rpx;
+    height: 40rpx;
+    margin-top: 150rpx;
+    margin-left: 30rpx;
+    color: @fontColor;
+  }
+  .beginCompute{
+    width: 660rpx;
+    height: 88rpx;
+    margin-top: 50rpx;
+    margin-left: 30rpx;
+    font-size: 32rpx;
+    line-height: 88rpx;
+    text-align: center;
+    background-color: @themeColor;
+    margin-right: 30rpx;
+    position: absolute;
+  }
+
+</style>
+
+<template>
+    <view class="containCompute">
+
+      <view class="head">
+
+        <repeat for="{{itemNum}}" key="index" index="index" item="item">
+
+          <view class="all" data-value="{{item.value}}" data-title="{{item.title}}"  data-checked="{{item.checked}}" wx:if="{{!item.checked}}" @tap="tapChangeAct">
+            {{item.title}}
+
+          </view>
+
+          <view class="check"  data-value="{{item.value}}" data-title="{{item.title}}"  data-checked="{{item.checked}}" wx:if="{{item.checked}}">
+            {{item.title}}
+
+          </view>
+
+
+        </repeat>
+
+      </view>
+      <view class="lineHead"></view>
+<!--      <view style="margin-top: 150rpx">-->
+
+      <repeat wx:if="{{selectItem!=3}}"  for="{{titleLeft}}" key="index" index="index" item="item">
+      <view style="margin-top: 10rpx">
+      <compute :pickLX="index" :titleL="item" :rightLX="rightLX[index]" ></compute>
+      </view>
+      </repeat>
+
+<!--      </view>-->
+      <repeat wx:if="{{selectItem==3}}" for="{{titleZH}}" key="key" index="index" item="item">
+        <view style="margin-top: 10rpx">
+        <compute :selectHead="3" :pickLX="index"  :titleL="item" :rightLX="rightZH[index]"></compute>
+        </view>
+      </repeat>
+
+      <view wx:if="{{benxi==true}}" class="denge" @tap="benxi">等额本息</view>
+      <view wx:if="{{benxi==false}}" class="denge" @tap="benxi"
+            style="border-color: #999999;color: black;background-color: white;">等额本息</view>
+      <view wx:if="{{benjin==false}}" class="dengebenjin" @tap="benjin">等额本金</view>
+      <view wx:if="{{benjin==true}}" class="dengebenjin" @tap="benjin"
+      style="background-color: rgb(255,244,233);border-color: #ffaa00;color: #ffaa00;">等额本金</view>
+
+      <view class="text">每月还款额固定，所还总利息较多，适合收入稳定者</view>
+
+      <view class="beginCompute" @tap="tapCompute">开始计算</view>
+
+      <view wx:if="{{huankuanHide==false}}">
+      <huankuan></huankuan>
+      </view>
+<!--      pick-->
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  // import test from "../mixins/test"
+  import compute from '../components/homeCompute/compute'
+  import huankuan from '../components/homeCompute/huankuan'
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "房贷计算器"
+    }
+    components = {
+      compute,huankuan
+    }
+    // mixins=[
+    //   test
+    // ]
+    data = {
+
+      itemNum: [
+        {value: 1, title: '商业贷',checked: true},
+        {value: 2, title: '公积金贷', checked: false},
+        {value: 3, title: '组合贷',checked: false},
+
+      ],
+      selectItem:1,
+      titleLeft:['房款总价','首付比例','贷款总额','按揭年数','利率'],
+      titleZH:['商业贷款','公积金贷款','按揭年数','商贷利率','公积金利率'],
+      rightLX:['input','三成','input','20年(240期)','基准利率(4.9%)'],
+      rightZH:['input','三成','20年(240期)','基准利率(3.25%)','基准利率(3.25%)'],
+
+      benxi:true,
+      benjin:false,
+      huankuanHide:true
+
+    };
+    methods = {
+
+      benxi(){
+
+
+        this.benxi=true
+        this.benjin=false
+        this.$apply()
+
+      },
+      benjin(){
+        this.benxi=false
+        this.benjin=true
+
+        this.huankuanHide=true
+        this.$apply()
+
+      },
+      tapCompute() {
+
+        if (this.benxi == true) {
+
+          this.huankuanHide=false
+          this.$apply()
+
+        } else {
+          this.huankuanHide=true
+          this.$apply()
+
+        wepy.navigateTo({
+          url: '/pages/computeResult'
+        })
+      }
+      },
+
+      tapChangeAct(e){
+
+
+
+        console.log(e)
+        var value = e.currentTarget.dataset.value
+        console.log(e.currentTarget.dataset.value);
+
+        this.selectItem = e.currentTarget.dataset.value
+
+        this.itemNum.forEach(item=>{
+          item.checked = false
+        })
+
+        var index = this.itemNum.findIndex(item =>item.value == value)
+        this.itemNum[index].checked = true
+        this.$apply;
+
+      }
+    };
+
+    onLoad() {
+
+      // var titleLeft1=['房款总价','首付比例','贷款总额','按揭年数','利率'];
+      // var titleZH1=['商业贷款','公积金贷款','按揭年数','商贷利率','公积金利率'];
+      // var rightLX1=['input','三成','input','20年(240期)','基准利率(4.9%)'];
+      // var rightZH1=['input','三成','20年(240期)','基准利率(3.25%)','基准利率(3.25%)'];
+      // this.titleLeft=titleLeft1;
+      // this.titleZH=titleZH1;
+      // this.rightLX=rightLX1;
+      // this.rightZH=rightZH1;
+      // this.$apply()
+
+    }
+
+  }
+
+</script>

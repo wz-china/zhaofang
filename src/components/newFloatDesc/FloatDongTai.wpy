@@ -1,0 +1,62 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .dongtai{
+    .container();
+    .splitBorderBottom();
+    padding-bottom: 30rpx;
+
+    .dongtai-item{
+      width:100%;
+
+    }
+  }
+
+</style>
+<template>
+    <view class="dongtai">
+      <ItemHeader1 :headerTitle.sync="header1" gotoPage="floatDongTai" params="id=1111"/>
+      <view class="dongtai-item">
+        <CommentIcon>
+          <span>项目位置在中州路上，距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里</span>
+        </CommentIcon>
+        <CommentIcon>
+          <span>项目位置在中州路上，距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里</span>
+        </CommentIcon>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ItemHeader from "../common/ItemHeader"
+  import CommentIcon from "../common/CommentPingLun"
+
+  export default class FloatDongTai extends wepy.component {
+
+    components = {
+      "ItemHeader1":ItemHeader,
+      CommentIcon
+    };
+    data = {
+      header1:"楼盘动态(10)"
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

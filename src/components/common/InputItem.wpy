@@ -1,0 +1,206 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .input-item{
+    width:100%;
+    border-bottom: 1px solid #eee;
+    height:112rpx;
+    .flex-just(@dirt:row,@x:space-between);
+
+    .left{
+      font-size: 32rpx;
+      color: @fontColorBack;
+    }
+
+    .right{
+      font-size:28rpx;
+      color: @fontColor9;
+      .flex-just(@dirt: row,@x:flex-end);
+      position: relative;
+
+
+      .picker{
+        width:50vw;
+        text-align: right;
+      }
+
+      input{
+        text-align: right;
+        width:40vw;
+      }
+
+      image{
+        width:24rpx;
+        height:24rpx;
+        margin-left: 20rpx;
+      }
+
+      .teshu-box{
+        position: absolute;
+        width:630rpx;
+        height:316rpx;
+        background: rgba(0,0,0,0.8);
+        right:0;
+        top:90rpx;
+        border-radius: 10rpx;
+        padding:6% 4%;
+        box-sizing: border-box;
+        z-index:11;
+
+        .teshu-list-item{
+          color: #fff;
+          .flex-just(@dirt:row,@y:flex-start);
+          margin-top: 10rpx;
+
+          view:nth-child(1){
+            width:100rpx;
+          }
+        }
+      }
+
+    }
+
+  }
+
+</style>
+<template>
+    <view class="input-item">
+     <view class="left">
+       <slot name="left"></slot>
+     </view>
+      <view class="right">
+
+        <!--自定义内容-->
+        <slot name="right" wx:if="curType=='custom'" ></slot>
+
+        <!--选择器-->
+        <picker wx:if="{{curType=='picker'}}" bindchange="bindPickerChange" range-key="name" value="{{default_index}}"  range="{{data_array}}">
+          <view class="picker">
+            {{ default_index == -1? place_holder : data_array[default_index].name}}
+          </view>
+        </picker>
+
+        <!--input输入-->
+        <input wx:if="{{curType=='input'}}" @input="inputEvent" @focus="focusEvent" type="text" placeholder="{{place_holder}}"/>
+
+        <!--提示框-->
+        <image style="width: 36rpx;height: 36rpx;"  @tap="changeTipStatus" wx:if="{{other_type == 'teshu'}}" src="/assets/icon/float-desc/list_btn_why.png" ></image>
+
+        <!--提示框-->
+        <view wx:if="{{if_show_tip}}"  @tap="changeTipStatus" class="teshu-box" >
+          <view class="teshu-list-item">
+            <view>1</view>
+            <view>若您持有的是房屋所有权证，请输入证书上  的下列信息；例：房权证   长房权    字第xxxxxx号</view>
+          </view>
+          <view class="teshu-list-item">
+            <view>2</view>
+            <view>若您持有的是不动产权证，请输入证书上的下列信息；例：吉(xxx)长春市 不动产权第 xxxxxxx号</view>
+          </view>
+        </view>
+
+        <view style="margin-left: 10rpx;">
+          <slot name="danwei"></slot>
+        </view>
+
+        <!--右箭头-->
+        <image wx:if="{{isShowArrow}}" src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class InputItem extends wepy.component {
+    props={
+      isShowArrow:{
+        type:Boolean,
+        default:true
+      },
+      curType:{
+        type:String,
+        default:"input"
+      },
+      data_array:{
+        type:Array,
+        default:[]
+      },
+      form_list:{
+        type:Object,
+        twoWay: true
+      },
+      which_one:{
+        type:String
+      },
+      place_holder:{
+        type:String
+      },
+      other_type:{
+        type:String
+      }
+    }
+    components = {};
+    data = {
+      default_index:0,
+      default_input:"",
+      if_show_tip:false
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+
+      //picker选择事件
+      bindPickerChange({detail}) {
+        this.default_index = detail.value
+        this.form_list[this.which_one] = this.data_array[this.default_index].id
+      },
+
+      //修改显示提示框状态
+      changeTipStatus(){
+        this.if_show_tip = !this.if_show_tip
+      },
+
+      //输入框聚焦时收起提示框
+      focusEvent(){
+        if(this.other_type && this.other_type == 'teshu'){
+          this.if_show_tip = false
+        }
+      },
+
+      inputEvent({detail}){
+        let value = detail.value
+        this.form_list[this.which_one] = value
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+
+      if(this.curType == "custom"){
+        return
+      }
+      let value = this.form_list[this.which_one]
+
+      if(this.curType == "picker"){
+        if(!value){
+          this.default_index = -1
+          this.$apply()
+          return
+        }
+        this.default_index = this.data_array.findIndex(x=> x.id == value)
+        this.$apply()
+      }
+
+      if(this.curType == 'input'){
+        this.isShowArrow = false
+        this.default_input = value
+        this.$apply()
+      }
+    };
+
+  }
+
+
+</script>
+
+

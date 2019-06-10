@@ -1,0 +1,59 @@
+<style type='less'>
+  @import "../../assets/css/index.less";
+
+  .containHK{
+    width: 660rpx;
+    height: 500rpx;
+    margin-left: 30rpx;
+    position: absolute;
+    margin-top: 180rpx;
+    display: flex;
+  }
+</style>
+
+<template>
+  <view style="position: relative">
+    <view class="containHK">
+      <view>
+      <repeat for="{{[2,2,2,2]}}" index="index" key="index" item="item">
+      <view style="color: #666;font-size: 32rpx;margin-top: 30rpx">{{titleLHK[index]}}</view>
+
+      </repeat>
+      </view>
+<!--      <view style="margin-top: -295rpx">-->
+      <view style="margin-left: 24%">
+      <repeat for="{{titleRHK}}" index="index" key="index" item="item">
+      <view style="margin-left: 50%;color: #666;font-size: 32rpx;margin-top: 30rpx;width: 150rpx">{{titleRHK[index]}}</view>
+      </repeat>
+      </view>
+
+
+
+
+    </view>
+    <view style="color: #ffaa00;margin-top: 510rpx;position: absolute;margin-left: 30rpx;font-size: 32rpx">以上结果仅供参考</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class huankuan extends wepy.component {
+    data = {
+
+      titleLHK:['房屋总价','贷款总额','支付利息','月均还款']
+      ,
+      titleRHK:['首付金额','利率','还款总额']
+    };
+    methods = {};
+
+
+    onLoad() {
+
+      console.log(1111)
+
+    }
+
+  }
+
+</script>

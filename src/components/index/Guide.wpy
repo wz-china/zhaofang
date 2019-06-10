@@ -1,0 +1,113 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+  .guide{
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    z-index:20;
+    left:0;
+    top:0;
+    background: rgba(0,0,0,0.8);
+    overflow: hidden;
+
+    .guide-line1{
+      .flex-just(@dirt: row,@y:flex-end);
+      margin-top: 20rpx;
+
+      .line1-left{
+        width:407rpx;
+        height:50rpx;
+        margin-right: 30rpx;
+      }
+      .line1-right{
+        width:115rpx;
+        height:251rpx;
+      }
+    }
+
+    .guide-line2{
+      .flex-just(@dirt: row);
+      image{
+        margin-top: 50rpx;
+        width:530rpx;
+        height:96rpx;
+      }
+    }
+
+    .guide-line3{
+      .flex-just(@dirt: row);
+      image{
+        margin-top: 50rpx;
+        width:530rpx;
+        height:288rpx;
+      }
+    }
+
+    .guide-line4{
+      width:100%;
+      height:110rpx;
+      margin-top: 80rpx;
+      text-align: center;
+
+      .btn{
+        width:242rpx;
+        height:102rpx;
+      }
+    }
+
+
+  }
+</style>
+<template>
+    <view class="guide" catchtouchmove="ture" wx:if="{{isShow}}">
+      <view class="guide-line1">
+        <image class="line1-left" src="../../assets/icon/guide-line1.png"></image>
+        <image class="line1-right" src="../../assets/icon/guide-arrow.png"></image>
+      </view>
+      <view class="guide-line2">
+        <image src="../../assets/icon/guide-line2.png"></image>
+      </view>
+      <view class="guide-line3">
+        <image src="../../assets/icon/guide.png"></image>
+      </view>
+      <view class="guide-line4">
+        <image class="btn" @tap="colseGuide" src="../../assets/icon/guide-btn.png"></image>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Guide extends wepy.component {
+
+    props={
+      isShow:{
+        type:Boolean,
+      }
+    }
+    components = {};
+    data = {
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      colseGuide(){
+        this.isShow = false
+        wepy.showTabBar()
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      if(this.isShow){
+        wepy.hideTabBar()
+      }
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,84 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+  .item-header{
+    height:100rpx;
+    line-height:100rpx;
+    width:100%;
+    .flex-just(@dirt: row,@x:space-between);
+
+    .header-title{
+      font-size: 18px;
+      color: #000;
+      font-weight: 700;
+
+    }
+    .header-see{
+      font-size: 14px;
+      color: @fontColor;
+      height:100%;
+      .flex-just(@dirt: row);
+
+      image{
+        width:30rpx;
+        height:30rpx;
+        margin-left: 10rpx;
+
+      }
+    }
+
+
+  }
+</style>
+<template>
+    <view class="item-header">
+      <view class="header-title">{{headerTitle}}</view>
+      <view class="header-see" wx:if="{{showMore}}" @tap="gotoCommonPage({{gotoPage}},{{params}})">
+        <span>查看更多</span>
+        <image src="/assets/icon/arrow-right.png"></image>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonMethods from "../../mixins/CommonMethods"
+
+  export default class ItemHeader extends wepy.component {
+    components = {};
+    mixins=[CommonMethods]
+    props={
+      gotoPage:{
+        type:String,
+        default:""
+      },
+      params:{
+        type:String,
+        default:"0"
+      },
+      headerTitle:{
+        type:String,
+        default:""
+      },
+      showMore:{
+        type:Boolean,
+        default:true
+      }
+    }
+
+    data = {}
+
+    methods = {
+
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,205 @@
+<style type="less" scoped>
+
+  @import "../assets/css/index.less";
+  .old-float-desc{
+    width:100%;
+    height:auto;
+    margin-bottom: 100rpx;
+
+    .common-box{
+      .container();
+      .splitBorderBottom();
+      padding-bottom: 30rpx;
+
+
+      .tuijian-content{
+        font-size: 28rpx;
+        color: @fontColorBack;
+        line-height: 40rpx;
+      }
+      .inlineblock{
+        display: inline-block;
+      }
+
+    }
+    .common-box:nth-last-child(1){
+      border: none;
+    }
+    .bottom-concat{
+      width:100%;
+      height:120rpx;
+      background: #fff;
+      position: fixed;
+      z-index:10;
+      left:0;
+      bottom:0;
+      .container();
+
+      .people-icon{
+        height:100%;
+        width:40%;
+        .flex-just(@dirt: row,@x:flex-start);
+        float: left;
+
+        image{
+          width:80rpx;
+          height:80rpx;
+          border-radius: 40rpx;
+
+        }
+        .people-name{
+          font-size: 28rpx;
+          color: @fontColorBack;
+          margin-left: 20rpx;
+          font-weight: 700;
+        }
+
+
+      }
+
+      .btn-right{
+        width:60%;
+        height:100%;
+        float: left;
+        .flex-just(@dirt: row);
+
+        .btn-common{
+          width:200rpx;
+          height:88rpx;
+          font-size: 32rpx;
+          font-weight: 700;
+          .flex-just();
+          background: @themeColor;
+
+        }
+        .btn-common:nth-child(1){
+          background: #46edff;
+          margin-right: 20rpx;
+
+        }
+      }
+    }
+  }
+
+</style>
+<template>
+    <ScrollView class="old-float-desc">
+
+      <!--banner区域-->
+      <BannerBox :imgUrls="imgUrls" />
+
+      <!--价格区域-->
+      <DescTitle />
+
+      <!--详情-->
+      <FloatDesc />
+
+      <!--周边配套-->
+      <view class="common-box">
+        <ItemHeader1 headerTitle="周边配套" :showMore="showMore"></ItemHeader1>
+        <MapScreen />
+      </view>
+
+      <!--推荐理由-->
+      <view class="common-box">
+        <ItemHeader2 headerTitle="推荐理由" :showMore="showMore"></ItemHeader2>
+        <view class="tuijian-content">小区地理位置优越，绿化高，居民素质好，里边有健身器材，篮球场，可供居民使用，停车位充足，并且建有地面停车场和地下停车场，小区内24小时保安巡逻。</view>
+      </view>
+
+      <!--同小区房源-->
+      <view class="common-box">
+        <ItemHeader3 headerTitle="同小区房源"></ItemHeader3>
+        <ScrollViewRow>
+          <RowItem1 class="inlineblock"/>
+          <RowItem1 class="inlineblock"/>
+          <RowItem1 class="inlineblock"/>
+          <RowItem1 class="inlineblock"/>
+          <RowItem1 class="inlineblock"/>
+        </ScrollViewRow>
+      </view>
+
+      <!--周边小区-->
+      <view class="common-box">
+        <ItemHeader4 headerTitle="周边小区"></ItemHeader4>
+        <ScrollViewRow>
+          <RowItem class="inlineblock" curType="zhoubian"/>
+          <RowItem class="inlineblock" curType="zhoubian"/>
+          <RowItem class="inlineblock" curType="zhoubian"/>
+          <RowItem class="inlineblock" curType="zhoubian"/>
+          <RowItem class="inlineblock" curType="zhoubian"/>
+        </ScrollViewRow>
+      </view>
+
+      <!--联系人-->
+      <view class="bottom-concat">
+        <view class="people-icon">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="people-name">陈天骄</view>
+        </view>
+        <view class="btn-right">
+          <view class="btn-common">在线咨询</view>
+          <view class="btn-common">电话咨询</view>
+        </view>
+      </view>
+
+    </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+  import BannerBox from "../components/common/BannerBox"
+  import DescTitle from "../components/oldFloatDesc/DescTitle"
+  import FloatDesc from "../components/oldFloatDesc/FloatDesc"
+  import ItemHeader from "../components/common/ItemHeader"
+  import MapScreen from "../components/common/MapScreen"
+  import ScrollViewRow from "../components/common/ScrollViewRow"
+  import RowItem from "../components/oldFloatDesc/RowItem"
+  import CommonMethods from "../mixins/CommonMethods"
+
+  export default class oldFloatDesc extends wepy.page {
+    config = {
+      "navigationBarTitleText": "房源详情"
+    };
+    components = {
+      ScrollView,
+      BannerBox,
+      DescTitle,
+      FloatDesc,
+      MapScreen,
+      'ItemHeader1':ItemHeader,
+      'ItemHeader2':ItemHeader,
+      'ItemHeader3':ItemHeader,
+      'ItemHeader4':ItemHeader,
+      ScrollViewRow,
+      RowItem,
+      "RowItem1":RowItem
+    };
+    data = {
+      imgUrls:['https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640','https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'],
+      showMore:false
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    }
+
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+    }
+
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

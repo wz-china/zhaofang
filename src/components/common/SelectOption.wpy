@@ -1,0 +1,437 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .select-option{
+    width:100%;
+    height:88rpx;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    top:0;
+    left:0;
+
+    .select-title{
+      width:100%;
+      height:100%;
+      .flex-just(@dirt: row,@x:space-between);
+      position: relative;
+      z-index:12;
+      background: #fff;
+      box-sizing: border-box;
+      padding:0 5%;
+
+      .select-title-item{
+        .flex-just(@dirt: row);
+        font-size: 16px;
+        color: @fontColorBack;
+        height:100%;
+        margin-right: 20rpx;
+        color: @fontColor;
+
+        .title-inner{
+          margin-right: 10rpx;
+          width:80rpx;
+          .text-ellipsis();
+          text-align: right;
+        }
+
+        .title-inner-selected{
+          color: @themeColorDeep;
+        }
+
+      }
+
+      .triangle_border_up{
+        width:0;
+        height:0;
+        border-width:0 10rpx 10rpx;
+        border-style:solid;
+        border-color:transparent transparent @themeColorDeep;
+        position:relative;
+      }
+
+      .triangle_border_down{
+        width:0;
+        height:0;
+        border-width:10rpx 10rpx 0;
+        border-style:solid;
+        border-color:#C2C2C2 transparent transparent;
+        position:relative;
+      }
+
+    }
+
+    .select-page{
+      width:100%;
+      position: absolute;
+      left:0;
+      background: #FCFCFC;
+      top:88rpx;
+      z-index:12;
+
+      .select-page-view{
+        width:100%;
+        height:100%;
+
+        .select-item{
+          width:100%;
+          box-sizing: border-box;
+          padding:0 2%;
+          height:96rpx;
+          line-height:96rpx;
+          font-size: 16px;
+          color: @fontColorBack;
+
+        }
+        .select-item-selected {
+          color: @themeColorDeep;
+        }
+
+      }
+
+      .shaixuan-item{
+        width:100%;
+        padding:0 0 0 30rpx;
+        box-sizing: border-box;
+
+        .shaixuan-title{
+          width:100%;
+          line-height:100rpx;
+          height:100rpx;
+          font-size: 36rpx;
+          font-weight: 700;
+        }
+        .shaixuan-list{
+          width:100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .shaixuan-list-item{
+            width:150rpx;
+            height:60rpx;
+            line-height:60rpx;
+            margin-right: 30rpx;
+            text-align: center;
+            font-size: 24rpx;
+            border:1px solid @fontColor9;
+            box-sizing: border-box;
+            margin-bottom: 20rpx;
+            font-size: @fontColorBack;
+            .text-ellipsis();
+          }
+
+          .shaixuan-list-item-selected{
+            background: @themeColor;
+            border:none;
+          }
+        }
+
+      }
+
+      .shaixuan-btn-box{
+        width:100%;
+        height:150rpx;
+        border-top: 1px solid #eee;
+        box-sizing: border-box;
+        padding:0 30rpx;
+        justify-content: space-between;
+        .flex-just(@dirt: row,@x:space-between);
+
+        .shaixuan-btn-common{
+          width:47%;
+          height:88rpx;
+          .flex-just();
+          font-size: 32rpx;
+        }
+        .clear-btn{
+          color: @fontColor9;
+          background: #ECECEC;
+        }
+        .ok-btn{
+          color: @fontColorBack;
+          background: @themeColor;
+        }
+      }
+    }
+  }
+  .select-option-top{
+    position: fixed;
+    z-index:12;
+  }
+
+</style>
+<template>
+    <view class="select-option {{floatTop || showMask?'select-option-top':' '}}">
+      <view class="select-title">
+
+        <view class="select-title-item" wx:if="{{selectOptionType.indexOf('fangyuan') == -1}}"  @tap="clickOption('quyu')">
+          <view class="title-inner {{showWhichPage == 'quyu'  || search_form.quyu.name!='区域' ? 'title-inner-selected':' '}}">{{search_form.quyu.name}}</view>
+          <view class="{{showWhichPage == 'quyu'|| search_form.quyu.name !='区域' ? 'triangle_border_up':'triangle_border_down'}}">
+            <text></text>
+          </view>
+        </view>
+
+        <view class="select-title-item" @tap="clickOption('jiage')">
+          <view class="title-inner {{showWhichPage == 'jiage' || search_form.jiage.name!='价格' ? 'title-inner-selected':' '}}">{{search_form.jiage.name}}</view>
+          <view class="{{showWhichPage == 'jiage' || search_form.jiage.name !='价格' ? 'triangle_border_up':'triangle_border_down'}}">
+            <text></text>
+          </view>
+        </view>
+
+        <view class="select-title-item" wx:if="{{selectOptionType.indexOf('diff') == -1}}"  @tap="clickOption('huxing')" >
+          <view class="title-inner {{showWhichPage == 'huxing' || search_form.huxing.name!='户型' ? 'title-inner-selected':' '}}">{{search_form.huxing.name}}</view>
+          <view class="{{showWhichPage == 'huxing' || search_form.huxing.name !='户型' ? 'triangle_border_up':'triangle_border_down'}}">
+            <text></text>
+          </view>
+        </view>
+
+        <view class="select-title-item" wx:if="{{selectOptionType.indexOf('diff') != -1}}" @tap="clickOption('shaixuan')">
+          <view class="title-inner {{showWhichPage == 'shaixuan' || search_form.shaixuan.name!='筛选' ? 'title-inner-selected':' '}}">{{search_form.shaixuan.name}}</view>
+          <view class="{{showWhichPage == 'shaixuan' || search_form.shaixuan.name !='筛选' ? 'triangle_border_up':'triangle_border_down'}}">
+            <text></text>
+          </view>
+        </view>
+
+        <view class="select-title-item" @tap="clickOption('paixu')">
+          <view class="title-inner {{showWhichPage == 'paixu' || search_form.paixu.name!='排序' ? 'title-inner-selected':' '}}">{{search_form.paixu.name}}</view>
+          <view class="{{showWhichPage == 'paixu' || search_form.paixu.name !='排序' ? 'triangle_border_up':'triangle_border_down'}}">
+            <text></text>
+          </view>
+        </view>
+      </view>
+
+      <view class="select-page">
+        <scroll-view wx:if="{{showWhichPage == 'quyu' && showMask}}" scroll-y class="select-page-view">
+          <view class="select-item select-item-selected" @tap="selectItem('quyu',0,'朝阳区')" >朝阳区0</view>
+          <view class="select-item" @tap="selectItem('quyu',1,'朝阳区')" >朝阳区1</view>
+          <view class="select-item" @tap="selectItem('quyu',2,'朝阳区')" >朝阳区2</view>
+          <view class="select-item" @tap="selectItem('quyu',3,'朝阳区')" >朝阳区3</view>
+          <view class="select-item" @tap="selectItem('quyu',4,'朝阳区')" >朝阳区4</view>
+          <view class="select-item" @tap="selectItem('quyu',5,'朝阳区')" >朝阳区5</view>
+        </scroll-view>
+        <scroll-view wx:if="{{showWhichPage == 'jiage'&& showMask}}" scroll-y class="select-page-view">
+          <view class="select-item select-item-selected">朝阳区2</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+
+
+        </scroll-view>
+        <scroll-view wx:if="{{showWhichPage == 'huxing'&& showMask}}" scroll-y class="select-page-view">
+          <view class="select-item select-item-selected">朝阳区3</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+
+
+        </scroll-view>
+        <scroll-view wx:if="{{showWhichPage == 'shaixuan'&& showMask}}" scroll-y class="select-page-view shaixuan-page-view">
+          <view class="shaixuan-item">
+            <view class="shaixuan-title">户型</view>
+            <view class="shaixuan-list">
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('huxing')">一世</view>
+            </view>
+          </view>
+          <view class="shaixuan-item">
+            <view class="shaixuan-title">面积</view>
+            <view class="shaixuan-list">
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('mianji')">一世</view>
+            </view>
+          </view>
+          <view class="shaixuan-item">
+            <view class="shaixuan-title">类型</view>
+            <view class="shaixuan-list">
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('leixing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('leixing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('leixing')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('leixing')">一世</view>
+            </view>
+          </view>
+          <view class="shaixuan-item">
+            <view class="shaixuan-title">售卖状态</view>
+            <view class="shaixuan-list">
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('zhuangtai')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('zhuangtai')">一世</view>
+              <view class="shaixuan-list-item" @tap="seelctShaixuan('zhuangtai')">一世</view>
+            </view>
+          </view>
+          <view class="shaixuan-btn-box">
+            <view class="shaixuan-btn-common clear-btn" @tap="clearShaixuan">清空</view>
+            <view class="shaixuan-btn-common ok-btn" @tap="okShaixuan">确定</view>
+          </view>
+        </scroll-view>
+        <scroll-view wx:if="{{showWhichPage == 'paixu'&& showMask}}" scroll-y class="select-page-view">
+          <view class="select-item select-item-selected">朝阳区4</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+          <view class="select-item">朝阳区</view>
+
+
+        </scroll-view>
+
+      </view>
+
+      <MaskShade :isShow.sync="showMask"/>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import MaskShade from "./MaskShade"
+
+  export default class SelectOption extends wepy.component {
+    props = {
+      showMask:{
+        type:Boolean,
+        default:false,
+        twoWay: true
+      },
+      selectOptionType:{
+        type:String,
+        default:"simple"
+      }
+    };
+    components = {
+      MaskShade
+    };
+    data = {
+      floatTop:false,
+      showWhichPage:"",
+      cur_top:0,
+      search_form:{
+        quyu:{name:"区域"},
+        jiage:{name:"价格"},
+        huxing:{name:"户型"},
+        paixu:{name:"排序"},
+        shaixuan:{name:"筛选"}
+      },
+      shaixuan_list:{
+        huxing:[],
+        mianji:[],
+        leixing:[],
+        zhuangtai:[]
+      }
+    }
+
+    watch={
+      showMask:function (newValue,oldValue) {
+        console.log(newValue)
+        console.log(this.cur_top)
+        if(!newValue){
+          if(this.cur_top <100){
+            this.floatTop = false
+          }
+          this.showWhichPage = ""
+          this.$apply()
+        }
+      }
+    }
+
+    methods = {
+      //点击选项头
+      clickOption(e) {
+        this.floatTop = true
+        this.showWhichPage = e
+        this.showMask = true
+        this.$apply()
+
+      },
+
+      //点击选项
+      selectItem(which,id,name,e){
+        //赋值
+        this.search_form[which] = {
+          name:name,
+          id:id
+        }
+        //修改UI布局
+        this.showWhichPage = ""
+        this.showMask = false
+        if(this.cur_top <100){
+          this.floatTop = false
+        }else{
+          this.floatTop = true
+        }
+
+        //通知父级
+        this.$emit("getFormValue",this.search_form)
+        this.$apply()
+
+      },
+
+      //选择
+      seelctShaixuan(){
+
+      },
+
+      clearShaixuan(){
+
+      },
+      okShaixuan(){
+
+      }
+
+    };
+    events={
+      "pageScroll":(e)=>{
+        let cur_top = e.scrollTop
+        this.cur_top = e.scrollTop
+        //滚动会出现吸顶效果
+//        if(this.floatTop){
+//          if(cur_top <= 250){
+//            this.floatTop = false
+//            this.$apply()
+//          }
+//        }
+//        if(!this.floatTop){
+//          if(cur_top > 250){
+//            this.floatTop = true
+//            this.$apply()
+//          }
+//        }
+
+      },
+
+      "toOriginal":()=>{
+        if(this.cur_top <100){
+          this.floatTop = false
+        }
+        this.showWhichPage = ""
+      }
+    }
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

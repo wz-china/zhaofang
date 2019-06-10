@@ -1,0 +1,154 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+
+  .upload-image{
+    .base-wh();
+
+    .upload-title{
+      .container();
+      font-size: 36rpx;
+      font-weight: 700;
+      line-height:50rpx;
+      margin:20rpx 0;
+    }
+    .upload-item{
+      box-sizing: border-box;
+      padding: 0 0 0 4%;
+
+      image{
+        width:29%;
+        height:214rpx;
+        margin-right: 4%;
+        margin-bottom: 20rpx;
+
+      }
+
+    }
+    .btn-box{
+      .container();
+      height:120rpx;
+      .flex-just();
+      background: #fff;
+      position: fixed;
+      bottom:0;
+      left:0;
+      z-index:10;
+
+      view{
+        height:88rpx;
+        width:100%;
+        background: @themeColor;
+        .flex-just();
+        font-size: 32rpx;
+        font-weight: 700;
+
+      }
+    }
+
+  }
+
+</style>
+<template>
+    <view class="upload-image">
+      <view class="upload-title">客厅({{image_list.keting.length}})</view>
+      <view class="upload-item">
+        <repeat for="{{image_list.keting}}" key="index" index="index" item="item">
+          <image @tap="seeImage('keting',{{item}})" @longtap="delImage('keting',{{index}})" src="{{item}}"></image>
+        </repeat>
+        <image src="/assets/icon/float-desc/uploadphoto_btn_add.png" @tap="addImage('keting')"></image>
+      </view>
+
+      <view class="btn-box">
+        <view>确定</view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonMethods from "../mixins/CommonMethods"
+
+  export default class uploadFloatImage extends wepy.page {
+    config = {
+      "navigationBarTitleText": "上传照片"
+    };
+    mixins=[CommonMethods]
+    components = {};
+    data = {
+      image_list: {
+        keting:['https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640','https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640','https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640','https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640'],
+        woshi:[],
+        chufang:[],
+        weisheng:[],
+        huanjing:[],
+        huxing:[],
+        qita:[]
+      },
+      click_type:true
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+
+      //删除图片
+      delImage(type,index) {
+        let that = this
+        this.click_type = false
+        wx.showModal({
+          title: '删除',
+          content: '是否删除该图片？',
+          success (res) {
+            if (res.confirm) {
+              that.image_list[type].splice(index,1)
+              that.$apply()
+            }
+          },
+          complete(){
+            that.click_type = true
+          }
+        })
+      },
+
+      //添加图片
+      async addImage(type){
+        try{
+          let choose = await wepy.chooseImage({
+            count: 9,
+            sizeType: ['compressed'],
+            sourceType: ['album', 'camera'],
+         })
+
+          //上传
+//         let uploadImage = wepy.uploadFile({
+//            url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
+//            filePath: tempFilePaths[0],
+//            name: 'file'
+//         })
+
+        }catch (err){
+
+        }
+      },
+
+      //预览
+      seeImage(type,cur){
+        if(this.click_type){
+          this.previewImage(cur,this.image_list[type])
+        }
+      }
+
+
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

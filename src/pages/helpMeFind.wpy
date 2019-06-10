@@ -1,0 +1,390 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .help-me{
+    .base-wh();
+
+    .slider-box{
+      margin:30rpx 0;
+    }
+    .show-select-price-box{
+      width:200rpx;
+      position: absolute;
+      right:4%;
+      top:30rpx;
+      height:50rpx;
+      font-size: 32rpx;
+      color:@themeColorDeep;
+      text-align: right;
+      font-weight: 700;
+      line-height:50rpx;
+    }
+    .select-float-type{
+      width:100%;
+      height:80rpx;
+      .flex-just(@dirt: row,@x:flex-start);
+    }
+
+    .quyu{
+      .flex-just(@dirt: row,@x:flex-start);
+      border: 1px solid #eee;
+      box-sizing: border-box;
+      margin-top: 30rpx;
+      height:80rpx;
+      line-height:80rpx;
+      padding-left: 20rpx;
+
+      .select-picker{
+        width:80%;
+      }
+
+      .quyu-icon{
+        width:32rpx;
+        height:32rpx;
+      }
+      .select-quyu{
+        width:100%;
+        font-size: 28rpx;
+        padding-left: 20rpx;
+        color: @fontColorBack;
+      }
+    }
+
+    .pianhao{
+      margin-top: 20rpx;
+    }
+
+    .teshu-btn-list{
+      width:100vw;
+
+      view{
+        display: inline-block;
+        margin-top: 20rpx;
+      }
+
+    }
+
+    .phone-box{
+      width:100%;
+      margin-top: 20rpx;
+
+      .phone-box-common{
+        width:100%;
+        height:88rpx;
+        line-height:88rpx;
+        border-bottom: 1px solid #eee;
+        .flex-just(@dirt: row,@x:flex-start);
+        margin-bottom: 20rpx;
+
+        .input-common{
+          width:50%;
+          height:100%;
+          line-height:88rpx;
+          font-size: 28rpx;
+          color: @fontColor9;
+        }
+        .phone-box-btn{
+          width:50%;
+          float: right;
+          .flex-just(@dirt: row,@x:flex-end);
+
+          .get-code{
+            background: @themeColor;
+            font-size: 28rpx;
+            margin-left: 25rpx;
+            height:50rpx;
+            padding:2rpx 10rpx;
+            .flex-just();
+          }
+
+          image{
+            width:32rpx;
+            height:32rpx;
+
+          }
+        }
+      }
+
+      .phone-tip-box{
+        width:100%;
+        font-size: 24rpx;
+        font-weight: 700;
+        color: @fontColorBack;
+
+        .phone-tip-item{
+          margin-bottom: 20rpx;
+
+          image{
+            width:32rpx;
+            height:32rpx;
+            margin-right: 20rpx;
+            margin-bottom: -5rpx;
+          }
+
+          .phone-tip-item-text{
+            font-size: 24rpx;
+            font-weight: 500;
+            color: @fontColor9;
+          }
+        }
+
+
+      }
+    }
+
+    .tijiao-box{
+      width:100%;
+      height:120rpx;
+      background: #fff;
+      .container();
+      .flex-just();
+
+      view{
+        width:100%;
+        height:88rpx;
+        background: @themeColor;
+        font-size: 32rpx;
+        font-weight: 700;
+        .flex-just();
+      }
+
+    }
+
+    .screen-tip-text{
+      font-size: 28rpx;
+      color: @fontColorBack;
+      line-height:40rpx;
+
+    }
+
+    .btn-item{
+      width:150rpx;
+      height:60rpx;
+      border:1px solid @fontColor9;
+      box-sizing: border-box;
+      line-height: 60rpx;
+      text-align:center;
+      font-size: 28rpx;
+      color: @fontColorBack;
+      margin-right: 4%;
+
+    }
+    .btn-item-selected {
+      background: @themeColor;
+      border:none;
+    }
+
+
+  }
+</style>
+<template>
+    <view class="help-me">
+
+      <!--预付款-->
+      <ItemHeader>
+        <view slot="title">您的首付预算是多少？</view>
+        <view slot="content">
+          <Slider class="slider-box" :value="value2" :max="100" :min="5" :type="slider_type" @sliderChange.user="sliderChange"/>
+          <view class="show-select-price-box">{{minValue}}-{{maxValue}}万</view>
+          <view class="select-float-type">
+            <view class="btn-item {{float_type == 'first'?'btn-item-selected':''}}" @tap="changeFloatType('first')">首套</view>
+            <view class="btn-item {{float_type == 'second'?'btn-item-selected':''}}" @tap="changeFloatType('second')">二套</view>
+          </view>
+        </view>
+      </ItemHeader>
+
+      <!--偏好-->
+      <ItemHeader1 :ifSplit="if_split">
+        <view slot="title" >您的购买偏好？</view>
+        <view slot="content">
+          <view class="select-float-type pianhao">
+            <view class="btn-item {{if_new_float == 'buxian'?'btn-item-selected':''}}" @tap="changeFloatPianhao('buxian')">不限</view>
+            <view class="btn-item {{if_new_float == 'xinfang'?'btn-item-selected':''}}" @tap="changeFloatPianhao('xinfang')">新房</view>
+            <view class="btn-item {{if_new_float == 'ershou'?'btn-item-selected':''}}" @tap="changeFloatPianhao('ershou')">二手房</view>
+          </view>
+        </view>
+        <view class=""></view>
+      </ItemHeader1>
+
+      <!--区域-->
+      <ItemHeader>
+        <view slot="title">您想购买的区域是？</view>
+        <view slot="content">
+          <view class="quyu">
+            <image class="quyu-icon" src="/assets/icon/float-desc/searchhouse_icon_position.png"></image>
+            <picker bindchange="bindPickerChange" class="select-picker" range-key="name" value="{{region_index}}" range="{{region_list}}">
+              <view class="select-quyu">
+                {{region_list[region_index].name}}
+              </view>
+            </picker>
+          </view>
+        </view>
+      </ItemHeader>
+
+      <!--特殊要求-->
+      <ItemHeader>
+        <view slot="title">特殊要求？</view>
+        <view slot="content">
+          <view class="teshu-btn-list">
+            <repeat for="{{teshu_list}}" key="index" index="index" item="item">
+              <view class="btn-item  {{item.if_checked?'btn-item-selected':''}}" @tap="selectTeshu({{index}})">优质学区</view>
+            </repeat>
+          </view>
+        </view>
+      </ItemHeader>
+
+      <!--联系方式-->
+      <ItemHeader2 :ifSplit="if_split">
+        <view slot="title">您的联系方式？</view>
+        <view slot="content">
+          <view class="phone-box">
+            <view class="phone-box-common">
+              <input type="number" value="{{phone_number}}" @input="inputPhoneNumber('phone')" maxlength="11" minlength="11" placeholder="请输入手机号" class="input-common" />
+              <view class="phone-box-btn">
+                <image src="/assets/icon/float-desc/btn_onekeydeletion.png"></image>
+                <text class="get-code" wx:if="{{show_code}}">获取验证码</text>
+              </view>
+            </view>
+            <view class="phone-box-common" wx:if="{{show_code}}">
+              <input type="number" value="{{phone_code}}" @input="inputPhoneNumber('code')" maxlength="11" minlength="11" placeholder="请输入短信验证码" class="input-common" />
+            </view>
+            <view class="phone-tip-box">
+              <view class="phone-tip-item">
+                <image src="/assets/icon/float-desc/icon_reminder.png"></image>
+                <text>温馨提示</text>
+              </view>
+              <view class="phone-tip-item">
+                <text class="phone-tip-item-text">购房需求提交后，将由惠买房平台为您提供专业服务</text>
+              </view>
+            </view>
+          </view>
+
+
+
+        </view>
+      </ItemHeader2>
+
+      <!--提交按钮-->
+      <view class="tijiao-box" @tap="showTip">
+        <view>提交</view>
+      </view>
+
+      <!--弹窗-->
+      <Tip :ifShowTip.sync="show_tip">
+        <view slot="title">提交成功</view>
+        <view slot="content">
+          <text class="screen-tip-text">您的找房需求已经提交，我们会安排专业的置业顾问为您服务</text>
+        </view>
+      </Tip>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ItemHeader from "../components/helpMeFind/ItemHeader"
+  import Slider from '../components/helpMeFind/slider/index'
+  import Tip from '../components/common/Tip'
+
+  export default class helpMeFind extends wepy.page {
+    config = {
+      "navigationBarTitleText": "帮我找房"
+    };
+    components = {
+      ItemHeader,
+      Slider,
+      'ItemHeader1':ItemHeader,
+      'ItemHeader2':ItemHeader,
+      Tip
+    };
+    data = {
+      value2: [5, 100],
+      slider_type:"double",
+      maxValue:100,
+      minValue:5,
+      if_split:false,
+      float_type:"first",
+      if_new_float:"buxian",
+      region_index:"0",
+      region_list:[
+        {id:1,name:"不限"},
+        {id:2,name:"朝阳区"},
+      ],
+      teshu_list:[
+        {name:"youzhi",if_checked:false},
+        {name:"ditie",if_checked:false},
+        {name:"nanbei",if_checked:false},
+        {name:"lvhua",if_checked:false},
+        {name:"wuye",if_checked:false},
+        {name:"chwei",if_checked:false},
+        {name:"gaoceng",if_checked:false},
+        {name:"zhongjian",if_checked:false},
+        {name:"louding",if_checked:false},
+        {name:"diceng",if_checked:false},
+        {name:"bianli",if_checked:false},
+      ],
+      phone_number:"",
+      phone_code:"",
+      show_code:true,
+      show_tip:false
+
+    }
+
+    methods = {
+
+      //监听滚动条滚动
+      sliderChange(min,max) {
+        this.maxValue = max
+        this.minValue = min
+      },
+
+      //选择首套房
+      changeFloatType(e){
+        this.float_type = e
+      },
+
+      //选择偏好
+      changeFloatPianhao(e){
+        this.if_new_float = e
+      },
+
+      //选择区域
+      bindPickerChange({detail}){
+        this.region_index = detail.value
+      },
+
+      //选择特殊
+      selectTeshu(index){
+        this.teshu_list[index]["if_checked"] = ! this.teshu_list[index]["if_checked"]
+        this.$apply()
+      },
+
+      //手机号
+      inputPhoneNumber(type,{detail}){
+        let value = detail.value
+        if(type == "phone"){
+          this.phone_number = value
+        }
+        if(type == "code"){
+          this.phone_code = value
+        }
+
+      },
+
+      showTip(){
+        this.show_tip = true
+        this.$apply()
+      }
+
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

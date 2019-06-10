@@ -1,0 +1,94 @@
+<style type="less">
+  @import "../assets/css/index.less";
+  .yushou{
+    .base-wh();
+
+    .heyan-fail{
+      .base-wh();
+      .flex-just(@x:flex-start);
+
+      image{
+        width:240rpx;
+        height:240rpx;
+        margin-top: 30%;
+      }
+      .fail-text{
+        width:100%;
+        font-size: 28rpx;
+        color: @fontColor9;
+        text-align: center;
+        margin-top: 50rpx;
+
+      }
+      .fail-btn{
+        margin-top: 50rpx;
+        width:228rpx;
+        height:72rpx;
+        background: @themeColor;
+        color: @fontColorBack;
+        font-weight: 700;
+        .flex-just();
+        font-size: 28rpx;
+
+      }
+
+    }
+
+
+  }
+
+</style>
+<template>
+    <view class="yushou">
+
+      <!--显示输入内容-->
+      <CheckPage wx:if="{{show_which == 'input'}}" :show_which.sync="show_which"/>
+
+      <!--获取查询结果-->
+      <SuccessResult wx:if="{{show_which == 'success'}}"/>
+
+      <!--核验失败-->
+      <view class="heyan-fail" wx:if="{{show_which == 'null'}}">
+        <image src="/assets/icon/float-desc/presalepermit_defaultimage.png"></image>
+        <view class="fail-text">对不起，该楼盘暂无预售证信息</view>
+        <view class="fail-btn">重新核验</view>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CheckPage from "../components/checkYushou/CheckPage"
+  import SuccessResult from "../components/checkYushou/SuccessResult"
+
+  export default class Canlendar extends wepy.page {
+    config = {
+      "navigationBarTitleText": "查预售证"
+    };
+    components = {
+      CheckPage,
+      SuccessResult
+    };
+    data = {
+      show_which:"input"
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

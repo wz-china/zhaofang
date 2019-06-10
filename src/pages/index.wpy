@@ -1,0 +1,538 @@
+<style lang="less">
+  @import "../assets/css/index.less";
+  .index {
+    width: 100%;
+    padding-bottom: 50rpx;
+    overflow-x: hidden;
+
+    .top-box {
+      height: 105rpx;
+      background: @themeColor;
+      .container();
+      .flex-just(@dirt: row);
+
+      .top-item {
+        height:100%;
+        font-size: 16px;
+      }
+      .top-item:nth-child(1){
+        width:20%;
+        line-height:105rpx;
+        .text-ellipsis();
+
+        image{
+          margin-right: 5rpx;
+          margin-bottom: -8rpx;
+          width:40rpx;
+          height:40rpx;
+          margin-right: 5rpx;
+        }
+      }
+      .top-item:nth-child(2){
+        width:70%;
+        .flex-just(@dirt: row);
+        font-size: 14px;
+        .search-box{
+          width:100%;
+          height:60rpx;
+          background: #fff;
+          border-radius: 10rpx;
+          color: #999;
+          .flex-just(@dirt: row;@x:flex-start);
+
+          image{
+            width:35rpx;
+            height:35rpx;
+            margin:0 15rpx 0 20rpx;
+          }
+        }
+      }
+      .top-item:nth-child(3){
+        width:10%;
+        background-color: rgba(0,0,0,0);
+        position: relative;
+        border:none;
+
+        image{
+          position: absolute;
+          left:55%;
+          top:50%;
+          transform: translate(-50%,-50%);
+          width:44rpx;
+          height:44rpx;
+        }
+      }
+
+    }
+
+    .banner-box{
+      width:100%;
+      height:350rpx;
+
+      .banner{
+          .base-wh();
+        .banner-item{
+          .base-wh();
+          .slide-image{
+            .base-wh()
+          }
+        }
+      }
+    }
+
+    .icon-box{
+      height:420rpx;
+      border-bottom:20rpx solid @borderSplit;
+      box-sizing: border-box;
+      padding:0 2%;
+
+      .icon-item-row{
+        width:100%;
+        height:200rpx;
+        font-size: 14px;
+        font-weight: 700;
+
+        .icon-item-col{
+          .flex-just();
+          width:20%;
+          height: 100%;
+          float: left;
+
+          image{
+            width:90rpx;
+            height:90rpx;
+            margin-bottom: 10rpx;
+          }
+        }
+      }
+    }
+
+    .help-box{
+      .container();
+      height:300rpx;
+
+      .help-tab{
+        width:100%;
+        height:100rpx;
+        line-height:100rpx;
+        color: @fontColor;
+        font-size: 16px;
+        position: relative;
+        .flex-just(@x:flex-start;@dirt: row);
+
+        .help-tab-bottom{
+          width:50rpx;
+          height:6rpx;
+          background: @themeColor;
+          position: absolute;
+          bottom:14rpx;
+        }
+        .help-tab-bottom1{
+          left:35rpx;
+        }
+        .help-tab-bottom2{
+          left:50%;
+          transform: translateX(-50%);
+        }
+        .help-tab-item{
+          position: relative;
+        }
+        .help-tab-item:nth-child(1){
+          margin-right: 50rpx;
+        }
+        .help-tab-selected{
+          font-weight: 700;
+          color: #000;
+        }
+
+      }
+      .help-tab-content{
+        width:100%;
+        height:200rpx;
+
+        .buy-content{
+          .base-wh();
+          border:1px solid #eee;
+          box-sizing: border-box;
+          padding:15rpx;
+          position: relative;
+
+          .buy-content-item:nth-child(1){
+            font-size: 16px;
+            color: #000;
+            line-height:60rpx;
+            font-weight: 700;
+          }
+          .buy-content-item:nth-child(2) {
+            font-size: 12px;
+            color: @fontColor;
+            line-height:50rpx;
+          }
+          .buy-content-item:nth-child(3) {
+            font-size: 16px;
+            color: @themeColorDeep;
+            line-height:60rpx;
+
+            image{
+              width:24rpx;
+              height:24rpx;
+              margin-left: 10rpx;
+            }
+          }
+          .right-img{
+            width:208rpx;
+            height:172rpx;
+            position: absolute;
+            right:20rpx;
+            top:20rpx;
+
+
+          }
+
+
+        }
+
+        .mall-content{
+          .base-wh();
+          .flex-just(@dirt: row,@x:space-between);
+
+          .mall-content-item{
+            width:49%;
+            height:100%;
+            .flex-just(@y:flex-start);
+            border:1px solid #eee;
+            padding:0 5%;
+            position: relative;
+            box-sizing: border-box;
+
+            .mall-title{
+              font-size: 18px;
+              font-weight: 700;
+              color: #000;
+            }
+            .mall-desc{
+              font-size: 14px;
+              color: @fontColor;
+              margin-top: 20rpx;
+            }
+            .deal-text{
+              .text-ellipsis();
+              width:80%;
+            }
+            image{
+              width:48rpx;
+              height:48rpx;
+              position: absolute;
+              right:8%;
+              bottom:50rpx;
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    .float-hot{
+      .container();
+      height:400rpx;
+      position: relative;
+    }
+    .float-new{
+      .container();
+      position: relative;
+      .float-new-list{
+        width:100%;
+      }
+    }
+
+    .yushou-box{
+      .container();
+      position: relative;
+      .yushou-box-list{
+        width:100%;
+      }
+    }
+
+    .oldfloat-new{
+      .container();
+      position: relative;
+      .oldfloat-new-list{
+        width:100%;
+      }
+    }
+
+  }
+
+</style>
+<template>
+  <view class="index">
+    <!--顶部搜索-->
+    <view class="top-box">
+      <view class="top-item" @tap="gotoCommonPage('selectCity',0)">
+        <image src="../assets/icon/address.png"></image>
+        <span>内蒙</span>
+      </view>
+      <view class="top-item" @tap="gotoCommonPage('searchFloat',0)">
+        <view class="search-box">
+          <image src="../assets/icon/search.png"></image>
+          <view>你想住哪里?</view>
+        </view>
+      </view>
+      <button class="top-item share-btn" plain open-type="share">
+        <image src="../assets/icon/share.png" ></image>
+      </button>
+    </view>
+
+    <!--banner区域-->
+    <view class="banner-box">
+      <swiper class="banner"
+              indicator-active-color="{{banner_config.indicator_active_color}}"
+              indicator-color="{{banner_config.indicator_color}}"
+              indicator-dots="{{banner_config.indicatorDots}}"
+              autoplay="{{banner_config.autoplay}}"
+              interval="{{banner_config.interval}}"
+              duration="{{banner_config.duration}}">
+        <block wx:for="{{imgUrls}}">
+          <swiper-item class="banner-item">
+            <image src="{{item}}" class="slide-image" @tap="bannerLink"/>
+          </swiper-item>
+        </block>
+      </swiper>
+
+    </view>
+
+    <!--icon列表-->
+    <view class="icon-box">
+      <view class="icon-item-row">
+        <view class="icon-item-col" @tap="gotoCommonPage('newFloat',0)">
+          <image src="../assets/icon/newFloat.png"></image>
+          <view>新房</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoCommonPage('oldFloat',0)">
+          <image src="../assets/icon/secondFloat.png"></image>
+          <view>二手房</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoTabPage('float')">
+          <image src="../assets/icon/floatHot.png"></image>
+          <view>楼市热点</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoTabPage('float')">
+          <image src="../assets/icon/ceping.png"></image>
+          <view>测评</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoCommonPage('paihangbang',0)">
+          <image src="../assets/icon/paihang.png"></image>
+          <view>排行榜</view>
+        </view>
+      </view>
+      <view class="icon-item-row">
+        <view class="icon-item-col" @tap="gotoCommonPage('checkYushou',0)">
+          <image src="../assets/icon/yushou.png"></image>
+          <view>查预售证</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoCommonPage('heyanChanquan',0)">
+          <image src="../assets/icon/chanquan.png"></image>
+          <view>核验产权</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoCommonPage('out','美家商城')">
+          <image src="../assets/icon/shopping.png"></image>
+          <view>美家商城</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoCommonPage('out','问问')">
+          <image src="../assets/icon/wenwen.png"></image>
+          <view>问问</view>
+        </view>
+        <view class="icon-item-col" @tap="gotoCommonPage('homeCompute',0)">
+          <image src="../assets/icon/jisuan.png"></image>
+          <view>房贷计算</view>
+        </view>
+      </view>
+    </view>
+
+    <!--help-->
+    <view class="help-box">
+      <view class="help-tab">
+        <view class="help-tab-item {{help_type == 'buy'? 'help-tab-selected':''}}" @tap="changeHelp('buy')">帮我找房</view>
+        <view class="help-tab-item {{help_type == 'mall'? 'help-tab-selected':''}}" @tap="changeHelp('mall')">
+          <span>我要卖房</span>
+          <van-transition show="{{ help_type == 'mall' }}" custom-class="block">
+            <view class="help-tab-bottom help-tab-bottom2"></view>
+          </van-transition>
+        </view>
+        <van-transition show="{{ help_type == 'buy' }}" custom-class="block">
+          <view class="help-tab-bottom help-tab-bottom1"></view>
+        </van-transition>
+
+      </view>
+      <view class="help-tab-content">
+        <view class="buy-content" wx:if="{{help_type == 'buy'}}">
+          <view class="buy-content-item">您只需要输入几个选项</view>
+          <view class="buy-content-item">剩下的就交给我们专业的房产顾问吧</view>
+          <view class="buy-content-item" @tap="gotoCommonPage('helpMeFind',0)"><span>帮我找房</span> <image src="../assets/icon/arrow-right-color.png"></image></view>
+          <image class="right-img" src="../assets/icon/buy-right.png"></image>
+        </view>
+        <view class="mall-content" wx:if="{{help_type == 'mall'}}">
+          <view class="mall-content-item" @tap="gotoCommonPage('editorSecondFloat','type=zizhu')">
+            <view class="mall-title">自助卖房</view>
+            <view class="mall-desc deal-text">业主直卖</view>
+            <image src="../assets/icon/zhimai.png"></image>
+          </view>
+          <view class="mall-content-item" @tap="gotoCommonPage('editorSecondFloat','type=weituo')">
+            <view class="mall-title">委托卖房</view>
+            <view class="mall-desc deal-text">全城经纪人帮助卖房</view>
+            <image src="../assets/icon/weituo.png"></image>
+          </view>
+
+        </view>
+
+      </view>
+
+    </view>
+
+    <!--广告位-->
+    <Advertisement :imgSrc="ad_1"/>
+
+    <!--热门楼盘-->
+    <view class="float-hot">
+      <ItemHeader1 :headerTitle.sync="h_title1" gotoPage="floatList" params="type=relou"/>
+      <view class="float-hot-list">
+        <RowAnimationList />
+      </view>
+    </view>
+
+    <!--最新开盘-->
+    <view class="float-new">
+      <ItemHeader2 :headerTitle="h_title2"  gotoPage="floatList" params="type=kaipan"/>
+      <view class="float-new-list">
+        <ColumnFloatList />
+      </view>
+    </view>
+
+    <!--即将预售-->
+    <view class="yushou-box">
+      <ItemHeader3 :headerTitle="h_title3"  gotoPage="floatList" params="type=yushou"/>
+      <view class="yushou-box-list">
+        <RowAnimationList />
+      </view>
+
+    </view>
+
+    <!--最新二手房-->
+    <view class="oldfloat-new"  gotoPage="floatList" params="type=old">
+      <ItemHeader4 :headerTitle="h_title4"/>
+      <view class="oldfloat-new-list">
+        <ColumnFloatList />
+      </view>
+    </view>
+
+    <!--引导页-->
+    <Guide :isShow.sync="if_show_guide" />
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Guide from "../components/index/Guide"
+  import Advertisement from "../components/common/Advertisement"
+  import ItemHeader from "../components/common/ItemHeader"
+  import RowAnimationList from "../components/index/RowAnimationList"
+  import ColumnFloatList from "../components/common/ColumnFloatList"
+  import CommonMethods from "../mixins/CommonMethods"
+
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '找房豹',
+      "usingComponents": {
+        "van-transition": "../libs/vant-weapp/lib/transition/index"
+      }
+    }
+
+    mixins=[CommonMethods]
+    components = {
+      Guide,
+      Advertisement,
+      RowAnimationList,
+      ColumnFloatList,
+      'ItemHeader1':ItemHeader,
+      'ItemHeader2':ItemHeader,
+      'ItemHeader3':ItemHeader,
+      'ItemHeader4':ItemHeader,
+    }
+
+    data = {
+      imgUrls: [
+        'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
+        'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
+        'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
+      ],
+      banner_config:{
+        indicatorDots: true,
+        autoplay: true,
+        interval: 5000,
+        duration: 1000,
+        indicator_active_color:"rgba(255,255,255,0.8)",
+        indicator_color:"rgba(0,0,0,0.3)"
+      },
+      help_type:"buy",
+      ad_1:"https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
+      h_title1:"热门楼盘",
+      h_title2:"最新开盘",
+      h_title3:"即将预售",
+      h_title4:"最新二手房",
+      if_show_guide:false
+
+    }
+
+    computed = {}
+
+    methods = {
+
+      //跳转页面
+      gotoPage(page){
+        wepy.navigateTo({
+          url:page
+        })
+      },
+
+      //跳转选择地址页面
+      selectAddress() {
+      },
+
+      //跳转搜索页面
+      searchPage(){
+      },
+
+      //banner页面点击事件
+      bannerLink(){},
+
+      //买卖房
+      changeHelp(e){
+        this.help_type = e
+      },
+    }
+
+    events = {
+      'index-emit': (...args) => {
+        let $event = args[args.length - 1]
+        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
+    }
+
+    onShareAppMessage(info){
+     console.log(info)
+
+    }
+
+    onLoad() {
+      wx.showShareMenu({withShareTicket: true})
+      this.if_show_guide = this.$parent.globalData.isShowGuide
+      this.$apply()
+
+    }
+  }
+</script>

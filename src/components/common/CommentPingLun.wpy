@@ -1,0 +1,142 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .comment-icon{
+    margin-bottom: 30rpx;
+
+    .comment-top{
+      width:100%;
+      height:80rpx;
+
+      .comment-top-left{
+        width:60%;
+        height:100%;
+        .flex-just(@dirt: row,@x:flex-start);
+        float: left;
+        font-size: @fontColor;
+        font-size: 28rpx;
+
+        image{
+          width:44rpx;
+          height: 44rpx;
+          border-radius: 44rpx;
+          margin-right:20rpx ;
+        }
+
+        .nickname{
+          margin-right: 20rpx;
+        }
+
+        .comment-label{
+          color: #55C6FF;
+        }
+
+        .comment-label-pinglun{
+          background: #69c8f8;
+          color: #fff;
+          padding:5rpx 10rpx;
+          font-size: 20rpx;
+
+        }
+
+
+      }
+
+      .comment-top-right{
+        font-size: 24rpx;
+        color: @fontColor9;
+        height:100%;
+        width:40%;
+        .flex-just(@dirt: row,@x:flex-end);
+      }
+
+
+    }
+    .comment-title{
+      width:100%;
+      height:50rpx;
+      line-height:50rpx;
+      color: @fontColorBack;
+      font-weight: 700;
+      font-size: 28rpx;
+    }
+    .comment-content{
+      width:100%;
+      font-size: 28rpx;
+      line-height:50rpx;
+      color: @fontColorBack;
+    }
+    .comment-content-show{
+      .text-ellipsis-line();
+    }
+
+    .comment-desc-btn{
+      width:100%;
+      height: 50rpx;
+      font-size: 28rpx;
+      color: @themeColorDeep;
+      line-height: 50rpx;
+      margin-top: 20rpx;
+    }
+
+  }
+
+</style>
+<template>
+    <view class="comment-icon">
+      <view class="comment-top">
+        <view class="comment-top-left">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="nickname">吴丹</view>
+          <view class="comment-label"  wx:if="{{curType == 'dongtai'}}">职业顾问</view>
+          <view class="comment-label-pinglun"  wx:if="{{curType == 'pinglun'}}">已看过房</view>
+        </view>
+        <view class="comment-top-right">
+          2018-15-55
+        </view>
+      </view>
+      <view class="comment-title" wx:if="{{curType == 'dongtai' && strLeng == 0 }}">恒大城加推</view>
+      <view class="comment-content {{ isShowContent?'comment-content-show':''}}">
+        <slot></slot>
+      </view>
+      <view class="comment-desc-btn" wx:if="{{ strLeng > 54 }}" @tap="changeContent" >{{isShowContent?'全文':'收起'}}</view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class CommentIcon extends wepy.component {
+
+    props={
+      curType:{
+        type:String,
+        default:'dongtai'
+      },
+      strLeng:{
+        type:Number,
+        default:0
+      }
+    }
+    components = {};
+    data = {
+      isShowContent:true
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changeContent() {
+        this.isShowContent = !this.isShowContent
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+    };
+
+  }
+
+
+</script>
+
+

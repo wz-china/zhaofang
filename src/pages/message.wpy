@@ -1,0 +1,123 @@
+<style type="less">
+  .containXX{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #F5F5F5;
+  }
+  .line{
+    height: 152rpx;
+    width: 100%;
+    position: relative;
+    background-color: white;
+  }
+  .image{
+    position: absolute;
+    width: 88rpx;
+    height: 88rpx;
+    background-color: #F5F5F5;
+    border-radius: 44rpx;
+    margin-left: 30rpx;
+    margin-top: 32rpx;
+    position: absolute;
+  }
+  .title{
+    width: 400rpx;
+    height: 44rpx;
+    margin-left: 138rpx;
+    margin-top: 30rpx;
+    font-size: 32rpx;
+    font-weight: 500;
+    position: absolute;
+  }
+  .detail{
+    width: 550rpx;
+    height: 44rpx;
+    margin-left: 138rpx;
+    margin-top: 84rpx;
+    font-size: 28rpx;
+    position: absolute;
+    color: #999999;
+  }
+  .time{
+    width: 170rpx;
+    height: 33rpx;
+    margin-top: 32rpx;
+    right: 30rpx;
+    font-size: 28rpx;
+    position: absolute;
+    color: #999999;
+    text-align: right;
+  }
+  .lineB{
+    margin-left: 138rpx;
+    margin-top: 150rpx;
+    height: 2rpx;
+    width: 612rpx;
+    background-color: #E6E6E6;
+    position: absolute;
+  }
+  .line:nth-child(1)
+  {
+      margin-top: 20rpx;
+
+  }
+
+
+</style>
+<template>
+    <view class="containXX">
+      <repeat for="{{list}}" key="key" item="item" index="index">
+      <view class="line" @tap="tapXX" data-id="{{index}}">
+
+          <image class="image" src="{{listIma[index]}}"></image>
+          <view class="title">{{item}}</view>
+          <view class="detail">消息详情</view>
+          <view class="time">2019-05-24</view>
+
+          <view wx:if="{{index!=list.length-1}}" class="lineB"></view>
+      </view>
+      </repeat>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Message extends wepy.page {
+    config = {
+      "navigationBarTitleText": "消息"
+    };
+    components = {
+
+    };
+    data = {
+      list:["系统消息","楼盘动态消息","置业顾问001"],
+      listIma:["/assets/icon/xitong.png","/assets/icon/dongtai.png","/assets/icon/guwenPer.png"]
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      },
+      tapXX(){
+
+        wepy.navigateTo({
+          url: 'messageXT'
+        })
+
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

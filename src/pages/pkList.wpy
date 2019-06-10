@@ -1,0 +1,186 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .pk-list{
+    .base-wh();
+
+    .liulan-tip-box{
+      width:100%;
+      height:64rpx;
+      line-height:64rpx;
+      color: #000;
+      background: #F9F9FB;
+      color: @fontColor;
+      text-align: center;
+      font-size: 24rpx;
+    }
+
+    .list-box{
+      width:100%;
+
+      .list-box-item{
+        width:100%;
+        .container();
+        .flex-just(@dirt: row);
+
+        .list-item-left{
+          width:10%;
+          height:260rpx;
+          .flex-just(@dirt: row,@x:flex-start);
+
+          .duigou-box{
+            width:36rpx;
+            height:36rpx;
+
+          }
+        }
+
+        .list-item-right{
+          width:90%;
+        }
+
+      }
+
+    }
+
+    .pk-btn-box{
+      width:100%;
+      height:150rpx;
+      position: fixed;
+      z-index:12;
+      left:0;
+      bottom:0;
+      background: #fff;
+      box-sizing: border-box;
+      padding:0 5%;
+      .flex-just(@dirt: row,@x:space-between);
+
+      .pk-index-box{
+        width:100%;
+        .flex-just(@dirt: row,@x:space-between);
+
+        .pk-btn-box-item{
+          .flex-just();
+          font-size: 28rpx;
+          color: @fontColorBack;
+          margin-right: 50rpx;
+
+          image{
+            width:44rpx;
+            height:44rpx;
+            margin-bottom: 10rpx;
+          }
+
+        }
+        .pk-btn{
+          width:400rpx;
+          height:88rpx;
+          background: @themeColor;
+          color: @fontColorBack;
+          .flex-just();
+          font-weight: 700;
+          font-size: 32rpx;
+
+        }
+      }
+
+      .liulan-btn{
+        width:100%;
+        height: 88rpx;
+        background: @themeColor;
+        .flex-just();
+        font-size: 32rpx;
+        font-weight: 700;
+      }
+
+
+    }
+
+  }
+
+</style>
+<template>
+    <view class="pk-list">
+      <view class="liulan-tip-box" wx:if="{{if_liulan}}">根据您的浏览记录为您推荐</view>
+
+      <view class="list-box">
+        <repeat for="{{dataList}}" key="index" index="index" item="item">
+          <view class="list-box-item">
+            <view class="list-item-left" @tap="selectItem({{item.id}},{{index}})">
+              <image wx:if="{{item.if_selected}}" class="duigou-box" src="/assets/icon/float-desc/btn_checkbox_se.png"></image>
+              <image wx:else class="duigou-box" src="/assets/icon/float-desc/btn_checkbox_de.png"></image>
+            </view>
+            <view class="list-item-right">
+              <FloatItem :itemType="itemType" :isPk="is_pk"/>
+            </view>
+          </view>
+        </repeat>
+      </view>
+
+      <view class="pk-btn-box">
+        <view class="pk-index-box" wx:if="{{!if_liulan}}">
+          <view class="pk-btn-box-item">
+            <image src="/assets/icon/float-desc/btn_add.png"></image>
+            <view>添加</view>
+          </view>
+          <view class="pk-btn-box-item">
+            <image src="/assets/icon/float-desc/btn_delete.png"></image>
+            <view>删除</view>
+          </view>
+          <view class="pk-btn" @tap="gotoCommonPage('pkDesc','id=123123')">开始PK</view>
+        </view>
+
+        <view class="liulan-btn" wx:else>确定</view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import FloatItem from "../components/common/FloatItem"
+  import CommonMethods from "../mixins/CommonMethods"
+
+  /**
+   * 这里PK列表和添加PK的列表放在了一个页面
+   * 通过动态修改容器数据组实现
+   */
+
+  export default class pkList extends wepy.page {
+    config = {
+      "navigationBarTitleText": "PK列表"
+    };
+    mixins=[CommonMethods]
+    components = {
+      FloatItem
+    };
+    data = {
+      itemType:"new",
+      is_pk:true,
+      if_liulan:false,
+      dataList:[
+        {id:1,if_selected:false},
+        {id:2,if_selected:false},
+      ]
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      selectItem(e,index) {
+        console.log(e);
+        console.log(index);
+        this.dataList[index].if_selected = !this.dataList[index].if_selected
+        this.$apply()
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

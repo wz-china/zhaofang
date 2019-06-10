@@ -1,0 +1,87 @@
+<style type='less'>
+  .containSZ{
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+  }
+  .bacV{
+    width: 100%;
+    height: 115rpx;
+    background-color: white;
+    position: relative;
+  }
+  .leftV{
+    width:240rpx;
+    height: 45rpx;
+    margin-top: 34rpx;
+    margin-left: 30rpx;
+    font-size: 34rpx;
+    position: absolute;
+  }
+  .line{
+    background-color: #E6E6E6;
+    margin-left: 30rpx;
+    margin-top: 112rpx;
+    height: 2rpx;
+    width: 720rpx;
+    position: absolute;
+  }
+  .jiantou{
+    width: 32rpx;
+    height: 30rpx;
+    right: 30rpx;
+    margin-top: 44rpx;
+    position: absolute;
+  }
+
+</style>
+
+<template>
+    <view class="containSZ">
+      <repeat for="{{list}}" key="key" item="item" index="index">
+        <view class="bacV" @tap="tapSZ" data-id="{{index}}">
+          <view class="leftV">{{item}}</view>
+          <view wx:if="{{index==0}}" class="line"></view>
+          <image class="jiantou" src="/components/homeCompute/jiantou.png"></image>
+        </view>
+      </repeat>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      "navigationBarTitleText": "设置"
+    }
+    data = {
+      list:["关于我们","免责说明"]
+    };
+    methods = {
+      tapSZ(e){
+        console.log(e)
+        if (e.currentTarget.dataset.id==0) {
+          wx.navigateTo({
+            url: 'aboutMine'
+          })
+        }else {
+          wx.navigateTo({
+            url: 'mianze'
+          })
+        }
+
+      }
+
+    };
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

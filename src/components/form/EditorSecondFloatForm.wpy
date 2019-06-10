@@ -1,0 +1,68 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .form-inner{
+    width:100%;
+    background: #fff;
+    margin-bottom:20rpx;
+    .container();
+
+    .input-item:nth-last-child(1){
+      border: none;
+    }
+
+  }
+
+
+</style>
+<template>
+    <view class="form-inner">
+      <InputItem1
+        curType="input"
+        :form_list.sync="form_list"
+        which_one="fangbiaoti"
+        place_holder="请输入房源标签"
+      >
+        <view slot="left">*房源标题</view>
+      </InputItem1>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import InputItem from "../common/InputItem"
+
+  export default class EditorSecondFloatForm extends wepy.component {
+    props={
+      form_list:{
+        type:Object,
+        twoWay:true
+      }
+    }
+    components = {
+      "InputItem1":InputItem
+    };
+    data = {
+
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

@@ -1,0 +1,150 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .guwen-list{
+    background: #f9f9fb;
+    padding:30rpx 4%;
+    box-sizing: border-box;
+
+    .guwen-item{
+      width:100%;
+      height:325rpx;
+      background: #fff;
+      margin-bottom: 30rpx;
+
+      .guwen-item-top{
+        width:100%;
+        height:217rpx;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eee;
+        .flex-just(@dirt: row,@y:flex-start,@x:flex-start);
+        padding:30rpx;
+
+        image{
+          width:108rpx;
+          height:108rpx;
+          border-radius: 50rpx;
+
+        }
+
+        .guwen-item-right{
+
+          .guwen-info-one{
+
+            text:nth-child(1){
+              font-size: 32rpx;
+              font-weight: 700;
+              color: @fontColorBack;
+              margin:0 20rpx;
+            }
+            text:nth-child(2) {
+              font-size: 24rpx;
+              color: @fontColor;
+            }
+          }
+
+          .guwen-info-two{
+            font-size: 24rpx;
+            color: @fontColor9;
+            margin: 20rpx;
+          }
+
+          .guwen-info-three{
+            font-size: 24rpx;
+            color: @fontColorBack;
+            margin: 20rpx;
+          }
+
+        }
+      }
+
+      .guwen-item-bottom{
+        height:108rpx;
+        width:100%;
+        font-size: 28rpx;
+        color: @fontColorBack;
+
+        .btn-item{
+          height:100%;
+          width:50%;
+          float: left;
+          .flex-just(@dirt: row);
+
+          image{
+            width:60rpx;
+            height:60rpx;
+            margin-right: 20rpx;
+          }
+        }
+
+
+
+      }
+
+
+    }
+
+
+
+  }
+</style>
+<template>
+    <ScrollView class="guwen-list">
+      <view class="guwen-item">
+        <view class="guwen-item-top">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="guwen-item-right">
+            <view class="guwen-info-one">
+              <text>陈天骄</text>
+              <text>金牌经纪人</text>
+            </view>
+            <view class="guwen-info-two">佳龙太古城地产有限公司</view>
+            <view class="guwen-info-three">2019年度金牌经纪人，秉持着敬业的态度</view>
+          </view>
+        </view>
+        <view class="guwen-item-bottom">
+          <view class="btn-item">
+            <image src="/assets/icon/float-desc/adviser_btn_telephone.png"></image>
+            <text>电话咨询</text>
+          </view>
+          <view class="btn-item">
+            <image src="/assets/icon/float-desc/adviser_btn_chatwith.png"></image>
+            <text>在线咨询</text>
+          </view>
+
+        </view>
+      </view>
+    </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+
+  export default class Canlendar extends wepy.page {
+    config = {
+      "navigationBarTitleText": "顾问列表"
+    };
+    components = {
+      ScrollView
+    };
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

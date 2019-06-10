@@ -1,0 +1,138 @@
+<style type='less'>
+  .contain{
+    position: relative;
+    margin-left: 0rpx;
+  }
+  .spTitle{
+
+    width: 690rpx;
+    height: 48rpx;
+    font-size: 36rpx;
+
+    overflow:hidden;//一定要写
+    text-overflow: ellipsis;//超出省略号
+    display:-webkit-box;//一定要写
+    -webkit-line-clamp: 1;//控制行数
+    -webkit-box-orient: vertical;//一定要写
+
+    margin-top: 30rpx;
+
+  }
+
+  .spIma{
+    width: 690rpx;
+    height: 368rpx;
+    background-color: #666666;
+    margin-top: 20rpx;
+    position: relative;
+  }
+
+  .imaPerson{
+
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 35rpx;
+    background-color: #666666;
+    margin-top: 20rpx;
+
+  }
+
+  .name{
+    width: 100rpx;
+    height: 48rpx;
+    font-size: 34rpx;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    margin-top: -55rpx;
+    margin-left: 90rpx;
+    position: absolute;
+
+  }
+  .spTime{
+
+    color: #666666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 190rpx;
+    margin-top: -52rpx;
+    font-size: 32rpx;
+    height: 48rpx;
+
+  }
+
+  .spShare{
+
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 650rpx;
+    margin-top: -50rpx;
+    /*background-color: #666666;*/
+
+  }
+
+  .spLine{
+    height: 2rpx;
+    width: 690rpx;
+    background-color: #dcdcdc;
+
+    margin-left: 0rpx;
+    margin-right: 20rpx;
+    margin-top: 30rpx;
+  }
+  /*.spPlay{*/
+
+  /*  width: 50rpx;*/
+  /*  height: 50rpx;*/
+  /*  position: absolute;*/
+  /*  margin-top: 200rpx;*/
+  /*  margin-left: 200rpx;*/
+
+  /*}*/
+
+</style>
+
+<template>
+    <view class="contain">
+
+      <view class="spTitle">热门楼盘，国际中心二期新品户型，热门楼盘，国际中心二期新品户型</view>
+      <view class="spIma">
+
+        <view class="spPlay">
+          <image src="/components/floatComponents/play.png"
+                 style="width: 90rpx;height: 90rpx;position: absolute;margin-top: 140rpx;margin-left: 300rpx"></image>
+        </view>
+
+      </view>
+      <view class="imaPerson"></view>
+      <view class="name">小灰</view>
+      <view class="spTime">2019-04-05</view>
+
+      <view class="spShare">
+        <image src="/components/floatComponents/share.png" style="width: 40rpx;height: 40rpx"></image>
+      </view>
+
+      <view class="spLine"></view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

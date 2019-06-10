@@ -1,0 +1,285 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .success-box{
+    width:100%;
+    background: #f9f9fb;
+
+    .success-top{
+      width:100%;
+      background: #fff;
+      .container();
+      padding-top:30rpx;
+      padding-bottom: 30rpx;
+
+      image{
+        width:690rpx;
+        height:320rpx;
+      }
+
+      .success-top-title{
+        font-size: 42rpx;
+        font-weight: 700;
+        color: @fontColorBack;
+        margin-top: 20rpx;
+
+      }
+
+
+
+    }
+
+    .float-list{
+      margin:30rpx 4%;
+      background: #fff;
+
+      .float-list-title{
+        height:112rpx;
+        padding:0 4%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eee;
+
+        .flex-just(@dirt: row,@x:space-between);
+
+        span:nth-child(1){
+          font-size: 32rpx;
+          color: @fontColorBack;
+          font-weight: 700;
+
+        }
+        span:nth-child(2) {
+          font-size: 28rpx;
+          color: @fontColor9;
+        }
+      }
+
+      .float-list-children{
+        padding:0 30rpx;
+
+        .float-list-item{
+          width:100%;
+          height:88rpx;
+          border-bottom: 1px solid #eee;
+          font-size: 32rpx;
+          .flex-just(@dirt: row,@x:space-between);
+
+          .shengyu{
+
+            text:nth-child(2){
+              color: @themeColorDeep;
+              margin-right: 20rpx;
+            }
+
+            image{
+              width:24rpx;
+              height:24rpx;
+            }
+          }
+
+
+        }
+
+        .float-list-item:nth-last-child(1){
+          border:none;
+        }
+      }
+
+
+    }
+
+    .success-float{
+      width:100%;
+      height:650rpx;
+
+      .tip-title{
+        width:100%;
+        font-size: 28rpx;
+        font-weight: 700;
+        color: @fontColorBack;
+        margin-bottom: 20rpx;
+      }
+
+      .tip-content-item{
+        width:100%;
+        margin-bottom: 20rpx;
+        line-height: 55rpx;
+
+        view{
+          width:50%;
+          float: left;
+          .text-ellipsis();
+          font-size: 24rpx;
+
+        }
+        view:nth-child(1){
+          color: @fontColor9;
+        }
+        view:nth-child(2){
+          color: @fontColorBack;
+        }
+      }
+
+    }
+
+  }
+
+</style>
+<template>
+    <view class="success-box">
+      <view class="success-top">
+      <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+      <view class="success-top-title">中顺和苑</view>
+     </view>
+
+      <view class="float-list">
+        <view class="float-list-title">
+          <span>长房售证(2018)第248号</span>
+          <span @tap="seeDesc">查看详情</span>
+        </view>
+        <view class="float-list-children">
+          <view class="float-list-item">
+            <view>L02</view>
+            <view class="shengyu">
+              <text>共9套，</text>
+              <text>可售6套</text>
+              <image src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+            </view>
+          </view>
+          <view class="float-list-item">
+            <view>L02</view>
+            <view class="shengyu">
+              <text>共9套，</text>
+              <text>可售6套</text>
+              <image src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+            </view>
+          </view>
+          <view class="float-list-item">
+            <view>L02</view>
+            <view class="shengyu">
+              <text>共9套，</text>
+              <text>可售6套</text>
+              <image src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="float-list">
+        <view class="float-list-title">
+          <span>长房售证(2018)第248号</span>
+          <span>查看详情</span>
+        </view>
+        <view class="float-list-children">
+          <view class="float-list-item">
+            <view>L02</view>
+            <view class="shengyu">
+              <text>共9套，</text>
+              <text>可售6套</text>
+              <image src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+            </view>
+          </view>
+          <view class="float-list-item">
+            <view>L02</view>
+            <view class="shengyu">
+              <text>共9套，</text>
+              <text>可售6套</text>
+              <image src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+            </view>
+          </view>
+          <view class="float-list-item">
+            <view>L02</view>
+            <view class="shengyu">
+              <text>共9套，</text>
+              <text>可售6套</text>
+              <image src="/assets/icon/float-desc/btn_right_arrow.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <Tip :ifShowTip.sync="ifShowTip">
+        <view slot="title">预售信息</view>
+        <view slot="content">
+          <view class="success-float">
+            <view class="tip-title">中顺和苑</view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+            <view class="tip-content-item">
+              <view>楼盘地址</view>
+              <view>100万元</view>
+            </view>
+          </view>
+
+
+        </view>
+      </Tip>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Tip from "../common/Tip"
+
+  export default class SuccessResult extends wepy.component {
+    components = {
+      Tip
+    };
+    data = {
+      ifShowTip:false
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      seeDesc() {
+        console.log(111)
+        this.ifShowTip = true
+        this.$apply()
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

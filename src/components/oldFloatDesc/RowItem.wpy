@@ -1,0 +1,119 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .row-item{
+    height:100%;
+    width: 330rpx;
+    display: inline-block;
+    .flex-just();
+    padding:0 30rpx 0 0;
+    box-sizing: border-box;
+
+    image{
+      width:310rpx;
+      height:234rpx;
+    }
+    .row-item-title{
+      width:100%;
+      font-size: 28rpx;
+      color: @fontColorBack;
+      margin-top: 10rpx;
+      .text-ellipsis();
+    }
+
+    .row-item-price{
+      width:100%;
+
+      text:nth-child(1){
+        font-size: 28rpx;
+        color: @price;
+        margin-right: 10rpx;
+        font-weight: 700;
+      }
+      text:nth-child(2){
+        font-size: 24rpx;
+        color: @fontColor9;
+
+      }
+
+    }
+
+    .row-item-zhoubian-title{
+      width:100%;
+      .text-ellipsis();
+      font-size: 28rpx;
+    }
+
+    .row-item-zhoubian-niandai{
+      font-size: 24rpx;
+      color: @fontColor9;
+
+
+      text:nth-child(1){
+        margin-right: 15rpx;
+      }
+
+      .zhoubian-price{
+        color: @price;
+        font-size: 28rpx;
+      }
+    }
+
+
+
+  }
+
+</style>
+<template>
+    <view class="row-item">
+      <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+      <view class="row-item-title" wx:if="{{curType == 'xiaoqu'}}">2室1厅/88m²/南北</view>
+      <view class="row-item-price" wx:if="{{curType == 'xiaoqu'}}">
+        <text>52.8万</text>
+        <text>6550元/m²</text>
+      </view>
+      <view class="row-item-zhoubian"  wx:if="{{curType == 'zhoubian'}}">
+        <view class="row-item-zhoubian-title">御景名都雅苑</view>
+        <view class="row-item-zhoubian-niandai" style="margin-top: 10rpx;">
+          <text>年代</text>
+          <text>2018</text>
+        </view>
+        <view class="row-item-zhoubian-niandai">
+          <text>均价</text>
+          <text class="zhoubian-price">6500元/m²</text>
+        </view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class RowItem extends wepy.component {
+    props={
+      curType:{
+        type:String,
+        default:"xiaoqu"
+      }
+    }
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

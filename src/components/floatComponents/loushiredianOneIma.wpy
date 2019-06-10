@@ -1,0 +1,73 @@
+<style type='less'>
+
+  .loushiredianOneIma{
+    position: relative;
+  }
+  .title{
+    width: 430rpx;
+    /*height: 100rpx;*/
+    /*margin-left: 20rpx;*/
+    font-size: 35rpx;
+    position: absolute;
+    overflow:hidden;//一定要写
+    text-overflow: ellipsis;//超出省略号
+    display:-webkit-box;//一定要写
+    -webkit-line-clamp: 2;//控制行数
+    -webkit-box-orient: vertical;//一定要写
+
+  }
+  .time{
+    width: 430rpx;
+    height: 45rpx;
+    font-size: 30rpx;
+    /*margin-left: 20rpx;*/
+    color: #666666;
+    position: absolute;
+    margin-top: 110rpx;
+  }
+  .ima{
+    width: 228rpx;
+    height: 156rpx;
+    background-color: #666666;
+    margin-top: 20rpx;
+    margin-left: 470rpx;
+  }
+  .line{
+    height: 2rpx;
+    width: 100%;
+    background-color: #dcdcdc;
+
+    /*margin-left: 15rpx;*/
+    /*margin-right: 20rpx;*/
+    margin-top: 30rpx;
+    position: absolute;
+
+  }
+</style>
+
+<template>
+    <view class="loushiredianOneIma">
+
+      <view class="title">2019房地产税最新消息:2019房地产税最新消息房地产税最新消息</view>
+      <view class="time">2019-04-05</view>
+      <view class="ima"></view>
+      <view class="line"></view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class loushiredianOneIma extends wepy.component  {
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

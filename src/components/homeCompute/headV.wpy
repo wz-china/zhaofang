@@ -1,0 +1,202 @@
+<style type='less'>
+
+  @import "../../assets/css/index.less";
+
+  .containCompute {
+    .container();
+    padding-bottom: 100rpx;
+    position: relative;
+    /*display: flex;*/
+    /*background-color: #F5F5F5;*/
+  }
+
+  .head {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    /*<!--.flex-just(@dirt: row,@x:space-around);-->*/
+    margin-top: 0rpx;
+    background-color: #FFF;
+    margin-left: -2%;
+    margin-right: -2%;
+    height: 90rpx;
+    width: 100%;
+    /*position: fixed;*/
+
+
+
+  }
+
+  .lineHead{
+
+    width: 100%;
+    height: 1rpx;
+    background-color: #dcdcdc;
+    margin-top: 0rpx;
+    margin-left: 0%;
+    position: relative;
+
+  }
+
+  .all{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @fontColor;
+    line-height: 90rpx;
+
+    /*background-color: orange;*/
+
+  }
+  .all:last-child{
+
+    border-right: 0;
+
+  }
+  .check{
+
+    /*width: 100%;*/
+    /*display: flex;*/
+
+    /*justify-content: center;*/
+    font-size: 30rpx;
+    color: @themeColorDeep;
+    position: relative;
+
+    border-bottom: #ffaa00;
+    border-bottom: 4rpx;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    /*border-width: 1rpx;*/
+    border-style: solid;
+    line-height: 90rpx;
+    /*position: fixed;*/
+
+  }
+  .check:last-child {
+
+    border-right: 0;
+  }
+
+
+</style>
+
+<template>
+  <view class="containCompute">
+
+    <view class="head">
+
+      <repeat for="{{itemNum}}" key="index" index="index" item="item">
+
+        <view class="all" data-value="{{item.value}}" data-title="{{item.title}}"  data-checked="{{item.checked}}" wx:if="{{!item.checked}}" @tap="tapChangeAct">
+          {{item.title}}
+
+        </view>
+
+        <view class="check"  data-value="{{item.value}}" data-title="{{item.title}}"  data-checked="{{item.checked}}" wx:if="{{item.checked}}">
+          {{item.title}}
+
+        </view>
+
+
+      </repeat>
+
+    </view>
+    <view class="lineHead"></view>
+
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class headV extends wepy.component {
+    props={
+      titlet:{
+        Type:Array,
+        default:['商贷','公积金贷','组合贷']
+      },
+    }
+    data = {
+
+      itemNum: [
+        {value: 1, title: '商业贷',checked: true},
+        {value: 2, title: '公积金贷', checked: false},
+        {value: 3, title: '组合贷',checked: false},
+
+      ],
+      selectItem:1,
+    };
+    methods = {
+
+      tapChangeAct(e){
+
+
+
+        console.log(e)
+        var value = e.currentTarget.dataset.value
+        console.log(e.currentTarget.dataset.value);
+
+        this.$emit('selectID', e.currentTarget.dataset.value);
+        this.selectItem = e.currentTarget.dataset.value
+
+        this.itemNum.forEach(item=>{
+          item.checked = false
+        })
+
+        var index = this.itemNum.findIndex(item =>item.value == value)
+        this.itemNum[index].checked = true
+        this.$apply;
+
+      }
+
+    };
+
+    events={
+      'currentSwiper':(e)=>{
+        console.log('yyy',e)
+        for (var i=0;i<3;i++) {
+          this.itemNum[i].checked=false
+          this.itemNum[e].checked=true
+          this.$apply()
+        }
+
+
+      },
+      'listt':(e)=>{
+        console.log('yyy',e)
+
+        for (var i=0;i<e.length;i++) {
+          this.itemNum[i].checked=false
+          this.itemNum[i].title=e[i]
+          this.itemNum[this.selectItem-1].checked=true
+          this.itemNum.splice(e.length,this.itemNum.length-e.length)
+          console.log('jie',this.itemNum,e.length,this.itemNum.length-e.length)
+          this.$apply()
+        }
+
+      }
+    }
+    onLoad(e) {
+
+      console.log("0000",this.titlet)
+      // for (var i=0;i<3;i++) {
+      //   this.itemNum[i].checked=false
+      //   this.itemNum[i].title=this.titlet[i]
+      //   this.itemNum[this.selectItem-1].checked=true
+      //   this.$apply()
+      // }
+
+
+
+    }
+
+  }
+
+</script>

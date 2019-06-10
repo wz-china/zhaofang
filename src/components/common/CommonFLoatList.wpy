@@ -1,0 +1,65 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .common{
+    .base-wh();
+
+    .occup{
+      position: relative;
+      width:100%;
+      height:88rpx;
+    }
+
+    .content{
+      .container();
+    }
+
+  }
+
+</style>
+<template>
+  <ScrollView class="common">
+    <!--含有搜索结果的-->
+    <view class="occup" >
+      <SelectOption @getFormValue.user="getFormValue" :selectOptionType="selectOptionType" :isShow.sync="showMask" />
+    </view>
+    <view class="content">
+      <slot></slot>
+    </view>
+  </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "./ScrollView"
+  import SelectOption from "./SelectOption"
+
+  export default class CommonFLoatList extends wepy.component {
+    components = {
+      ScrollView,
+      SelectOption
+    };
+
+    props=['selectOptionType']
+    data = {
+      showMask:false
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      getFormValue() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

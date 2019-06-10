@@ -1,0 +1,132 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .map-screen-info{
+    .base-wh();
+    overflow: hidden;
+
+    .map-screen-top{
+      width:100%;
+      height:90%;
+
+      .map-show{
+        width:100%;
+        height:100%;
+      }
+    }
+
+    .map-list{
+      .container();
+      height:10%;
+      margin-top: 20rpx;
+      .flex-just(@dirt: row,@x:space-between);
+
+      .map-list-item{
+        height:100%;
+
+        view{
+          font-size:24rpx;
+          color: @fontColor9;
+
+        }
+        image{
+          width:44rpx;
+          height:44rpx;
+        }
+      }
+    }
+  }
+</style>
+<template>
+    <view class="map-screen-info">
+        <view class="map-screen-top">
+          <map id="map" class="map-show"
+               latitude="{{map_info.lat}}"
+               longitude="{{map_info.lng}}"
+               scale="{{map_info.scale}}"
+               markers="{{map_info.markers}}"
+               @tap="mapEvent"
+               @markertap="mapEvent"
+          ></map>
+        </view>
+        <view class="map-list">
+          <view class="map-list-item" @tap="mapEvent">
+            <image src="/assets/icon/float-desc/newhouse_btn_subway.png"></image>
+            <view>地铁</view>
+          </view>
+          <view class="map-list-item" @tap="mapEvent">
+            <image src="/assets/icon/float-desc/newhouse_btn_bus.png"></image>
+            <view>地铁</view>
+          </view>
+          <view class="map-list-item" @tap="mapEvent">
+            <image src="/assets/icon/float-desc/newhouse_btn_school.png"></image>
+            <view>学校</view>
+          </view>
+          <view class="map-list-item" @tap="mapEvent">
+            <image src="/assets/icon/float-desc/newhouse_btn_hospital.png"></image>
+            <view>医院</view>
+          </view>
+          <view class="map-list-item" @tap="mapEvent">
+            <image src="/assets/icon/float-desc/newhouse_btn_shopping.png"></image>
+            <view>购物</view>
+          </view>
+          <view class="map-list-item" @tap="mapEvent">
+            <image src="/assets/icon/float-desc/newhouse_btn_restaurant.png"></image>
+            <view>餐饮</view>
+          </view>
+        </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class MapScreenInfo extends wepy.page {
+    config={
+      "navigationBarTitleText": "周边配套"
+    }
+
+    components = {};
+    data = {
+      map_info:{
+        lat:"43.881439",
+        lng:"125.390396",
+        scale:12,
+        markers: [{
+          iconPath: "/assets/icon/float-desc/map-icon.png",
+          id: 0,
+          latitude: 43.881439,
+          longitude: 125.390396,
+          width: 15,
+          height: 15,
+          label: {
+            anchorX: '-50',
+            anchorY: '-55',
+            padding: 10,
+            content: "佳龙太古城首府三期",
+            bgColor: '#fff',
+            borderRadius:5
+          },
+        }],
+      }
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

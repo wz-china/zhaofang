@@ -1,0 +1,188 @@
+<style type='less'>
+  @import "../../assets/css/index.less";
+
+  .containCompute{
+
+    width: 100%;
+
+  }
+  .leftText{
+
+    width: 40%;
+    height: 45rpx;
+    font-size: 32rpx;
+    margin-top: 34rpx;
+    margin-left: 30rpx;
+    position: absolute;
+
+  }
+  .rightText{
+    font-size: 32rpx;
+    margin-top: 34rpx;
+    margin-left: 42%;
+    position: absolute;
+    width: 50%;
+    height: 45rpx;
+    line-height: 45rpx;
+    text-align: right;
+  }
+  .lineL{
+    height: 2rpx;
+    width: 720rpx;
+    background-color: #E6E6E6;
+    margin-top: 111rpx;
+    margin-left: 30rpx;
+    position: absolute;
+  }
+  .wanyuan{
+    width: 100rpx;
+    line-height: 45rpx;
+    /*height: 45rpx;*/
+    font-size: 32rpx;
+    /*margin-top: 4rpx;*/
+  }
+
+
+</style>
+
+<template>
+    <view class="containCompute">
+
+      <view class="leftText">{{titleL}}</view>
+      <view wx:if="{{rightLX!='input'}}" class="rightText" style="display: flex">
+<!--        <view style="width: 100%;text-align: right">{{rightLX}}</view>-->
+        <picker wx:if="{{pickLX==1&&selectHead!=3}}"   bindchange="bindPickerChangeShoufubili" value="三成" range="{{shoufubili}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{shoufubiliSele}}
+            <!--            {{infoInput.num}}-->
+          </view>
+        </picker>
+
+
+
+        <picker wx:if="{{pickLX==3&&selectHead!=3}}"  bindchange="bindPickerChangeNianxian" value="三成" range="{{nianxian}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{nianxianSele}}
+          </view>
+        </picker>
+
+        <picker wx:if="{{pickLX==4&&selectHead!=3}}"  bindchange="bindPickerChangeJizhun" value="三成" range="{{jizhunlilv}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{jizhunSele}}
+          </view>
+        </picker>
+
+
+<!--        组合贷款-->
+
+        <picker wx:if="{{pickLX==1&&selectHead==3}}"   bindchange="bindPickerChangeShoufubili" value="三成" range="{{shoufubili}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{shoufubiliSele}}
+            <!--            {{infoInput.num}}-->
+          </view>
+        </picker>
+
+
+        <picker wx:if="{{pickLX==2&&selectHead==3}}"  bindchange="bindPickerChangeNianxian" value="三成" range="{{nianxian}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{nianxianSele}}
+          </view>
+        </picker>
+
+        <picker wx:if="{{pickLX==3&&selectHead==3}}"  bindchange="bindPickerChangeJizhun" value="三成" range="{{jizhunlilv}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{jizhunSele}}
+          </view>
+        </picker>
+
+        <picker wx:if="{{pickLX==4&&selectHead==3}}"  bindchange="bindPickerChangeJizhun" value="三成" range="{{jizhunlilv}}">
+          <view class="picker" bindchange="bindPickerChange"
+                style="width: 90%;font-size: 33rpx;text-align: right;position: absolute">
+            {{jizhunSele}}
+          </view>
+        </picker>
+
+
+      <image src="/components/homeCompute/jiantou.png" style="width: 30rpx;height: 30rpx;margin-top: 8rpx;position: absolute;margin-left: 330rpx"></image>
+      </view>
+      <view wx:if="{{rightLX=='input'}}" class="rightText" style="color: #999999;font-size: 32rpx;width: 42%;display: flex;margin-top: 34rpx;margin-left: 50%">
+<!--        <view>-->
+        <input type="text" placeholder="请输入" style="min-height: 1.0rem;height: 45rpx;font-size: 32rpx"/>
+<!--        </view>-->
+        <view class="wanyuan" >万元</view>
+      </view>
+
+      <view class="lineL"></view>
+
+
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class compute extends wepy.component {
+    props = {
+      titleL:String,
+      rightLX:String,
+      pickLX:String,
+      selectHead:String
+    };
+    data = {
+      shoufubili:['三成','四成','五成','六成','七成','八成','九成'],
+      nianxian:['5年(60期)','10年(120期)','15年(180期)','20年(240期)','25年(300期)','30年(360期)'],
+      jizhunlilv:['基准利率(4.9%)','基准利率(5.39%)','基准利率(5.88%)','基准利率(6.37%)'],
+      shoufubiliSele:'三成',
+      nianxianSele:'10年(120期)',
+      jizhunSele:'基准利率(4.9%)'
+    };
+    methods = {
+
+      bindPickerChangeShoufubili(e){
+
+        console.log('value',e.detail.value)
+
+        this.shoufubiliSele=this.shoufubili[e.detail.value*1]
+        this.$apply()
+
+
+      },
+      bindPickerChangeNianxian(e){
+
+        console.log('value',e.detail.value)
+
+        this.nianxianSele=this.nianxian[e.detail.value*1]
+        this.$apply()
+
+
+      },
+      bindPickerChangeJizhun(e){
+
+        console.log('value',e.detail.value)
+
+        this.jizhunSele=this.jizhunlilv[e.detail.value*1]
+        this.$apply()
+
+
+      },
+
+    };
+
+    onLoad(e) {
+
+      console.log('dedede'+this.titleL+this.pickLX)
+
+
+    }
+
+  }
+
+</script>

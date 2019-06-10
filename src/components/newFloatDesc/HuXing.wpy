@@ -1,0 +1,155 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .huxing{
+    .container();
+    height: 500rpx;
+    .splitBorderBottom();
+
+    .row-swiper{
+      width:100%;
+      height:350rpx;
+      white-space: nowrap;
+      overflow: hidden;
+
+      .huxing-item{
+        width:312rpx;
+        height:350rpx;
+        display: inline-block;
+        margin-right: 30rpx;
+
+        image{
+          width:100%;
+          height:230rpx;
+
+        }
+        .huxing-desc{
+          width:100%;
+          height:100rpx;
+          box-sizing: border-box;
+          padding: 0 2rpx;
+
+          .huxing-desc-title{
+            width:100%;
+            .text-ellipsis();
+            font-size: 28rpx;
+            color: @fontColorBack;
+            font-weight: 700;
+          }
+
+          .huxing-desc-info{
+            width:100%;
+            .text-ellipsis();
+            font-size: 24rpx;
+            color: @fontColor9;
+            margin-top: 10rpx;
+
+            span:nth-child(1){
+              margin-right:10rpx;
+            }
+          }
+        }
+
+      }
+
+
+    }
+
+  }
+
+</style>
+<template>
+    <view class="huxing">
+      <ItemHeader1 :headerTitle.sync="header1" gotoPage="huxingList" params="id=1111"/>
+      <scroll-view scroll-x class="row-swiper">
+        <view class="huxing-item">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="huxing-desc">
+            <view class="huxing-desc-title">四期也别洋房</view>
+            <view class="huxing-desc-info">
+              <span>建面:</span>
+              <span>130m²</span>
+            </view>
+            <view class="huxing-desc-info">
+              <span>总价:</span>
+              <span>165.2万元</span>
+            </view>
+          </view>
+        </view>
+        <view class="huxing-item">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="huxing-desc">
+            <view class="huxing-desc-title">四期也别洋房</view>
+            <view class="huxing-desc-info">
+              <span>建面:</span>
+              <span>130m²</span>
+            </view>
+            <view class="huxing-desc-info">
+              <span>总价:</span>
+              <span>165.2万元</span>
+            </view>
+          </view>
+        </view>
+        <view class="huxing-item">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="huxing-desc">
+            <view class="huxing-desc-title">四期也别洋房</view>
+            <view class="huxing-desc-info">
+              <span>建面:</span>
+              <span>130m²</span>
+            </view>
+            <view class="huxing-desc-info">
+              <span>总价:</span>
+              <span>165.2万元</span>
+            </view>
+          </view>
+        </view>
+        <view class="huxing-item">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="huxing-desc">
+            <view class="huxing-desc-title">四期也别洋房</view>
+            <view class="huxing-desc-info">
+              <span>建面:</span>
+              <span>130m²</span>
+            </view>
+            <view class="huxing-desc-info">
+              <span>总价:</span>
+              <span>165.2万元</span>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ItemHeader from "../common/ItemHeader"
+
+  export default class HuXing extends wepy.component {
+
+    components = {
+      "ItemHeader1":ItemHeader
+    };
+    data = {
+      header1:"户型介绍"
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

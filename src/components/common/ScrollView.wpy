@@ -1,0 +1,86 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .scroll-view{
+    width:100%;
+    height:100%;
+
+    .back-to-top{
+      width:98rpx;
+      height:98rpx;
+      position: fixed;
+      bottom:150rpx;
+      right:30rpx;
+
+      image{
+        width:98rpx;
+        height:98rpx;
+      }
+    }
+
+  }
+
+</style>
+<template>
+    <view class="scroll-view">
+      <slot></slot>
+      <view class="back-to-top" wx:if="{{showBack}}" @tap="backTop">
+        <image src="/assets/icon/back-to-top.png"></image>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class ScrollView extends wepy.component {
+
+    components = {};
+    data = {
+      showBack:false,
+    }
+
+    props = ["whichDistancetoTop"]
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      backTop() {
+        wepy.pageScrollTo({
+          scrollTop: 0,
+          duration: 300
+        })
+      },
+
+      seeScrollBottom(e){
+        this.$emit('getScrollBottom')
+      },
+
+    };
+
+    events={
+      'pageScroll':(e)=>{
+        let cur_top = e.scrollTop
+        if(this.showBack){ //判断何时消失
+          if(cur_top < 200){
+            this.showBack = false
+          }
+        }
+        if(!this.showBack){   //判断何时出现
+          if(cur_top > 250){
+            this.showBack = true
+          }
+        }
+      }
+    }
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

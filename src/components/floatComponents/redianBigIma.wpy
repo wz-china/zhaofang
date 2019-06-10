@@ -1,0 +1,76 @@
+<style type='less'>
+
+  .redianBigIma{
+    position: relative;
+    margin-top: 60rpx;
+  }
+  .title2{
+    width: 690rpx;
+    height: 48rpx;
+    margin-left: 0rpx;
+    font-size: 35rpx;
+    /*position: absolute;*/
+    overflow:hidden;//一定要写
+    text-overflow: ellipsis;//超出省略号
+    display:-webkit-box;//一定要写
+    -webkit-line-clamp: 1;//控制行数
+    -webkit-box-orient: vertical;//一定要写
+
+  }
+  .time2{
+    width: 430rpx;
+    height: 45rpx;
+    font-size: 30rpx;
+    margin-left: 0rpx;
+    color: #666666;
+    /*position: absolute;*/
+    margin-top: 5rpx;
+  }
+  .ima2{
+    width: 690rpx;
+    height: 220rpx;
+    background-color: #666666;
+    margin-top: 15rpx;
+    margin-left: 0rpx;
+    margin-right: 0rpx;
+
+  }
+  .line2{
+    height: 2rpx;
+    width: 690rpx;
+    background-color: #dcdcdc;
+
+    margin-left: 0rpx;
+    margin-right: 20rpx;
+    margin-top: 30rpx;
+    position: absolute;
+
+  }
+</style>
+
+<template>
+    <view class="redianBigIma">
+
+      <view class="title2">2019房地产税最新消息:2019房地产税最新消息房地产税最新消息</view>
+      <view class="time2">2019-04-05</view>
+      <view class="ima2"></view>
+      <view class="line2"></view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class redianBigIma extends wepy.component {
+    data = {};
+    methods = {};
+
+    onLoad() {
+
+
+    }
+
+  }
+
+</script>

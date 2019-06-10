@@ -1,0 +1,83 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .float-list{
+    padding-top:88rpx ;
+
+    .select-header{
+      position: fixed;
+      z-index:13;
+      top:0;
+      left:0;
+    }
+
+    .scroll-views{
+      .container();
+    }
+
+
+  }
+
+
+</style>
+<template>
+    <view class="float-list">
+      <SelectOption class="select-header" selectOptionType="diff"></SelectOption>
+      <ScrollView class="scroll-views">
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+        <FloatItem itemType="new"></FloatItem>
+      </ScrollView>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+  import SelectOption from "../components/common/SelectOption"
+  import FloatItem from "../components/common/FloatItem"
+
+  export default class floatList extends wepy.page {
+    config = {
+      "navigationBarTitleText": "列表"
+    };
+    components = {
+      ScrollView,
+      SelectOption,
+      FloatItem
+    };
+    data = {}
+
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

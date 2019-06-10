@@ -1,0 +1,181 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .float-dongtai{
+    .base-wh();
+
+    .shengming-box{
+      width:100%;
+      height:80rpx;
+      text-align: right;
+      .flex-just(@dirt: row,@x:flex-end);
+      .container();
+
+      image{
+        width:32rpx;
+        height:32rpx;
+      }
+      view{
+        font-size: 28rpx;
+        color: @themeColorDeep;
+        margin-left: 10rpx;
+      }
+
+
+    }
+
+    .shengming-tip{
+      position: fixed;
+      width:100vw;
+      height:100vh;
+      left:0;
+      top:0;
+      z-index:10;
+      background: rgba(0,0,0,0.8);
+
+      .shengming-screen{
+        width:630rpx;
+        height:600rpx;
+        background: #fff;
+        border-radius: 10rpx;
+        position: absolute;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        z-index:12;
+        box-sizing: border-box;
+        padding:8%;
+
+        image{
+          width:45rpx;
+          height:45rpx;
+          position: absolute;
+          right:4%;
+          top:3%;
+        }
+
+        .shengming-content{
+          width:100%;
+
+          .shengming-title{
+            width:100%;
+            font-size: 42rpx;
+            font-weight: 700;
+            margin: 25rpx 0;
+          }
+          .shengming-text{
+            font-size: 28rpx;
+            color: @fontColorBack;
+            line-height:40rpx;
+            margin-bottom: 20rpx;
+
+          }
+
+
+
+        }
+
+        .shengming-btn{
+          width:100%;
+          height:88rpx;
+          background: @themeColor;
+          margin-top: 60rpx;
+          .flex-just();
+          font-size: 32rpx;
+          font-weight: 700;
+
+        }
+      }
+    }
+
+    .dongtai-list{
+      padding-bottom: 20rpx;
+
+      .dongtai-item{
+        .container();
+        border-bottom: 1px solid #eee;
+        margin-bottom: 20rpx;
+      }
+
+      .dongtai-item:nth-last-child(1){
+        border:none;
+      }
+
+    }
+  }
+</style>
+<template>
+    <ScrollView class="float-dongtai">
+      <view class="shengming-box" @tap="changeShengmingTip">
+        <image src="/assets/icon/float-desc/property_icon_relief.png"></image>
+        <view>免责声明</view>
+      </view>
+
+      <!--动态列表-->
+      <view class="dongtai-list">
+        <view class="dongtai-item">
+          <CommentPingLun :curType="curType" :strLeng="num">
+            <span>{{textinfo}}</span>
+          </CommentPingLun>
+        </view>
+      </view>
+
+      <!--弹窗-->
+      <view class="shengming-tip" wx:if="{{isShow}}">
+        <view class="shengming-screen">
+          <image @tap="changeShengmingTip" src="/assets/icon/float-desc/popup_btn_close.png"></image>
+          <view class="shengming-content">
+            <view class="shengming-title">免责声明</view>
+            <view class="shengming-text">楼盘动态中所载内容，其真实性由发布者负责，惠买房平台提供相应的监管职能，同时其不代表惠买房平台的观点或意见,仅供购房者参考和借鉴。</view>
+            <view class="shengming-text">如有异议，请及时与我们联系。</view>
+
+            <view class="shengming-btn" @tap="changeShengmingTip">知道了</view>
+          </view>
+        </view>
+      </view>
+    </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+  import CommentPingLun from "../components/common/CommentPingLun"
+
+  export default class floatDongTai extends wepy.page {
+    config = {
+      "navigationBarTitleText": "楼盘动态"
+    };
+    components = {
+      CommentPingLun,
+      ScrollView
+    };
+    data = {
+      isShow:false,
+      curType:"dongtai",
+      num:53,
+      textinfo:"项目位置在中州路上，距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17公里距离新机场17新"
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changeShengmingTip() {
+        this.isShow = !this.isShow
+        this.$apply()
+      }
+    };
+
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+    }
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log(this.textinfo.length);
+    };
+
+  }
+
+
+</script>
+
+

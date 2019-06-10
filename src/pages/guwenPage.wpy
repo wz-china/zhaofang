@@ -1,0 +1,210 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .guwen{
+    width:100%;
+    padding-bottom: 120rpx;
+
+    .guwen-top{
+      width:100%;
+      height:260rpx;
+      background: @fontColorBack;
+      .flex-just(@dirt: row,@x:flex-start);
+
+
+      image{
+        width:180rpx;
+        height:180rpx;
+        border-radius: 90rpx;
+        margin-left: 5%;
+      }
+
+      .guwen-top-info{
+        .flex-just(@y:flex-start);
+        height:180rpx;
+        margin-left: 30rpx;
+
+        .guwen-name{
+          font-size: 32rpx;
+          color: #fff;
+          font-weight: 700;
+          margin-bottom: 10rpx;
+        }
+
+        .guwen-info-item{
+          font-size: 28rpx;
+          color: @fontColor9;
+          line-height:50rpx;
+          height:50rpx;
+
+        }
+
+      }
+
+
+    }
+
+    .guwen-dongtai{
+      width:100%;
+
+      .guwen-dongtai-title{
+        margin:30rpx 4%;
+        height:25rpx;
+        line-height:25rpx;
+        font-size: 36rpx;
+        font-weight: 700;
+        padding-left: 20rpx;
+        border-left: 6rpx solid @fontColorBack;
+
+
+      }
+
+      .dongtai-item{
+        .container();
+        margin:30rpx 0;
+        .splitBorderBottom();
+        padding-top: 30rpx;
+        padding-bottom: 30rpx;
+
+        .dongtai-item-title{
+          width:100%;
+          font-weight: 700;
+          font-size: 32rpx;
+
+        }
+
+        .dongtai-item-content{
+          .text-ellipsis-line();
+          font-size: 28rpx;
+          color: @fontColorBack;
+          margin: 20rpx 0;
+        }
+
+        .dongtai-item-time{
+          font-size: 24rpx;
+          color: @fontColor9;
+
+        }
+
+        .see-more{
+          font-size: 28rpx;
+          color: @themeColorDeep;
+          margin-top:30rpx;
+
+        }
+      }
+
+      .dongtai-item:nth-last-child(1){
+        border-bottom: none;
+      }
+
+    }
+
+    .zixun-box{
+      width:100%;
+      height:120rpx;
+      background: #fff;
+      .flex-just(@dirt: row,@x:space-between);
+      z-index:11;
+      position: fixed;
+      left:0;
+      bottom:0;
+      .container();
+
+      .zixun-common{
+        width:48%;
+        height:88rpx;
+        font-size: 32rpx;
+        font-weight: 700;
+        .flex-just();
+        background: @themeColor;
+      }
+      .zixun-common:nth-child(1){
+        background:#46EDFF;
+      }
+
+
+    }
+  }
+</style>
+<template>
+    <ScrollView>
+      <view class="guwen">
+        <!--顶部-->
+        <view class="guwen-top">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="guwen-top-info">
+            <view class="guwen-name">陈天骄</view>
+            <view class="guwen-info-item">
+              <text>所属楼盘:</text>
+              <text>佳龙太古城</text>
+            </view>
+            <view class="guwen-info-item">
+              <text>所属楼盘:</text>
+              <text>佳龙太古城</text>
+            </view>
+          </view>
+
+        </view>
+
+        <!--动态列表-->
+        <view class="guwen-dongtai">
+          <view class="guwen-dongtai-title">TA发布得动态</view>
+          <view class="dongtai-item">
+            <view class="dongtai-item-title">德辉首府三期住宅</view>
+            <view class="dongtai-item-content">招商海德公园A区公寓在售面积50平，均价9000元/平；公寓全款优惠95折，贷款优惠98折。招商海</view>
+            <view class="dongtai-item-time">2019-05-21 10:41:48</view>
+            <view class="see-more">全文</view>
+          </view>
+          <view class="dongtai-item">
+            <view class="dongtai-item-title">德辉首府三期住宅</view>
+            <view class="dongtai-item-content">招商海德公园A区公寓在售面积50平，均价9000元/平；公寓全款优惠95折，贷款优惠98折。招商海</view>
+            <view class="dongtai-item-time">2019-05-21 10:41:48</view>
+            <view class="see-more">全文</view>
+          </view>
+        </view>
+
+        <!--底部联系-->
+        <view class="zixun-box">
+          <view class="zixun-common">在线咨询</view>
+          <view class="zixun-common">电话咨询</view>
+        </view>
+      </view>
+    </ScrollView>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ScrollView from "../components/common/ScrollView"
+
+  export default class guwenPage extends wepy.page {
+    config = {
+      "navigationBarTitleText": "置业顾问主页"
+    };
+    components = {
+      ScrollView
+    };
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+    onPageScroll(e){
+      this.$broadcast("pageScroll",e)
+
+    }
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

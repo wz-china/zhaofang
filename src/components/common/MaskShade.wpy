@@ -1,0 +1,52 @@
+<style type="less">
+  .mask{
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.5);
+    position: fixed;
+    left:0;
+    top:0;
+    z-index:10;
+  }
+
+</style>
+<template>
+    <view class="mask"  catchtouchmove="ture" @tap="changeStatus" wx:if="{{isShow}}"></view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class MaskShade extends wepy.component {
+    props={
+      isShow:{
+        type:Boolean,
+        default:false,
+        twoWay: true
+      }
+    }
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      changeStatus() {
+        this.isShow = !this.isShow
+      }
+    };
+
+    show(){
+      console.log('mask show');
+
+    }
+    //页面{的生命周期函数
+    onLoad() {
+      console.log('mask onLoad');
+    };
+
+  }
+
+
+</script>
+
+

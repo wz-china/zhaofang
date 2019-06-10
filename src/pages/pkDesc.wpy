@@ -1,0 +1,182 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .pk-desc{
+    .base-wh();
+    padding:10rpx 0;
+
+    .top-common{
+      width:100%;
+
+      image{
+        width:100%;
+        height:210rpx;
+
+      }
+      .top-left-title{
+        width:100%;
+        font-size: 24rpx;
+        color: @fontColorBack;
+        font-weight: 700;
+        .text-ellipsis();
+        margin-top: 10rpx;
+
+      }
+      .top-left-price{
+        width:100%;
+        text:nth-child(1){
+          font-size: 32rpx;
+          color: @price;
+          margin-right: 10rpx;
+          font-weight: 700;
+        }
+
+        text:nth-child(2) {
+          font-size: 24rpx;
+          color: @fontColor9;
+        }
+      }
+    }
+
+    .top-center{
+      image{
+        width:70rpx;
+        height:70rpx;
+        margin-top:-60rpx;
+      }
+    }
+
+    .center-common{
+      font-size: 24rpx;
+      color: @fontColor9;
+      width:100%;
+    }
+
+    .list-common{
+      font-size: 24rpx;
+      color: @fontColorBack;
+      width:100%;
+      text-align: center;
+      font-weight: 700;
+
+      text{
+        color: @themeColorDeep;
+      }
+      image{
+        margin-bottom: -1rpx;
+        margin-left: 5rpx;
+        width:24rpx;
+        height:24rpx;
+      }
+    }
+
+    .bottom{
+      width:100%;
+      height:100rpx;
+
+    }
+
+  }
+
+</style>
+<template>
+    <view class="pk-desc">
+      <ItemList>
+        <view slot="left" class="top-common">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="top-left-title">嘉龙太古城首付三期</view>
+          <view class="top-left-price">
+            <text>12000</text>
+            <text>元/m²</text>
+          </view>
+        </view>
+        <view slot="center" class="top-center">
+          <image src="/assets/icon/float-desc/pkdetail_icon_pk.png"></image>
+        </view>
+        <view slot="right" class="top-common">
+          <image src="https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"></image>
+          <view class="top-left-title">嘉龙太古城首付三期</view>
+          <view class="top-left-price">
+            <text>12000</text>
+            <text>元/m²</text>
+          </view>
+        </view>
+      </ItemList>
+      <ItemHeader>基本信息</ItemHeader>
+      <ItemList>
+        <view class="list-common" slot="left">在售</view>
+        <view class="center-common" slot="center">销售状态</view>
+        <view class="list-common" slot="right">在售</view>
+      </ItemList>
+      <ItemList>
+        <view class="list-common" slot="left">在售在售在售在售在售在售在售在售在售在售</view>
+        <view class="center-common" slot="center">销售状态</view>
+        <view class="list-common" slot="right">在售</view>
+      </ItemList>
+      <ItemHeader>户型信息</ItemHeader>
+      <ItemList>
+        <view class="list-common" slot="left">在售在售</view>
+        <view class="center-common" slot="center">销售状态</view>
+        <view class="list-common" slot="right">在售</view>
+      </ItemList>
+      <ItemList>
+        <view class="list-common" slot="left">
+          <text>查看更多</text>
+          <image src="/assets/icon/float-desc/pk_btn_right_arrow.png"></image>
+        </view>
+        <view class="center-common" slot="center"></view>
+        <view class="list-common" slot="right">
+          <text>查看更多</text>
+          <image src="/assets/icon/float-desc/pk_btn_right_arrow.png"></image>
+        </view>
+      </ItemList>
+      <ItemHeader>销售信息</ItemHeader>
+      <ItemList>
+        <view class="list-common" slot="left">在售在售</view>
+        <view class="center-common" slot="center">销售状态</view>
+        <view class="list-common" slot="right">在售</view>
+      </ItemList>
+      <ItemHeader>位置及周边</ItemHeader>
+      <ItemList>
+        <view class="list-common" slot="left">在售在售</view>
+        <view class="center-common" slot="center">销售状态</view>
+        <view class="list-common" slot="right">在售</view>
+      </ItemList>
+      <view class="bottom"></view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ItemList from "../components/pkDesc/ItemList"
+  import ItemHeader from "../components/pkDesc/ItemHeader"
+
+  export default class pkDesc extends wepy.page {
+    config = {
+      "navigationBarTitleText": "PK详情"
+    };
+    components = {
+      ItemList,
+      ItemHeader,
+    };
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

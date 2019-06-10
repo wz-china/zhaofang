@@ -1,0 +1,89 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .banner-box{
+    width:100%;
+    height:562rpx;
+    position: relative;
+
+    .banner-swiper{
+      width:100%;
+      height:100%;
+
+      .slide-image{
+        width: 100%;
+        height:100%;
+      }
+    }
+    .banner-num-box{
+      width:100rpx;
+      height:40rpx;
+      line-height:40rpx;
+      font-size: 24rpx;
+      color: #fff;
+      position: absolute;
+      right:20rpx;
+      bottom:20rpx;
+      .flex-just(@dirt: row);
+      background: rgba(0,0,0,0.3);
+      border-radius: 4px;
+    }
+
+  }
+
+</style>
+<template>
+    <view class="banner-box">
+        <swiper class="banner-swiper" indicator-dots="{{indicatorDots}}" @change="bannerChange"
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+          <block wx:for="{{imgUrls}}">
+            <swiper-item>
+              <image @tap="seePreviewImage" data-src="{{item}}" src="{{item}}" class="slide-image" />
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="banner-num-box">{{banner_cur_index}}/{{imgUrls.length}} </view>
+      </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import CommonMethods from "../../mixins/CommonMethods"
+
+  export default class BannerBox extends wepy.component {
+    components = {};
+    props=["imgUrls"]
+    data = {
+      indicatorDots: false,
+      autoplay: false,
+      interval: 5000,
+      duration: 1000,
+      banner_cur_index:1
+    }
+
+    mixins=[CommonMethods]
+
+    methods = {
+      bannerChange({detail}) {
+        this.banner_cur_index = detail.current +1
+        this.$apply()
+      },
+
+      seePreviewImage:function (e) {
+        var current = e.target.dataset.src;
+        this.previewImage(current,this.imgUrls)
+
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

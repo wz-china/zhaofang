@@ -1,0 +1,85 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+
+  .check-page{
+    .base-wh();
+    margin-top: 20rpx;
+
+    .input-box{
+      .container();
+      height:88rpx;
+      font-size: 32rpx;
+      color: @fontColorBack;
+      .flex-just(@dirt: row,@x:space-between);
+      border-bottom: 1px solid #eee;
+
+      .title{
+        color: @fontColorBack;
+      }
+
+      input{
+        color: @fontColor9;
+        width:50vw;
+        text-align: right;
+      }
+
+    }
+
+    .btn{
+      height:88rpx;
+      font-size: 32rpx;
+      font-weight: 700;
+      .flex-just();
+      background: @themeColor;
+      margin:50rpx 4%;
+    }
+
+  }
+
+
+</style>
+<template>
+    <view class="check-page">
+      <view class="input-box">
+        <view class="title">楼盘名称</view>
+        <input type="text" placeholder="请输入楼盘名称进行查询" />
+      </view>
+
+      <view class="btn" @tap="checkEvent">立即查询</view>
+
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class CheckPage extends wepy.component {
+    props={
+      show_which:{
+        type:String,
+        twoWay:true
+      }
+    }
+    components = {};
+    data = {}
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      checkEvent() {
+        this.show_which = 'success'
+        this.$apply()
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

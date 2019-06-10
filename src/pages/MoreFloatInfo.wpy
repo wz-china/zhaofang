@@ -1,0 +1,110 @@
+<style type="less">
+  @import "../assets/css/index.less";
+
+  .more-float-info{
+    width:100%;
+
+    .loupan-jieshao{
+      height:300rpx;
+      .container();
+      padding-top: 30rpx;
+
+      .loupan-jieshao-text{
+        margin-top: 30rpx;
+        font-size: 28rpx;
+        color: @fontColor9;
+        line-height: 42rpx;
+      }
+    }
+
+  }
+</style>
+<template>
+    <view class="more-float-info">
+      <MoreList1 :dataList="dataList1">
+        <span slot="title">德辉首府</span>
+      </MoreList1>
+      <MoreList2 :dataList="dataList2">
+        <span slot="title">建筑信息</span>
+      </MoreList2>
+      <MoreList3 :dataList="dataList3">
+        <span slot="title">物业信息</span>
+      </MoreList3>
+      <view class="loupan-jieshao">
+        <ItemHeader>
+          <span slot="header">楼盘介绍</span>
+        </ItemHeader>
+        <view class="loupan-jieshao-text">
+          德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府德辉首府
+        </view>
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import MoreList from "../components/moreFloatInfo/MoreList"
+  import ItemHeader from "../components/moreFloatInfo/ItemHeader"
+
+  export default class MoreFloatInfo extends wepy.page {
+    config = {
+      "navigationBarTitleText": "楼盘信息"
+    };
+    components = {
+      'MoreList1':MoreList,
+      'MoreList2':MoreList,
+      'MoreList3':MoreList,
+      ItemHeader
+    };
+    data = {
+      dataList1:[
+        {name:"开盘时间",content:"2018-06-19"},
+        {name:"交房时间",content:"2018-06-19"},
+        {name:"户型",content:"2018-06-19"},
+        {name:"物业类型",content:"2018-06-19"},
+        {name:"公积金",content:"2018-06-19"},
+        {name:"所属环线",content:"2018-06-19"},
+        {name:"所属区域",content:"2018-06-19"},
+        {name:"预售许可",content:"2018-06-19"},
+        {name:"地址",content:"2018-06-19"},
+      ],
+      dataList2:[
+        {name:"建筑类型",content:"2018-06-19"},
+        {name:"产权年限",content:"2018-06-19"},
+        {name:"装修状态",content:"2018-06-19"},
+        {name:"容积率",content:"2018-06-19"},
+        {name:"绿化率",content:"2018-06-19"},
+        {name:"总户数",content:"2018-06-19"},
+        {name:"楼层情况",content:"2018-06-19"},
+        {name:"建筑面积",content:"2018-06-19"},
+        {name:"占地面积",content:"2018-06-19"},
+        {name:"开发商",content:"2018-06-19"},
+      ],
+      dataList3:[
+        {name:"物业公司",content:"2018-06-19"},
+        {name:"物业费",content:"2018-06-19"},
+        {name:"车位",content:"2018-06-19"},
+        {name:"供暖方式",content:"2018-06-19"},
+
+      ]
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

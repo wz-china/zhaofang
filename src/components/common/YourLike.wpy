@@ -1,0 +1,60 @@
+<style type="less">
+  @import "../../assets/css/index.less";
+
+  .your-like{
+    .container();
+    padding-bottom: 30rpx;
+
+    .you-like-list{
+      width:100%;
+      margin-bottom: 100rpx;
+
+    }
+  }
+
+</style>
+<template>
+    <view class="your-like">
+      <ItemHeader :headerTitle.sync="header" :showMore="showMore"/>
+      <view class="you-like-list">
+        <FloatItem :itemType="itemType"/>
+        <FloatItem :itemType="itemType"/>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import ItemHeader from "./ItemHeader"
+  import FloatItem from "./FloatItem"
+
+  export default class YourLike extends wepy.component {
+
+    components = {
+      ItemHeader,
+      FloatItem
+    };
+    data = {
+      header:"猜你喜欢",
+      showMore:false,
+      itemType:'new'
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

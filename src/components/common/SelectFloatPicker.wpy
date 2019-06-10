@@ -1,0 +1,325 @@
+<style type="less" scoped>
+  @import "../../assets/css/index.less";
+  @inputHeight:88rpx;
+  @titleHeight:88rpx;
+  @panelHeight:500rpx;
+  @panelListHeight:@panelHeight - @titleHeight;
+  @panelItemHeight:88rpx;
+
+  .select-input{
+    width:100%;
+    height:@inputHeight;
+    line-height: @inputHeight;
+    font-size: 16px;
+    color: @fontColor9;
+
+
+    .show-result{
+      width:100%;
+      height:100%;
+      .flex-just(@dirt: row,@x:flex-end);
+
+      .niubi-text{
+        height:100%;
+        width:50vw;
+        text-align: right;
+        .text-ellipsis();
+      }
+    }
+    .select-pannel{
+      width:100vw;
+      height:@panelHeight;
+      position: fixed;
+      bottom:0;
+      left:0;
+      z-index:12;
+      background: #fff;
+
+      .panel-title-box{
+        .container();
+        height:@titleHeight;
+        background: #F7F7F7;
+        .flex-just(@dirt: row,@x:space-between);
+        font-size: 32rpx;
+        color: #000;
+        position: relative;
+
+
+        .panel-title-item:nth-child(1) {
+          color: @themeColorDeep;
+        }
+        .panel-title-item:nth-child(2){
+          position: absolute;
+          left:50%;
+          top:50%;
+          color: @fontColor9;
+          transform: translate(-50%,-50%);
+        }
+        .panel-title-item:nth-child(3) {
+          color: @themeColorDeep;
+        }
+
+      }
+
+      .panel-list{
+        width:100%;
+        height:@panelListHeight;
+
+
+        view{
+          width:100%;
+          line-height:@panelItemHeight;
+          height:@panelItemHeight;
+          border-bottom: 1px solid #eee;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    .input-page{
+      width:100vw;
+      height:100vh;
+      background: #fff;
+      position: fixed;
+      left:0;
+      top:0;
+      z-index:13;
+
+      .input-item{
+        margin:0 4%;
+        height:88rpx;
+        .flex-just(@dirt: row,@x:space-between);
+        border-bottom: 1px solid #eee;
+        view{
+          font-size: 32rpx;
+          color: @fontColorBack;
+
+        }
+        input{
+          width:50vw;
+          text-align: right;
+          font-size: 28rpx;
+          color: @fontColor9;
+        }
+      }
+      .save-btn{
+        margin: 50rpx 4%;
+        height:88rpx;
+        background: @themeColor;
+        font-size: 32rpx;
+        color: @fontColorBack;
+        .flex-just();
+        font-weight: 700;
+      }
+    }
+    .mask{
+      background: rgba(0,0,0,0.5);
+      position: fixed;
+      left:0;
+      top:0;
+      z-index:11;
+      width:100vw;
+      height:100vh;
+    }
+  }
+</style>
+<template>
+  <view class="select-input">
+    <view class="show-result" @tap="changePanel">
+      <view class="niubi-text">{{show_text}}</view>
+    </view>
+
+    <!--楼栋号-->
+    <view class="select-pannel" wx:if="{{show_panel && which_panel=='loudong'}}">
+      <view class="panel-title-box">
+        <span class="panel-title-item" style="color: #666;" @tap="changePanel">取消</span>
+        <span class="panel-title-item">楼栋号</span>
+        <span class="panel-title-item" @tap="inputForman">手动输入楼栋号</span>
+      </view>
+      <picker-view class="panel-list" indicator-style="height: 50px" >
+        <picker-view-column style="width:100%;text-align: center;">
+          <view wx:for="{{loudong_data}}" style="line-height: 50px" @tap="clickItem('loudong','danyuan',{{index}})">{{item.name}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+
+    <!--单元号-->
+    <view class="select-pannel" wx:if="{{show_panel && which_panel=='danyuan'}}">
+      <view class="panel-title-box">
+        <span class="panel-title-item" @tap="backEvent('loudong')">上一步</span>
+        <span class="panel-title-item">单元号</span>
+        <span class="panel-title-item" @tap="inputForman">手动输入单元号</span>
+      </view>
+      <picker-view class="panel-list" indicator-style="height: 50px;">
+        <picker-view-column style="width:100%;text-align: center;">
+          <view wx:for="{{danyuan_data}}" style="line-height: 50px" @tap="clickItem('danyuan','menpai',{{index}})">{{item.name}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+
+    <!--门牌号-->
+    <view class="select-pannel" wx:if="{{show_panel && which_panel=='menpai'}}">
+      <view class="panel-title-box">
+        <span class="panel-title-item" @tap="backEvent('danyuan')">上一步</span>
+        <span class="panel-title-item">门牌号</span>
+        <span class="panel-title-item" @tap="inputForman">手动输入门牌号</span>
+      </view>
+      <picker-view class="panel-list" indicator-style="height: 50px;" >
+        <picker-view-column style="width:100%;text-align: center;">
+          <view wx:for="{{menpai_data}}" style="line-height: 50px" @tap="clickItem('menpai','end',{{index}})">{{item.name}}</view>
+        </picker-view-column>
+      </picker-view>
+
+    </view>
+
+    <!--输入页面-->
+    <view class="input-page" wx:if="{{show_input_page}}">
+
+      <!--楼栋号-->
+      <view class="input-item">
+        <view>楼栋号</view>
+        <input type="text" value="{{value_array[0]}}" data-id="0" placeholder="请输入楼栋号；例：1栋"  @input="inputEvent" />
+      </view>
+
+
+      <!--单元-->
+      <view class="input-item">
+        <view>单元号</view>
+        <input type="text" value="{{value_array[1]}}" data-id="1" placeholder="请输入单元号；例：1单元"  @input="inputEvent" />
+      </view>
+
+      <!--门牌-->
+      <view class="input-item">
+        <view>门牌号</view>
+        <input type="text" value="{{value_array[2]}}" data-id="2" placeholder="请输入门牌号；例：1035"  @input="inputEvent" />
+      </view>
+
+      <view class="save-btn" @tap="saveValue">保存</view>
+
+    </view>
+
+    <MaskShade :isShow.sync="show_panel"/>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import MaskShade from "./MaskShade"
+
+  export default class SelectFloatPicker extends wepy.component {
+
+    props={
+
+      form_list:{
+        type:Object,
+        twoWay: true
+      },
+      which_one:{
+        type:String,
+      }
+    }
+
+    components = {
+      MaskShade
+    };
+
+    data = {
+      showInfo:"选择楼栋门牌号",
+      show_panel:false,
+      which_panel:"loudong",
+      value_array:["","",""],
+      show_input_page:false,
+      loudong_data:[
+        {id:1,name:"一楼栋"},
+        {id:2,name:"二楼栋"},
+        {id:3,name:"三楼栋"},
+        {id:4,name:"四楼栋"},
+      ],
+      danyuan_data:[
+        {id:1,name:"一单元"},
+        {id:2,name:"二单元"},
+        {id:3,name:"三单元"},
+        {id:4,name:"四单元"},
+      ],
+      menpai_data:[
+        {id:1,name:"一门牌"},
+        {id:2,name:"二门牌"},
+        {id:3,name:"三门牌"},
+        {id:4,name:"四门牌"},
+      ]
+    }
+
+    computed={
+      show_text:function () {
+        let text = "选择楼栋门牌号"
+        if(this.value_array[0] != ""){
+          text = this.value_array.join(" ")
+        }
+        return text
+      }
+    }
+
+    watch={
+
+      show_panel:function (newValue,oldValue) {
+        if(!newValue){
+          this.which_panel = "loudong"
+        }
+      },
+
+      value_array:function (newValue,oldValue) {
+        console.log(newValue)
+        this.form_list[this.which_one] = newValue
+      }
+
+    }
+
+    methods = {
+      changePanel() {
+        this.show_panel = !this.show_panel
+      },
+      backEvent(e){
+        this.which_panel = e
+        if(e == "danyuan"){
+          this.value_array[2] = ""
+        }else if(e == 'loudong'){
+          this.value_array[1] = ""
+        }
+        this.$apply()
+      },
+      saveValue(e){
+        this.show_input_page = false
+      },
+      inputForman(){
+        console.log(111)
+        this.show_input_page = true
+        this.show_panel = false
+      },
+      inputEvent(e){
+        let index = e.currentTarget.dataset.id
+        let detail = e.detail.value
+        console.log(index)
+        console.log(detail)
+        this.value_array[index] = detail
+      },
+
+      clickItem(cur,next,index){
+        this.which_panel = next
+        if(cur == 'loudong') {
+          this.value_array[0] = this.loudong_data[index].name
+        }else if(cur == 'danyuan'){
+          this.value_array[1] = this.danyuan_data[index].name
+        }else if(cur == "menpai"){
+          this.value_array[2] = this.menpai_data[index].name
+          this.show_panel = false
+        }
+        this.$apply()
+
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {};
+
+  }
+</script>

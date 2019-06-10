@@ -1,0 +1,280 @@
+<style type="less">
+  @import "../assets/css/index.less";
+  .containMine{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #F5F5F5;
+  }
+  .headV{
+    width: 100%;
+    height: 280rpx;
+    background-color:#ffdd00;
+    position: relative;
+  }
+  .imaPer{
+    width: 160rpx;
+    height: 160rpx;
+    /*background-color: red;*/
+    border-radius: 80rpx;
+    margin-left: 52rpx;
+    margin-top: 60rpx;
+    position: absolute;
+
+  }
+  .denglv{
+    width: 90rpx;
+    height: 50rpx;
+    font-size: 36rpx;
+    margin-left: 239rpx;
+    margin-top: 68rpx;
+    position: absolute;
+  }
+  .gang{
+    width: 30rpx;
+    height: 50rpx;
+    font-size: 36rpx;
+    margin-left: 329rpx;
+    margin-top: 68rpx;
+    position: absolute;
+  }
+  .zhuce{
+    width: 90rpx;
+    height: 50rpx;
+    font-size: 36rpx;
+    margin-left: 365rpx;
+    margin-top: 68rpx;
+    position: absolute;
+  }
+  .wenzi{
+    width: 400rpx;
+    height: 40rpx;
+    font-size: 30rpx;
+    margin-left: 239rpx;
+    margin-top: 135rpx;
+    position: absolute;
+    color: @fontColor;
+  }
+  .minView{
+    /*position: relative;*/
+    width: 100%;
+    height: 232rpx;
+    display: flex;
+    background-color: white;
+  }
+
+  .minIma{
+    width: 58rpx;
+    height: 58rpx;
+    margin-top: 65rpx;
+    margin-left: 68rpx;
+    background-color: white;
+    position: absolute;
+  }
+  .minefabu{
+    width: 120rpx;
+    height: 40rpx;
+    margin-left: 40rpx;
+    margin-top: 136rpx;
+    font-size: 29rpx;
+    position: absolute;
+  }
+  .minSub{
+    position: relative;
+    width: 25%;
+    height: 232rpx;
+  }
+  .kefu{
+    position: relative;
+    width: 100%;
+    height: 226rpx;
+    background-color: white;
+    margin-top: 30rpx;
+
+  }
+  .dianhua{
+    width: 37rpx;
+    height: 37rpx;
+    margin-top: 38rpx;
+    margin-left: 35rpx;
+    position: absolute;
+  }
+
+  .kefuPhone{
+    position: absolute;
+    width: 130rpx;
+    height: 45rpx;
+    font-size: 32rpx;
+    margin-top: 32rpx;
+    margin-left: 89rpx;
+
+  }
+  .phoneNumber{
+    width: 320rpx;
+    height: 45rpx;
+    margin-left: 340rpx;
+    margin-top: 32rpx;
+    font-size: 32rpx;
+    position: absolute;
+    text-align: right;
+  }
+
+  .jiantou{
+    width:  25rpx;
+    height: 30rpx;
+    margin-left: 696rpx;
+    margin-top: 42rpx;
+    position: absolute;
+
+  }
+  .lineV{
+    width:  720rpx;
+    height: 2rpx;
+    margin-left: 30rpx;
+    margin-top: 111rpx;
+    background-color: #E6E6E6;
+    position: absolute;
+  }
+
+  .shezhi{
+    width: 37rpx;
+    height: 37rpx;
+    margin-top: 150rpx;
+    margin-left: 35rpx;
+    position: absolute;
+  }
+
+  .shezhiText{
+    position: absolute;
+    width: 130rpx;
+    height: 45rpx;
+    font-size: 32rpx;
+    margin-top: 142rpx;
+    margin-left: 89rpx;
+
+  }
+  .sztap{
+    width: 100%;
+    position: absolute;
+    height: 110rpx;
+    margin-top: 110rpx;
+  }
+
+  .jiantou1{
+    width:  25rpx;
+    height: 30rpx;
+    margin-left: 696rpx;
+    margin-top: 152rpx;
+    position: absolute;
+
+  }
+
+
+</style>
+<template>
+    <view class="containMine">
+      <view class="headV">
+        <image class="imaPer" @tap="tapIma" src="/assets/icon/minePer.png"></image>
+        <view class="denglv">登录</view>
+        <view class="gang">/</view>
+        <view class="zhuce">注册</view>
+        <view class="wenzi">等录后即可体验更多服务</view>
+      </view>
+      <view class="minView">
+
+        <repeat for="{{titleMin}}" key="key" index="index" item="item">
+        <view class="minSub" @tap="minTap" data-id="{{index}}">
+        <image class="minIma" src="{{imaMin[index]}}"></image>
+        <view class="minefabu">{{item}}</view>
+        </view>
+        </repeat>
+
+      </view>
+      <view class="kefu">
+        <image class="dianhua" src="/assets/icon/phonemine.png"></image>
+        <view class="kefuPhone">客服电话</view>
+        <view class="phoneNumber" @tap="tapNum">0431-80808080</view>
+        <image class="jiantou" src="/components/homeCompute/jiantou.png"></image>
+        <view class="lineV"></view>
+        <image class="shezhi" src="/assets/icon/phonemine.png"></image>
+        <view class="shezhiText">设置</view>
+        <view class="sztap" @tap="shezhiTap"></view>
+        <image class="jiantou1" src="/components/homeCompute/jiantou.png"></image>
+
+      </view>
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Mine extends wepy.page {
+    config = {
+      "navigationBarTitleText": "个人中心"
+    };
+    components = {
+
+
+    };
+    data = {
+      titleMin:["我的发布","我的关注","入住楼盘","浏览记录"],
+      imaMin:["/assets/icon/fabumine.png","/assets/icon/guanzhumine.png","/assets/icon/loupanmine.png","/assets/icon/liulanmine.png"]
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      tapNum(){
+        wx.makePhoneCall({
+          phoneNumber: '0431-80808080',
+        })
+      },
+      shezhiTap(){
+        wx.navigateTo({
+          url: 'mineShezhi'
+        })
+      },
+      bindViewTap() {
+        console.log('button clicked');
+      },
+      minTap(e){
+        console.log(111,e)
+        if (e.currentTarget.dataset.id==0) {
+          wx.navigateTo({
+            url: 'fabuMine'
+          })
+        }
+        if (e.currentTarget.dataset.id==1) {
+          wx.navigateTo({
+            url: 'guanzhuMine'
+          })
+        }
+        if (e.currentTarget.dataset.id==2) {
+          wx.navigateTo({
+            url: 'ruzhuMine'
+          })
+        }
+        if (e.currentTarget.dataset.id==3) {
+          wx.navigateTo({
+            url: 'liulanMine'
+          })
+        }
+      },
+      tapIma(){
+        wx.navigateTo({
+          url: 'mineInfo'
+        })
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

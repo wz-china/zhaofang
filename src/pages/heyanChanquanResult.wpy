@@ -1,0 +1,243 @@
+<style type="less" scoped>
+  @import "../assets/css/index.less";
+
+  .heyan{
+    .base-wh();
+
+    .heyan-success{
+      .base-wh();
+
+      .show-info-box{
+        width:100%;
+        height:80rpx;
+        line-height:80rpx;
+        font-size: 28rpx;
+        .flex-just(@dirt: row,@x:flex-start);
+
+        .show-info-left{
+          color: @fontColor9;
+          margin-right: 30rpx;
+        }
+        .show-info{
+          color: @fontColorBack;
+        }
+
+
+
+      }
+
+      .heyan-top{
+        .container();
+        .splitBorderBottom();
+        padding-bottom: 20rpx;
+        .show-info-left {
+          margin-right: 40rpx;
+          width:223rpx;
+          text-align: justify;
+          height:100%;
+          line-height:88rpx;
+          text{
+            display:inline-block;
+            width:100%;
+          }
+
+        }
+
+        .show-info{
+          height:100%;
+          line-height:92rpx;
+
+        }
+
+      }
+
+      .heyan-bottom{
+        .container();
+        padding-top: 20rpx;
+
+        .heyan-common{
+          float: left;
+          width:50%;
+
+        }
+
+
+      }
+    }
+
+    .heyan-fail{
+      .base-wh();
+      .flex-just(@x:flex-start);
+
+      image{
+        width:240rpx;
+        height:240rpx;
+        margin-top: 30%;
+      }
+      .fail-text{
+        width:100%;
+        font-size: 28rpx;
+        color: @fontColor9;
+        text-align: center;
+        margin-top: 50rpx;
+
+      }
+      .fail-btn{
+        margin-top: 50rpx;
+        width:228rpx;
+        height:72rpx;
+        background: @themeColor;
+        color: @fontColorBack;
+        font-weight: 700;
+        .flex-just();
+        font-size: 28rpx;
+
+      }
+
+    }
+
+  }
+</style>
+<template>
+    <view class="heyan">
+
+      <!--核验成功-->
+      <view class="heyan-success" wx:if="{{if_success}}">
+        <view class="heyan-top">
+          <view class="show-info-box">
+            <view class="show-info-left">房地局核验码<text></text> </view>
+            <view class="show-info">129004u0124</view>
+          </view>
+          <view class="show-info-box">
+            <view class="show-info-left">产权人姓名<text></text> </view>
+            <view class="show-info">129004u0124</view>
+          </view>
+          <view class="show-info-box">
+            <view class="show-info-left">产权证编号<text></text> </view>
+            <view class="show-info">129004u0124</view>
+          </view>
+          <view class="show-info-box">
+            <view class="show-info-left">产权证类型<text></text> </view>
+            <view class="show-info">129004u0124</view>
+          </view>
+          <view class="show-info-box">
+            <view class="show-info-left">产权人证件类型 <text></text> </view>
+            <view class="show-info">129004u0124</view>
+          </view>
+          <view class="show-info-box">
+            <view class="show-info-left">产权人证件编号<text></text> </view>
+            <view class="show-info">129004u0124</view>
+          </view>
+
+        </view>
+        <view class="heyan-bottom">
+          <view class="heyan-common">
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+          </view>
+          <view class="heyan-common">
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+            <view class="show-info-box">
+              <view class="show-info-left">户型:<text></text> </view>
+              <view class="show-info">2室1厅1厨1卫</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!--核验失败-->
+      <view class="heyan-fail" wx:else>
+        <image src="/assets/icon/float-desc/presalepermit_defaultimage.png"></image>
+        <view class="fail-text">产权核验失败，请核对信息是否输入正确</view>
+        <view class="fail-btn">重新核验</view>
+      </view>
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class heyanChanquanResult extends wepy.page {
+    config = {
+      "navigationBarTitleText": "核验结果"
+    };
+    components = {};
+    data = {
+      if_success:false
+    }
+
+    //事件处理函数(集中保存在methods对象中)
+    methods = {
+      bindViewTap() {
+        console.log('button clicked');
+      }
+    };
+
+    //页面的生命周期函数
+    onLoad() {
+      console.log('onLoad');
+    };
+
+  }
+
+
+</script>
+
+

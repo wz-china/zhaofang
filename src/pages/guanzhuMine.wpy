@@ -1,0 +1,94 @@
+<style type='less'>
+  @import "../assets/css/index.less";
+  .guanzhu{
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .head{
+    width: 100%;
+    height: 90rpx;
+    top: 0rpx;
+    position: fixed;
+    /*margin-left: 0;*/
+    z-index: 10;
+  }
+  .text{
+    /*margin-top: 120rpx;*/
+    position: absolute;
+
+  }
+  .liulan{
+    width: 100%;
+    height: 270rpx;
+    position: relative;
+  }
+  /*.liulan:nth-child(1){*/
+  /*  margin-top: 120rpx;*/
+  /*}*/
+</style>
+
+<template>
+    <view class="guanzhu">
+
+
+
+      <view style="height:90rpx;position: relative"></view>
+      <view class="head">
+        <headV :titlet="listTitle"></headV>
+      </view>
+<!--      <view class="text">-->
+        <repeat for="{{listTitle1}}" key="key" item="item" index="index">
+
+          <view class="liulan">
+            <liulanCom></liulanCom>
+          </view>
+        </repeat>
+<!--      </view>-->
+
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import liulanCom from "../components/mine/liulanCom"
+  import headV from "../components/homeCompute/headV"
+
+  export default class Index extends wepy.page {
+    components={
+      liulanCom,
+      headV,
+    }
+    config = {
+      "navigationBarTitleText": "我的关注"
+    };
+    events = {
+      'selectID': (event) => {
+
+        console.log(888,event)
+        // this.selectid=event
+
+        // wepy.pageScrollTo({
+        //   scrollTop: 0,
+        //   duration: 300
+        // })
+
+        // console.log(${this.name} receive ${$event.name} from ${$event.source.name});
+      }
+    }
+
+    data = {
+      listTitle:['新房','二手房'],
+      listTitle1:['新房','二手房','二手房','二手房','二手房','二手房','二手房','二手房'],
+    };
+    methods = {};
+
+    onLoad() {
+
+      this.$broadcast("listt",this.listTitle)
+
+    }
+
+  }
+
+</script>
