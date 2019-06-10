@@ -17,6 +17,10 @@
 
 5.小程序开发工具预览
 
+更多预览图片在readmeImg文件内
+
+该项目页面在60个左右
+
 ![image](https://github.com/wz-china/zhaofang/blob/master/readmeImg/1.png)
 ![image](https://github.com/wz-china/zhaofang/blob/master/readmeImg/2.png)
 ![image](https://github.com/wz-china/zhaofang/blob/master/readmeImg/3.png)
